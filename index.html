@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <!-- =====  HEADER / NAVBAR =====  -->
+     <header class="nav">
+        <div class="nav__inner">
+            <a class="brand" href="#top">Alberto Pérez Talaván</a>
+
+            <!-- =====  LINKS DE NAVEGACIÓN =====  -->
+            <nav class="nav__links">
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#labs">Labs</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <!-- =====  ACCIONES =====  -->
+            <div class="nav__actions">
+                <a class="btn" href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" target="_blank" rel="noopener">Descargar CV</a>
+                <button class="btn" id="langBtn" type="button">ES</button>
+            </div>
+        </div>
+     </header>
+
+     <!-- =========================
+        MAIN (Contenido principal)
+    ========================= -->
+    <main id="top">
+        <!-- ========= HERO ========== -->
+         <section class="hero">
+            <div class="container hero__grid">
+
+                <div>
+                    <h1 class="hero__title"> Bienvenidos a mi portfolio</h1>
+                    <p class="hero__lead"> Junior developer - proyectos web y multiplataforma</p>
+                
+                    <div class="hero__cta">
+                        <a class="btn" href="#proyectos">Ver Proyectos</a>
+                        <a class="btn" href="#contacto">Contactar</a>
+                    </div>
+                </div>
+
+                <div class="hero__art">
+                    <div class="hero__placeholder">
+                        Imagen/Avatar
+                    </div>
+                </div>
+
+            </div>
+         </section>
+
+         <!-- ========= SOBRE MÍ ========= -->
+          <section id="sobre-mi" class="section">
+            <div class="container">
+                <h2>Sobre mí</h2>
+                <p>Introducir breve texto sobre mi</p>
+
+                <!-- CREDENCIALES -->
+                 <div class="credentials">
+                    <h3 class="credentials__title">Credenciales</h3>
+                    <ul class="credentials__list">
+                        <li>
+                            <a class="credentials__link" href="assets/Carta recomendación Tich Consulting.pdf" 
+                            target="_blank" rel="noopener">Carta de recomendación Tich Consulting (Prácticas)</a>
+                        </li>
+                    </ul>
+                 </div>
+            </div>
+          </section>
+
+          <!-- ========= PROYECTOS (Panel oscuro) ========= -->
+           <section id="proyectos" class="section section--dark">
+            <div class="container">
+                <h2>Proyectos</h2>
+                <div id="projectsGrid" class="grid"></div>
+            </div>
+           </section>
+
+           <!-- =========== SKILLS ============ -->
+            <section id="skills" class="section">
+                <div class="container">
+                    <h2>Habilidades</h2>
+                    <div id="skillsRow" class="skills-row"></div>
+                </div>
+            </section>
+
+            <!-- =========== LABS ============ -->
+             <section id="labs" class="section">
+                <div class="container">
+                    <h2>Labs</h2>
+                    <div id="labsGrid" class="grid grid--2"></div>
+                </div>
+             </section>
+
+             <!-- =========== CONTACTO ============ -->
+              <section id="contacto" class="section">
+                <div class="container">
+                    <h2>Contacto</h2>
+                    <p>Luego pondremos bloque con email + formulario</p>
+                </div>
+              </section>
+    </main>
+
+    <!-- =========== FOOTER ============ -->
+               <footer class="footer">
+                @ <span id="year"></span>Alberto Pérez Talaván - Todos los derechos reservados
+               </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

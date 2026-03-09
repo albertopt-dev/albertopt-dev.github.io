@@ -1,0 +1,270 @@
+/* =========================================================
+   1) VARIABLES (colores y tamaños reutilizables)
+   - Si cambias aquí, cambia en toda la web
+========================================================= */
+:root{
+  --max: 1100px;          /* ancho máximo del contenido */
+  --accent: #2dd4bf;      /* color principal (turquesa) */
+  --dark: #0b1220;        /* fondo oscuro (panel proyectos) */
+
+  --text: #0f172a;        /* texto principal */
+  --muted: #64748b;       /* texto secundario */
+  --border: rgba(15,23,42,.10); /* borde suave */
+}
+
+/* =========================================================
+   2) RESET / BASE
+   - “Normaliza” cosas básicas del navegador
+========================================================= */
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  color: var(--text);
+  background: white;
+}
+
+a{ color: inherit; } /* por defecto, los links heredan color */
+img{ max-width: 100%; display: block; }
+
+/* =========================================================
+   3) LAYOUT GENERAL (container)
+   - Para que todo tenga el mismo margen y no se pegue a los bordes
+========================================================= */
+.container{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* =========================================================
+   4) NAVBAR (barra superior sticky)
+   - Queda fija arriba cuando haces scroll
+   - Tiene blur para efecto “glass”
+========================================================= */
+.nav{
+  position: sticky;
+  top: 0;
+  z-index: 10; /* para que quede encima del contenido */
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15,23,42,.08);
+}
+
+.nav__inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 18px;
+
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+/* Logo / nombre */
+.brand{
+  text-decoration: none;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* Links del menú (en móvil los ocultamos, en escritorio aparecen) */
+.nav__links{
+  display: none;      /* móvil: oculto */
+  gap: 16px;
+}
+
+.nav__links a{
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.nav__links a:hover{
+  color: var(--text);
+}
+
+/* Botones/acciones (CV, idioma...) */
+.nav__actions{
+  display: flex;
+  gap: 10px;
+}
+
+/* =========================================================
+   5) BOTONES (clase reutilizable)
+   - La usamos en CV, idioma, CTAs del hero, etc.
+========================================================= */
+.btn{
+  border: 1px solid rgba(15,23,42,.12);
+  background: white;
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* =========================================================
+   6) HERO (sección principal arriba)
+   - Grid: 1 columna en móvil, 2 en escritorio
+========================================================= */
+.hero{
+  padding: 56px 0 24px;
+}
+
+.hero__grid{
+  display: grid;
+  grid-template-columns: 1fr; /* móvil: 1 columna */
+  gap: 18px;
+  align-items: center;
+}
+
+.hero__title{
+  margin: 0 0 8px;
+  font-size: 40px;
+}
+
+.hero__lead{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Botones bajo el texto del hero */
+.hero__cta{
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* “Caja” temporal para la imagen/avatar */
+.hero__placeholder{
+  border: 1px dashed rgba(15,23,42,.25);
+  border-radius: 20px;
+  padding: 60px 16px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* =========================================================
+   7) SECCIONES (bloques de contenido)
+   - Cada sección tiene padding vertical
+========================================================= */
+.section{
+  padding: 56px 0;
+}
+
+/* Panel oscuro (lo usamos en Proyectos) */
+.section--dark{
+  background: var(--dark);
+  color: white;
+}
+
+/* Títulos dentro de secciones oscuras */
+.section--dark h2{
+  color: var(--accent);
+}
+
+/* =========================================================
+   8) GRID (para Proyectos/Labs)
+   - De momento no hay cards, pero dejamos el contenedor listo
+========================================================= */
+.grid{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr; /* móvil: 1 columna */
+  gap: 18px;
+}
+
+/* Variante para “2 columnas” (en escritorio la activaremos) */
+.grid--2{
+  grid-template-columns: 1fr;
+}
+
+/* =========================================================
+   9) SKILLS ROW (fila con scroll horizontal)
+   - Aún no hay “skills” pintadas, pero el contenedor ya está
+========================================================= */
+.skills-row{
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;      /* hace scroll horizontal */
+  padding-bottom: 10px;  /* espacio para que no corte el scroll */
+}
+
+/* =========================================================
+   10) CREDENCIALES (bloque dentro de “Sobre mí”)
+   - Aquí va la carta de recomendación
+========================================================= */
+.credentials{
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(255,255,255,.6);
+}
+
+.credentials__title{
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.credentials__list{
+  margin: 0;
+  padding-left: 18px;
+}
+
+.credentials__link{
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(45,212,191,.7);
+}
+
+.credentials__link:hover{
+  opacity: .85;
+}
+
+/* =========================================================
+   11) FOOTER
+========================================================= */
+.footer{
+  padding: 28px 0;
+  text-align: center;
+  background-color: black;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* =========================================================
+   12) RESPONSIVE (pantallas grandes)
+   - A partir de 860px:
+     - mostramos links del menú
+     - hero a 2 columnas
+     - grids a 3 columnas / 2 columnas
+========================================================= */
+@media (min-width: 860px){
+  .nav__links{
+    display: flex; /* escritorio: visible */
+  }
+
+  .hero__grid{
+    grid-template-columns: 1.2fr .8fr; /* escritorio: 2 columnas */
+  }
+
+  .grid{
+    grid-template-columns: repeat(3, 1fr); /* proyectos: 3 columnas */
+  }
+
+  .grid--2{
+    grid-template-columns: repeat(2, 1fr); /* labs: 2 columnas */
+  }
+}
