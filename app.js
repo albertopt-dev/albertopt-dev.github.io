@@ -23,34 +23,6 @@ const projects = [
   },
   {
     id: "p2",
-    title: "ObjetivosApp",
-    description: "App personal de gestión de objetivos con vistas diaria, semanal y anual. Subobjetivos, código de colores personalizable, calendario principal y autenticación — cada usuario solo ve sus propios datos.",
-    tags: ["Android", "Personal", "Productividad"],
-    stacks: ["Kotlin", "Firebase Auth", "Calendario"],
-    image: "",
-    featured: false,
-    highlights: [],
-    links: {
-      repo: "https://github.com/albertopt-dev/ObjetivosApp",
-      demo: ""
-    }
-  },
-  {
-    id: "p3",
-    title: "Presupuesto Mensual",
-    description: "App personal para control de finanzas: ingresos, ahorro mensual, desglose de gastos por categoría y estadísticas visuales. Saldo disponible y seguimiento en tiempo real.",
-    tags: ["Android", "Personal", "Finanzas"],
-    stacks: ["Kotlin", "Gráficas", "Local DB"],
-    image: "",
-    featured: false,
-    highlights: [],
-    links: {
-      repo: "https://github.com/albertopt-dev/Presupuesto-mensual",
-      demo: ""
-    }
-  },
-  {
-    id: "p4",
     title: "Web Rehabilitación Funcional",
     description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
     tags: ["Web", "Cliente real", "En desarrollo"],
@@ -66,25 +38,32 @@ const projects = [
 ];
 
 // =========================
-// DATA: Labs
+// DATA: Labs / Taller
 // =========================
 const labs = [
   {
-    title: "Visualización interactiva de datos",
-    description:
-      "Prototipo para explorar datasets usando gráficos interactivos y visualizaciones modernas. Experimento con librerías de charting y presentación de datos.",
+    title: "ObjetivosApp",
+    description: "App personal para gestionar objetivos diarios, semanales y anuales. Subobjetivos, código de colores, calendario y autenticación propia — cada usuario solo ve sus datos.",
     iconClasses: [
-      "devicon-javascript-plain colored",
-      "devicon-d3js-plain colored"
+      "devicon-kotlin-plain colored",
+      "devicon-firebase-plain colored"
     ],
-    links: { repo: "https://github.com/albertopt-dev" }
+    links: { repo: "https://github.com/albertopt-dev/ObjetivosApp" }
   },
   {
-    title: "Chatbot IA para preguntas técnicas",
-    description:
-      "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales.",
+    title: "Presupuesto Mensual",
+    description: "App personal para control de finanzas: ingresos, ahorro, desglose de gastos por categoría y estadísticas visuales. Hecha por necesidad propia, no por encargo.",
     iconClasses: [
-      "devicon-python-plain colored",
+      "devicon-kotlin-plain colored",
+      "devicon-android-plain colored"
+    ],
+    links: { repo: "https://github.com/albertopt-dev/Presupuesto-mensual" }
+  },
+  {
+    title: "Chatbot IA — Asistente técnico",
+    description: "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales. En construcción.",
+    iconClasses: [
+      "devicon-java-plain colored",
       "devicon-javascript-plain colored"
     ],
     links: { repo: "https://github.com/albertopt-dev" }
