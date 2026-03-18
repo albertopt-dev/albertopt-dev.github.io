@@ -1,235 +1,278 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <link rel="icon" href="data:,">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alberto Pérez Talaván — Desarrollador Android Junior</title>
+  <meta name="description" content="Portfolio de Alberto Pérez Talaván, Desarrollador Android Junior especializado en Java y Kotlin. Apps reales, prácticas en empresa tech, disponible para nuevas oportunidades." />
+
+  <!-- Devicons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- =====  HEADER / NAVBAR =====  -->
-     <header class="nav">
-        <div class="nav__inner">
-            <a class="brand" href="#top">Alberto Pérez Talaván</a>
 
-            <!-- =====  LINKS DE NAVEGACIÓN =====  -->
-            <nav class="nav__links">
-                <a href="#sobre-mi">Sobre mí</a>
-                <a href="#proyectos">Proyectos</a>
-                <a href="#skills">Habilidades</a>
-                <a href="#labs">Taller de creatividad</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
-            <!-- =====  ACCIONES =====  -->
-            <div class="nav__actions">
-                <a class="btn btn--primary btn--cta" href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" target="_blank" rel="noopener">Descargar CV</a>
-                <button class="btn" id="themeBtn" type="button" aria-label="Cambiar tema">🌙</button>
-            </div>
-        </div>
-     </header>
+  <!-- ═══════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════ -->
+  <header class="navbar">
+    <a href="#hero" class="navbar__logo">Alberto<span>.</span></a>
 
-     <!-- =========================
-        MAIN (Contenido principal)
-    ========================= -->
-    <main id="top">
-        <!-- ========= HERO ========== -->
-         <section class="hero">
-            <div class="container hero__grid">
+    <nav class="navbar__links" aria-label="Navegación principal">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#taller">Taller</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
 
-                <div>
-                    <h1 class="hero__title"> Bienvenidos a mi portfolio</h1>
-                    <p class="hero__lead"> Técnico en desarrollo de aplicaciones multiplataforma Junior</p>
-                
-                    <div class="hero__cta">
-                        <a class="btn" href="#proyectos">Ver Proyectos</a>
-                        <a class="btn" href="#contacto">Contactar</a>
-                    </div>
-                </div>
-
-                <div class="hero__art">
-                    <div class="hero__placeholder">
-                        Imagen/Avatar
-                    </div>
-                </div>
-
-            </div>
-         </section>
-
-         <!-- ========= SOBRE MÍ ========= -->
-          <section id="sobre-mi" class="section">
-            <div class="container">
-                <h2 >Sobre mí</h2>
-                <p>Introducir breve texto sobre mi</p>
-
-                <!-- CREDENCIALES -->
-                 <div class="credentials">
-                    <h3 class="credentials__title">Credenciales</h3>
-                    <ul class="credentials__list">
-                        <li>
-                            <a class="credentials__link" href="assets/Carta recomendación Tich Consulting.pdf" 
-                            target="_blank" rel="noopener">Carta de recomendación Tich Consulting (Prácticas)</a>
-                        </li>
-                    </ul>
-                 </div>
-            </div>
-          </section>
-
-          <!-- ========= PROYECTOS (Panel oscuro) ========= -->
-           <section id="proyectos" class="section section--dark">
-            <div class="container">
-                <h2 class="labs-title">Proyectos</h2>
-                <div id="projectsGrid" class="grid"></div>
-            </div>
-           </section>
-
-           <!-- =========== SKILLS ============ -->
-            <section id="skills" class="section">
-                <div class="container">
-                    <h2 class="labs-title">Habilidades</h2>
-
-                    <!-- SKILLS SCROLLER (fila horizontal + flechas) -->
-                    <div class="skills-scroller">
-                    <button class="skills-arrow skills-arrow--left" id="skillsPrev" type="button" aria-label="Ver skills anteriores">
-                        <span aria-hidden="true">❮</span>
-                    </button>
-
-                    <div id="skillsRow" class="skills-row"></div>
-
-                    <button class="skills-arrow skills-arrow--right" id="skillsNext" type="button" aria-label="Ver skills siguientes">
-                        <span aria-hidden="true">❯</span>
-                    </button>
-
-                    <!-- Brillo/degradado en los lados (más “pro” y guía visual) -->
-                    <div class="skills-fade skills-fade--left"></div>
-                    <div class="skills-fade skills-fade--right"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- =========== Taller de creatividad ============ -->
-            <section id="labs" class="section">
-                <div class="container">
-                    <h2 class="labs-title">El taller de la creatividad</h2>
-                    <p class="labs-subtitle">
-                    Este espacio es mi "taller" creativo, ya que en él experimento con nuevas ideas que me van surgiendo, donde puedo 
-                    prácticar lo aprendido, y en definitiva pasar el rato intentando crear cosas interesantes.
-                    </p>
-
-                    <div id="labsGrid" class="grid grid--2"></div>
-                </div>
-            </section>
-
-             <!-- =========== CONTACTO ============ -->
-              <section id="contacto" class="section">
-                <div class="container">
-                    <!-- PANEL CONTACTO -->
-                    <div class="contact-panel">
-
-                    <!-- COLUMNA IZQUIERDA -->
-                    <div class="contact-left">
-                        <h2 class="contact-title">Conectemos</h2>
-
-                        <p class="contact-text">
-                        Si quieres crear algo juntos, compartir ideas o simplemente saludar,
-                        ¡me encantaría saber de ti! Siempre busco proyectos que mezclen tecnología,
-                        creatividad e impacto positivo.
-                        </p>
-
-                        <ul class="contact-links">
-                        <li>
-                            <span class="contact-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-                                    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2" />
-                                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" />
-                                </svg>
-                            </span>
-                            <a href="mailto:alberto.pt.dev@gmail.com">alberto.pt.dev@gmail.com</a>
-                        </li>
-                        <li>
-                            <span class="contact-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-                                    <path d="M6 9v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M6 6.5v.2" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                                    <path d="M10 19v-6a3 3 0 0 1 6 0v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M10 13v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </span>
-                            <a href="https://www.linkedin.com/in/alberto-perez-talavan" target="_blank" rel="noopener">
-                                Perfil profesional
-                            </a>
-                        </li>
-                        <li>
-                            <span class="contact-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-                                    <path d="M9 19c-4 1.5-4-2.5-5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M14 20v-3.5c0-1 .3-1.7.8-2.2 2.7-.3 5.5-1.3 5.5-6a4.7 4.7 0 0 0-1.3-3.3A4.4 4.4 0 0 0 18.9 2s-1 0-3 1.3a10.3 10.3 0 0 0-5.8 0C8.1 2 7.1 2 7.1 2a4.4 4.4 0 0 0-.1 2.7A4.7 4.7 0 0 0 5.7 8c0 4.7 2.8 5.7 5.5 6 .5.5.8 1.2.8 2.2V20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
-                            <a href="https://github.com/albertopt-dev" target="_blank" rel="noopener">Mis proyectos</a>
-                        </li>
-                        </ul>
-                    </div>
-
-                    <!-- COLUMNA DERECHA (FORM) -->
-                    <form class="contact-form" action="#" method="post">
-                        <label class="field">
-                        <span class="field-label">Tu nombre</span>
-                        <input class="field-input" type="text" name="name" placeholder="Tu nombre" />
-                        </label>
-
-                        <label class="field">
-                        <span class="field-label">Tu email</span>
-                        <input class="field-input" type="email" name="email" placeholder="Tu email" />
-                        </label>
-
-                        <label class="field">
-                        <span class="field-label">Tu mensaje</span>
-                        <textarea class="field-input field-textarea" name="message" rows="6" placeholder="Tu mensaje"></textarea>
-                        </label>
-
-                        <button class="contact-submit" type="button">Enviar mensaje</button>
-                    </form>
-
-                    </div>
-                </div>
-            </section>
-    </main>
-
-    <!-- =========== FOOTER ============ -->
-               <footer class="footer">
-                @ <span id="year"></span>Alberto Pérez Talaván - Todos los derechos reservados
-               </footer>
-
-
-    <!-- =========================
-    MODAL DETALLE DE PROYECTO
-    (Se muestra/oculta con JS)
-    ========================= -->
-    <div class="modal" id="projectModal" aria-hidden="true">
-    <div class="modal__backdrop" id="modalBackdrop"></div>
-
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <button class="modal__close" id="modalClose" type="button" aria-label="Cerrar">✕</button>
-
-        <div class="modal__media" id="modalMedia">
-        <!-- Imagen del proyecto (o placeholder) -->
-        </div>
-
-        <div class="modal__content">
-        <h3 class="modal__title" id="modalTitle">Título</h3>
-        <p class="modal__desc" id="modalDesc">Descripción</p>
-
-        <div class="modal__tags" id="modalTags"></div>
-
-        <div class="modal__actions" id="modalActions">
-            <!-- Botones Demo/Repo -->
-        </div>
-        </div>
+    <div class="navbar__actions">
+      <button id="themeBtn" class="navbar__theme-btn" aria-label="Cambiar tema">🌙</button>
+      <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" class="btn btn--outline" download>Descargar CV</a>
     </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <div class="hero__content">
+      <span class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        Disponible para nuevas oportunidades
+      </span>
+
+      <h1 class="hero__title">
+        Hola, soy<br>
+        <span class="hero__title--accent">Alberto</span><br>
+        Pérez Talaván
+      </h1>
+
+      <p class="hero__subtitle">
+        <strong>Desarrollador Android Junior</strong> — Java &amp; Kotlin.<br>
+        FP DAM · Prácticas reales en empresa tech · Producto en producción.<br>
+        Aprendiendo Spring Boot y Flutter de forma autodidacta.
+      </p>
+
+      <div class="hero__ctas">
+        <a href="#proyectos" class="btn btn--primary">Ver proyectos</a>
+        <a href="#contacto"  class="btn btn--ghost">Contactar</a>
+      </div>
+
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-num">3</span>
+          <span class="hero__stat-label">Apps Android propias</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">1</span>
+          <span class="hero__stat-label">Producto en producción</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">150h+</span>
+          <span class="hero__stat-label">Formación autodidacta</span>
+        </div>
+      </div>
     </div>
 
-    <script src="app.js"></script>
+    <div class="hero__avatar">
+      <!-- Pon tu foto como assets/foto.jpg -->
+      <div class="hero__avatar-frame">
+        <img src="assets/foto.jpg" alt="Alberto Pérez Talaván"
+             onerror="this.style.display='none'" />
+        <div class="hero__avatar-fallback" aria-hidden="true">APT</div>
+      </div>
+      <div class="hero__avatar-tag">📍 Alcoy · <strong>Abierto a remoto</strong></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SOBRE MÍ
+  ═══════════════════════════════════════ -->
+  <section id="sobre-mi" class="about section">
+    <div class="about__text">
+      <p class="section__label">Sobre mí</p>
+      <h2 class="section__title">Código, apps<br>y constancia</h2>
+
+      <p class="about__body">
+        Vengo de entornos técnicos exigentes — 4 años en un centro de I+D — donde aprendí que la disciplina y el trabajo bajo presión no se estudian, se viven. En paralelo, me formé más de <strong>150 horas de forma autodidacta</strong> en Java, Kotlin y .NET.
+      </p>
+      <p class="about__body">
+        Hoy tengo el título de <strong>FPGS en Desarrollo de Aplicaciones Multiplataforma</strong> y prácticas reales en empresa tech donde entregué un portal completo en producción en 3 meses. Al finalizar, me dieron una carta de recomendación formal.
+      </p>
+      <p class="about__body">
+        Me especializo en <strong>Android nativo (Java/Kotlin)</strong> y estoy ampliando con Spring Boot y Flutter. Lo que me diferencia no es solo el stack — es que cuando me comprometo con algo, lo termino.
+      </p>
+
+      <a href="assets/Carta recomendación Tich Consulting.pdf"
+         class="about__cred" target="_blank" rel="noopener">
+        <span class="about__cred-icon">📄</span>
+        <div>
+          <strong>Carta de recomendación — TICH Consulting</strong>
+          <span>Emitida al finalizar las prácticas. Iniciativa, compromiso y nivel técnico.</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="about__cards">
+      <div class="about__skill-card">
+        <span class="about__skill-name">Java &amp; Kotlin</span>
+        <span class="about__skill-tag">Android nativo</span>
+      </div>
+      <div class="about__skill-card">
+        <span class="about__skill-name">SQL</span>
+        <span class="about__skill-tag">MySQL · PostgreSQL · TransacSQL</span>
+      </div>
+      <div class="about__skill-card">
+        <span class="about__skill-name">JavaScript</span>
+        <span class="about__skill-tag">Web · Frontend</span>
+      </div>
+      <div class="about__skill-card">
+        <span class="about__skill-name">WordPress · PHP</span>
+        <span class="about__skill-tag">CMS · Backend</span>
+      </div>
+      <div class="about__skill-card">
+        <span class="about__skill-name">Spring Boot</span>
+        <span class="about__skill-tag about__skill-tag--learning">Aprendizaje autodidacta</span>
+      </div>
+      <div class="about__skill-card">
+        <span class="about__skill-name">Flutter</span>
+        <span class="about__skill-tag about__skill-tag--learning">Aprendizaje autodidacta</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       PROYECTOS
+  ═══════════════════════════════════════ -->
+  <section id="proyectos" class="projects section">
+    <div class="section__header">
+      <div>
+        <p class="section__label">Proyectos</p>
+        <h2 class="section__title">Lo que he construido</h2>
+      </div>
+      <a href="https://github.com/albertopt-dev" target="_blank" rel="noopener" class="btn btn--ghost">
+        Ver GitHub →
+      </a>
+    </div>
+
+    <div id="projectsGrid" class="projects__grid"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       HABILIDADES
+  ═══════════════════════════════════════ -->
+  <section id="habilidades" class="skills section">
+    <p class="section__label">Habilidades</p>
+    <h2 class="section__title">Mi stack</h2>
+
+    <div class="skills__scroller">
+      <button id="skillsPrev" class="skills__arrow is-disabled" aria-label="Anterior">❮</button>
+      <div id="skillsRow" class="skills__row"></div>
+      <button id="skillsNext" class="skills__arrow" aria-label="Siguiente">❯</button>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       TALLER
+  ═══════════════════════════════════════ -->
+  <section id="taller" class="labs section">
+    <p class="section__label">El taller de la creatividad</p>
+    <h2 class="section__title">Donde experimento</h2>
+    <p class="labs__subtitle">
+      Proyectos de exploración sin cliente ni fecha límite — solo curiosidad y aprendizaje.
+    </p>
+
+    <div id="labsGrid" class="labs__grid"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       CONTACTO
+  ═══════════════════════════════════════ -->
+  <section id="contacto" class="contact section">
+    <div class="contact__inner">
+      <p class="section__label">Contacto</p>
+      <h2 class="section__title">Hablemos</h2>
+      <p class="contact__sub">
+        Si tienes un proyecto, una oferta o simplemente quieres charlar sobre tecnología — estoy disponible.
+      </p>
+
+      <div class="contact__links">
+        <a href="mailto:alberto.pt.dev@gmail.com" class="contact__link">
+          <span>✉️</span> alberto.pt.dev@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/alberto-perez-talavan" target="_blank" rel="noopener" class="contact__link">
+          <span>💼</span> LinkedIn
+        </a>
+        <a href="https://github.com/albertopt-dev" target="_blank" rel="noopener" class="contact__link">
+          <span>🐙</span> GitHub
+        </a>
+      </div>
+
+      <form class="contact-form" onsubmit="return false;">
+        <div class="contact-form__row">
+          <div class="contact-form__group">
+            <label for="contactName">Nombre</label>
+            <input id="contactName" type="text" name="name" placeholder="Tu nombre" />
+          </div>
+          <div class="contact-form__group">
+            <label for="contactEmail">Email *</label>
+            <input id="contactEmail" type="email" name="email" placeholder="tu@email.com" required />
+          </div>
+        </div>
+        <div class="contact-form__group">
+          <label for="contactMsg">Mensaje *</label>
+          <textarea id="contactMsg" name="message" rows="5" placeholder="Cuéntame en qué puedo ayudarte..." required></textarea>
+        </div>
+        <button type="button" class="btn btn--primary contact-submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <span class="footer__logo">Alberto<span>.</span></span>
+    <span class="footer__copy">© 2026 Alberto Pérez Talaván · Todos los derechos reservados</span>
+    <div class="footer__links">
+      <a href="assets/Carta de presentacion.pdf" target="_blank" rel="noopener">Carta presentación</a>
+      <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" download>CV</a>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════
+       MODAL proyectos
+  ═══════════════════════════════════════ -->
+  <div id="projectModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div id="modalBackdrop" class="modal__backdrop"></div>
+    <div class="modal__box">
+      <button id="modalClose" class="modal__close" aria-label="Cerrar">✕</button>
+      <div id="modalMedia" class="modal__media"></div>
+      <div class="modal__body">
+        <h2 id="modalTitle" class="modal__title"></h2>
+        <p  id="modalDesc"  class="modal__desc"></p>
+        <div id="modalHighlights"></div>
+        <div id="modalTags"    class="modal__tags"></div>
+        <div id="modalActions" class="modal__actions"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="app.js"></script>
 </body>
 </html>
