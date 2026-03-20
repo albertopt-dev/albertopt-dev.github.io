@@ -40,11 +40,11 @@ const projects = [
   },
 
   {
-    id: "coming2", 
+    id: "coming2",
     title: "Próximamente",
     description: "Explorando nuevas ideas. En construcción.",
-    tags: [], stacks: [],
-    image: "", featured: false, highlights: [], status: "coming",
+    tags: [], stacks: [], image: "", featured: false, highlights: [],
+    status: "coming",
     links: { repo: "", demo: "" }
   }
 ];
