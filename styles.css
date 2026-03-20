@@ -457,6 +457,7 @@ a   { color: inherit; text-decoration: none; }
   display: flex; gap: 14px;
   overflow-x: auto; scroll-snap-type: x mandatory;
   padding-bottom: 6px;
+  padding-top: 6px;
   -ms-overflow-style: none; scrollbar-width: none;
 }
 .skills__row::-webkit-scrollbar { display: none; }
