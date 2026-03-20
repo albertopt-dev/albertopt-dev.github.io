@@ -310,7 +310,7 @@ function initContactMailto() {
     const subject = encodeURIComponent(`Contacto desde tu portfolio (${name || "sin nombre"})`);
     const body    = encodeURIComponent(`Nombre: ${name || "-"}\nEmail: ${email}\n\nMensaje:\n${message}\n`);
 
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    window.open(`https://mail.google.com/mail/?view=cm&to=${to}&su=${subject}&body=${body}`, '_blank');
   });
 }
 
