@@ -8,8 +8,9 @@ const projects = [
     description: "App Android para la despedida de soltero de un amigo. Roles diferenciados (amigos/novio), mapa de España con pruebas geolocalizadas, cámara integrada con guardado en galería y chat interno en tiempo real.",
     tags: ["Android", "Firebase", "Roles"],
     stacks: ["Kotlin", "Firebase", "Maps"],
+    status: "terminado",
     image: "",
-    featured: true,
+    featured: false,
     highlights: [
       "Autenticación con roles diferenciados",
       "Mapa interactivo con pruebas geolocalizadas",
@@ -21,12 +22,14 @@ const projects = [
       demo: ""
     }
   },
+
   {
     id: "p2",
     title: "Web Rehabilitación Funcional",
     description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
     tags: ["Web", "Cliente real", "En desarrollo"],
     stacks: ["HTML", "CSS", "JavaScript"],
+    status: "en-proceso",
     image: "",
     featured: false,
     highlights: [],
@@ -34,6 +37,15 @@ const projects = [
       repo: "https://github.com/albertopt-dev/Web-cliente",
       demo: ""
     }
+  },
+
+  {
+    id: "coming2", 
+    title: "Próximamente",
+    description: "Explorando nuevas ideas. En construcción.",
+    tags: [], stacks: [],
+    image: "", featured: false, highlights: [], status: "coming",
+    links: { repo: "", demo: "" }
   }
 ];
 
@@ -97,9 +109,23 @@ function renderProjects() {
   const grid = document.getElementById("projectsGrid");
 
   grid.innerHTML = projects.map((p) => {
+    if (p.status === "coming") {
+      return `
+        <article class="project-card project-card--coming">
+          <div class="project-card__coming-inner">
+            <span class="coming-icon">🚧</span>
+            <h3 class="project-card__title">Próximamente</h3>
+            <p class="project-card__desc">Nuevo proyecto en desarrollo personal. Vuelve pronto.</p>
+          </div>
+        </article>`;
+    }
+
     const initials = p.title.split(" ").slice(0,2).map(w => w[0]).join("").toUpperCase();
     const featuredBadge = p.featured ? `<span class="project-card__featured-badge">⭐ Destacado</span>` : "";
-    const wipBadge = p.tags.includes("En desarrollo") ? `<span class="project-card__wip-badge">🔧 En desarrollo</span>` : "";
+    const wipBadge = p.status === "en-proceso" ? `<span class="project-card__wip-badge">🔧 En desarrollo</span>` : "";
+    const statusBadge = p.status === "terminado"
+      ? `<span class="project-card__status status--done">✓ Terminado</span>`
+      : "";
 
     return `
       <article class="project-card${p.featured ? ' project-card--featured' : ''}">
@@ -108,7 +134,7 @@ function renderProjects() {
             ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" />`
             : `<div class="project-card__placeholder">${initials}</div>`
           }
-          ${featuredBadge}${wipBadge}
+          ${featuredBadge}${wipBadge}${statusBadge}
         </div>
 
         <div class="project-card__body">
