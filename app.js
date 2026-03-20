@@ -288,29 +288,55 @@ function initSkillsScroller() {
 }
 
 // =========================
-// CONTACT: mailto
 // =========================
-function initContactMailto() {
-  const btn  = document.querySelector(".contact-submit");
-  const form = document.querySelector(".contact-form");
+// CONTACT: EmailJS
+// =========================
+function initContactEmailJS() {
+  const form     = document.getElementById('contactForm');
+  const btn      = document.getElementById('contactSubmit');
+  const feedback = document.getElementById('formFeedback');
 
-  if (!btn || !form) return;
+  if (!form) return;
 
-  btn.addEventListener("click", () => {
-    const name    = form.querySelector('input[name="name"]').value.trim();
-    const email   = form.querySelector('input[name="email"]').value.trim();
-    const message = form.querySelector('textarea[name="message"]').value.trim();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email   = form.querySelector('[name="email"]').value.trim();
+    const message = form.querySelector('[name="message"]').value.trim();
 
     if (!email || !message) {
-      alert("Por favor, completa al menos tu email y el mensaje.");
+      feedback.textContent = 'Por favor completa el email y el mensaje.';
+      feedback.className   = 'form-feedback form-feedback--error';
       return;
     }
 
-    const to      = "alberto.pt.dev@gmail.com";
-    const subject = encodeURIComponent(`Contacto desde tu portfolio (${name || "sin nombre"})`);
-    const body    = encodeURIComponent(`Nombre: ${name || "-"}\nEmail: ${email}\n\nMensaje:\n${message}\n`);
+    btn.textContent = 'Enviando...';
+    btn.disabled    = true;
+    feedback.textContent = '';
 
-    window.open(`https://mail.google.com/mail/?view=cm&to=${to}&su=${subject}&body=${body}`, '_blank');
+    emailjs.sendForm(
+      'service_ua9d39r',
+      'template_e0je0eo',
+      form
+    )
+    .then(() => {
+      feedback.textContent = '✓ Mensaje enviado. Te responderé pronto.';
+      feedback.className   = 'form-feedback form-feedback--success';
+      btn.textContent      = 'Enviado ✓';
+      btn.style.background = '#22c55e';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent      = 'Enviar mensaje';
+        btn.disabled         = false;
+        btn.style.background = '';
+      }, 4000);
+    })
+    .catch(() => {
+      feedback.textContent = '✗ Error al enviar. Escríbeme a alberto.pt.dev@gmail.com';
+      feedback.className   = 'form-feedback form-feedback--error';
+      btn.textContent      = 'Enviar mensaje';
+      btn.disabled         = false;
+    });
   });
 }
 
@@ -370,6 +396,6 @@ renderSkills();
 initSkillsScroller();
 renderLabs();
 initProjectModal();
-initContactMailto();
+initContactEmailJS();
 initTheme();
 initNav();

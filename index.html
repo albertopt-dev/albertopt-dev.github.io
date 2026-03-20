@@ -17,6 +17,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("qmb3XbliOU9TNqLAN");</script>
 </head>
 <body>
 
@@ -45,6 +48,7 @@
        HERO
   ═══════════════════════════════════════ -->
   <section id="hero" class="hero">
+<canvas id="bgCanvas"></canvas>
     <div class="hero__content">
       <span class="hero__badge">
         <span class="hero__badge-dot"></span>
@@ -225,22 +229,28 @@
         </a>
       </div>
 
-      <form class="contact-form" onsubmit="return false;">
+      <form id="contactForm" class="contact-form" onsubmit="return false;">
         <div class="contact-form__row">
           <div class="contact-form__group">
-            <label for="contactName">Nombre *</label>
+            <label for="contactName">Nombre</label>
             <input id="contactName" type="text" name="name" placeholder="Tu nombre" />
           </div>
           <div class="contact-form__group">
             <label for="contactEmail">Email *</label>
-            <input id="contactEmail" type="email" name="email" placeholder="tu@email.com" required />
+            <input id="contactEmail" type="email" name="email"
+                   placeholder="tu@email.com" required />
           </div>
         </div>
         <div class="contact-form__group">
           <label for="contactMsg">Mensaje *</label>
-          <textarea id="contactMsg" name="message" rows="5" placeholder="Cuéntame en qué puedo ayudarte..." required></textarea>
+          <textarea id="contactMsg" name="message" rows="5"
+                    placeholder="Cuéntame en qué puedo ayudarte..." required></textarea>
         </div>
-        <button type="button" class="btn btn--primary contact-submit">Enviar mensaje</button>
+        <button type="submit" id="contactSubmit"
+                class="btn btn--primary contact-submit">
+          Enviar mensaje
+        </button>
+        <p id="formFeedback" class="form-feedback" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -279,5 +289,61 @@
 
 
   <script src="app.js"></script>
+
+  <script>
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+
+let W = canvas.width  = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+});
+
+const FONT_SIZE = 14;
+const COLS      = Math.floor(W / FONT_SIZE);
+const drops     = Array.from({ length: COLS }, () =>
+  Math.floor(Math.random() * -50)
+);
+
+const chars = '01アイウエオJavaKotlin{}[]=>&&||null true API git//';
+
+let hue = 120; // empieza en verde (0=rojo, 120=verde, 240=azul)
+
+let frameCount = 0;
+function draw() {
+  frameCount++;
+  if (frameCount % 2.0 !== 0) { requestAnimationFrame(draw); return; }
+
+  hue = (hue + 0.3) % 360; // velocidad del cambio de color — sube para ir más rápido
+
+  const isDark = document.documentElement.classList.contains('dark');
+  const lightness = isDark ? '60%' : '35%';
+
+  ctx.fillStyle = isDark
+    ? 'rgba(10,14,26,0.07)'
+    : 'rgba(255,255,255,0.07)';
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.font = `${FONT_SIZE}px monospace`;
+
+  drops.forEach((y, i) => {
+    const char  = chars[Math.floor(Math.random() * chars.length)];
+    const alpha = 0.12 + Math.random() * 0.08;
+    ctx.fillStyle = `hsla(${hue},80%,${lightness},${alpha})`;
+    ctx.fillText(char, i * FONT_SIZE, y * FONT_SIZE);
+
+    ctx.fillStyle = `hsla(${hue},80%,${lightness},0.22)`;
+    ctx.fillText(char, i * FONT_SIZE, y * FONT_SIZE);
+
+    if (y * FONT_SIZE > H && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+  </script>
 </body>
 </html>
