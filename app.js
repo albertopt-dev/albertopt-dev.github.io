@@ -502,7 +502,7 @@ function initFlappyDev() {
     if (!running) { drawBg(); drawDev(dev.x, dev.y, 0); }
   });
 
-  const GRAVITY = 0.42, JUMP = -8, PIPE_W = 64;
+  const GRAVITY = 0.30, JUMP = -5, PIPE_W = 64;
   const PIPE_GAP = 160, PIPE_SPEED = 2.4, PIPE_FREQ = 120;
 
   const isMobile = window.innerWidth <= 768;
@@ -614,11 +614,6 @@ function initFlappyDev() {
         ctx.fillRect(x + ci * PIXEL, y + ri * PIXEL + bob, PIXEL, PIXEL);
       });
     });
-    ctx.shadowColor = '#4f8ef7';
-    ctx.shadowBlur  = 6;
-    ctx.strokeStyle = 'rgba(79,142,247,0.12)';
-    ctx.lineWidth   = 1;
-    ctx.strokeRect(x, y + bob, 16 * PIXEL, 16 * PIXEL);
     ctx.shadowBlur  = 0;
   }
 
@@ -633,7 +628,7 @@ function initFlappyDev() {
     ctx.fillStyle   = '#7dd3fc';
     ctx.font        = 'bold 28px monospace';
     ctx.textAlign   = 'center';
-    ctx.fillText('{', p.x + PIPE_W / 2, p.topH - 5);
+    ctx.fillText(p.top || '{', p.x + PIPE_W / 2, p.topH - 5);
 
     ctx.strokeStyle = 'rgba(125,211,252,0.25)';
     ctx.lineWidth   = 1;
@@ -649,7 +644,7 @@ function initFlappyDev() {
     ctx.shadowColor = '#7dd3fc';
     ctx.shadowBlur  = 14;
     ctx.fillStyle   = '#7dd3fc';
-    ctx.fillText('}', p.x + PIPE_W / 2, botY + 24);
+    ctx.fillText(p.bot || '}', p.x + PIPE_W / 2, botY + 24);
 
     ctx.strokeStyle = 'rgba(125,211,252,0.25)';
     ctx.strokeRect(p.x, botY + 12, PIPE_W, H - botY - 12);
@@ -670,10 +665,21 @@ function initFlappyDev() {
 
   function spawnPipe() {
     const minY = 60, maxY = H - GAP - 60;
+    const pairs = [
+      ['{', '}'],
+      ['<', '>'],
+      ['(', ')'],
+      ['[', ']'],
+      ['/*', '*/'],
+      ['//', '//'],
+    ];
+    const pair = pairs[Math.floor(Math.random() * pairs.length)];
     pipes.push({
       x: W + 10,
       topH: Math.random() * (maxY - minY) + minY,
-      scored: false
+      scored: false,
+      top: pair[0],
+      bot: pair[1],
     });
   }
 
