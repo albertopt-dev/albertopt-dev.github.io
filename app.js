@@ -407,6 +407,49 @@ function initNav() {
 }
 
 // =========================
+// VISIT COUNTER
+// =========================
+function initVisitCounter() {
+  const namespace = 'alberto-portfolio';
+  const key       = 'visitas-2026';
+  let   hideTimer = null;
+
+  // Suma visita silenciosamente al cargar
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      window._visitCount = data.value;
+    })
+    .catch(() => {});
+
+  const btn     = document.getElementById('counterBtn');
+  const display = document.getElementById('counterDisplay');
+  const value   = document.getElementById('counterValue');
+
+  if (!btn || !display || !value) return;
+
+  btn.addEventListener('click', () => {
+    if (display.style.display !== 'none') {
+      clearTimeout(hideTimer);
+      display.style.display = 'none';
+      btn.style.display     = 'flex';
+      return;
+    }
+
+    value.textContent     = window._visitCount
+      ? window._visitCount.toLocaleString('es-ES')
+      : '...';
+    display.style.display = 'inline-flex';
+    btn.style.display     = 'none';
+
+    hideTimer = setTimeout(() => {
+      display.style.display = 'none';
+      btn.style.display     = 'flex';
+    }, 10000);
+  });
+}
+
+// =========================
 // INIT
 // =========================
 renderProjects();
@@ -417,3 +460,4 @@ initProjectModal();
 initContactEmailJS();
 initTheme();
 initNav();
+initVisitCounter();

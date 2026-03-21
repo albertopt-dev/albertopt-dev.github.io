@@ -113,7 +113,7 @@ portfolio-web/
 ├── favicon.svg             # Favicon SVG
 │
 └── assets/
-    ├── foto.jpg                                    # Foto de perfil del hero
+    ├── foto.png                                   # Foto de perfil del hero
     ├── Alberto_Pérez_Talaván_CV_2025.pdf           # CV descargable
     ├── Carta recomendación Tich Consulting.pdf     # Carta de recomendación
     ├── Carta de presentacion.pdf                   # Carta de presentación
@@ -209,7 +209,7 @@ En `app.js`, añade un nuevo objeto al array `skills` con el nombre de la tecnol
 
 ### Cambiar la foto de perfil
 
-Reemplaza el archivo `assets/foto.jpg` con tu foto. La imagen se recorta con `object-fit: cover` centrado en la parte superior (`object-position: top`), por lo que las fotos verticales tipo carnet funcionan perfectamente.
+Reemplaza el archivo `assets/foto.png` con tu foto. La imagen se recorta con `object-fit: cover` centrado en la parte superior (`object-position: top`), por lo que las fotos verticales tipo carnet funcionan perfectamente.
 
 Si la imagen no carga (o mientras no exista), el fallback muestra automáticamente las iniciales **APT** en el frame del avatar.
 

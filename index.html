@@ -92,10 +92,10 @@
     </div>
 
     <div class="hero__avatar">
-      <!-- Pon tu foto como assets/foto.jpg -->
+      <!-- Pon tu foto como assets/foto.png -->
       <div class="hero__avatar-frame">
         <img src="assets/foto.png" alt="Alberto Pérez Talaván"
-             onerror="this.style.display='none'" />
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="hero__avatar-fallback" aria-hidden="true">APT</div>
       </div>
       <div class="hero__avatar-tag">📍 Alcoy · <strong>Abierto a remoto</strong></div>
@@ -266,13 +266,23 @@
   <footer class="footer">
     <span class="footer__logo">Alberto<span>  PT</span></span>
     <span class="footer__copy">© 2026 Alberto Pérez Talaván · Todos los derechos reservados</span>
-    <div class="footer__links">
-      <a href="assets/Carta de presentacion.pdf" target="_blank" rel="noopener" class="footer__btn">
-        Carta de presentación
-      </a>
-      <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" download class="footer__btn footer__btn--accent">
-        Descargar CV
-      </a>
+    <div class="footer__right">
+      <div class="footer__links">
+        <a href="assets/Carta de presentacion.pdf" target="_blank" rel="noopener">Carta de presentación</a>
+        <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" download>Descargar CV</a>
+      </div>
+      <div class="footer__counter">
+        <button id="counterBtn" class="footer__counter-btn" title="Stats">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+        <span id="counterDisplay" class="footer__counter-display" style="display:none;">
+          👁 <strong id="counterValue">...</strong> visitas
+        </span>
+      </div>
     </div>
   </footer>
 
