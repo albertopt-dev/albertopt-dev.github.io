@@ -174,6 +174,11 @@
         <span class="about__skill-name">.NET</span>
         <span class="about__skill-tag about__skill-tag--learning">Aprendizaje autodidacta</span>
       </div>
+      <div class="about__skill-card">
+        <span class="about__skill-name">React Native</span>
+        <span class="about__skill-tag">Apps móviles</span>
+        <span class="about__skill-tag about__skill-tag--learning">Aprendizaje autodidacta</span>
+      </div>
     </div>
   </section>
 
@@ -430,5 +435,18 @@ function draw() {
 }
 draw();
   </script>
+
+  <!-- Modal detalle lab -->
+  <div id="labDetailOverlay" class="lab-detail-overlay">
+    <div class="lab-detail-backdrop" onclick="closeLabDetail()"></div>
+    <div id="labDetailBox" class="lab-detail-box"></div>
+  </div>
+
+  <!-- Lightbox imagen individual -->
+  <div id="imgLightbox" class="img-lightbox" onclick="closeImgLightbox()">
+    <img id="imgLightboxSrc" src="" alt="Preview" class="img-lightbox__img" />
+    <button class="img-lightbox__close" onclick="closeImgLightbox()">✕</button>
+  </div>
+
 </body>
 </html>

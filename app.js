@@ -55,11 +55,33 @@ const projects = [
 const labs = [
   {
     title: "ObjetivosApp",
-    description: "App personal para gestionar objetivos diarios, semanales y anuales. Subobjetivos, código de colores, calendario y autenticación propia — cada usuario solo ve sus datos.",
+    description: "App personal para gestionar objetivos diarios, semanales y anuales con autenticación propia.",
+    detail: {
+      intro: "Una app construida para uso real y diario. Diseñada con React Native y Firebase, cada usuario tiene su propio espacio privado donde ningún dato es compartido.",
+      features: [
+        { icon: "📅", title: "Calendario inteligente", desc: "Vista mensual con marcadores visuales en los días con objetivos programados. Navega por meses y semanas de un vistazo." },
+        { icon: "🎯", title: "Objetivos por período", desc: "Crea objetivos diarios, semanales, mensuales o anuales. Los semanales y mensuales admiten subobjetivos para desglosar el progreso." },
+        { icon: "🎨", title: "Código de colores", desc: "Asigna un color a cada objetivo para identificarlos visualmente. Vista previa en tiempo real al crear o editar." },
+        { icon: "📊", title: "Estadísticas detalladas", desc: "Panel con tasa de éxito, racha actual, mejor racha, objetivos por prioridad y tendencias de los últimos 7 y 30 días." },
+        { icon: "🔔", title: "Prioridad y notificaciones", desc: "Marca cada objetivo como Baja, Media o Alta prioridad. Sistema de notificaciones integrado para no olvidar ninguno." },
+        { icon: "🔐", title: "Autenticación propia", desc: "Cada usuario se registra e inicia sesión con su cuenta. Los datos son completamente privados — nadie más puede verlos." }
+      ],
+      stack: ["React Native", "Firebase Auth", "Firestore", "Expo"]
+    },
     iconClasses: [
-      "devicon-kotlin-plain colored",
+      "devicon-react-original colored",
       "devicon-firebase-plain colored"
     ],
+    images: [
+      "assets/proyectos/ObjetivosApp/objetivos-01.png",
+      "assets/proyectos/ObjetivosApp/objetivos-02.png",
+      "assets/proyectos/ObjetivosApp/objetivos-03.png",
+      "assets/proyectos/ObjetivosApp/objetivos-04.png",
+      "assets/proyectos/ObjetivosApp/objetivos-05.png",
+      "assets/proyectos/ObjetivosApp/objetivos-06.png",
+      "assets/proyectos/ObjetivosApp/objetivos-07.png"
+    ],
+    video: "assets/proyectos/ObjetivosApp/objetivos-video.mp4",
     links: { repo: "https://github.com/albertopt-dev/ObjetivosApp" }
   },
   {
@@ -100,6 +122,7 @@ const skills = [
   { name: "CSS3",        iconClass: "devicon-css3-plain colored" },
   { name: "Git",         iconClass: "devicon-git-plain colored" },
   { name: "Android",     iconClass: "devicon-android-plain colored" },
+  { name: "React", iconClass: "devicon-react-original colored" },
 ];
 
 // =========================
@@ -231,22 +254,129 @@ function onEscClose(e) {
 function renderLabs() {
   const grid = document.getElementById("labsGrid");
 
-  grid.innerHTML = labs.map((lab) => `
-    <article class="lab-card">
-      <h3 class="lab-card__title">${lab.title}</h3>
-      <p class="lab-card__desc">${lab.description}</p>
+  grid.innerHTML = labs.map((lab, labIdx) => {
+    const hasImages = lab.images && lab.images.length > 0;
+    const hasVideo  = !!lab.video;
+    const hasDetail = !!lab.detail;
 
-      <div class="lab-card__icons">
-        ${lab.iconClasses.map(cls => `<i class="${cls} lab-card__icon" aria-hidden="true"></i>`).join("")}
-      </div>
+    const thumbnail = hasVideo
+      ? `<video class="lab-thumb__video" autoplay muted loop playsinline>
+           <source src="${lab.video}" type="video/mp4">
+         </video>`
+      : hasImages
+        ? `<img src="${lab.images[0]}" alt="${lab.title}" class="lab-thumb__img" loading="lazy" />`
+        : '';
 
-      <div class="lab-card__actions">
-        ${lab.links.repo
-          ? `<a class="lab-card__btn" href="${lab.links.repo}" target="_blank" rel="noopener">Ver repositorio</a>`
-          : ""}
+    const thumbSection = (hasVideo || hasImages) ? `
+      <div class="lab-card__thumb">
+        ${thumbnail}
+        <div class="lab-card__thumb-overlay">
+          <span class="lab-thumb__tag">${lab.detail ? lab.detail.stack[0] : ''}</span>
+        </div>
+      </div>` : '';
+
+    return `
+      <article class="lab-card${(hasVideo || hasImages) ? ' lab-card--has-thumb' : ''}">
+        ${thumbSection}
+        <div class="lab-card__body">
+          <h3 class="lab-card__title">${lab.title}</h3>
+          <p class="lab-card__desc">${lab.description}</p>
+          <div class="lab-card__icons">
+            ${lab.iconClasses.map(cls =>
+              `<i class="${cls} lab-card__icon" aria-hidden="true"></i>`
+            ).join("")}
+          </div>
+          <div class="lab-card__actions">
+            ${hasDetail
+              ? `<button class="lab-card__btn lab-card__btn--detail"
+                         onclick="openLabDetail(${labIdx})">
+                   🔍 Ver detalles
+                 </button>`
+              : ''}
+            ${lab.links.repo
+              ? `<a class="lab-card__btn" href="${lab.links.repo}"
+                    target="_blank" rel="noopener">Ver repositorio</a>`
+              : ''}
+          </div>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function openLabDetail(idx) {
+  const lab = labs[idx];
+  if (!lab || !lab.detail) return;
+  const d = lab.detail;
+
+  const mosaicImages = lab.images ? lab.images.map(img =>
+    `<img src="${img}" alt="${lab.title}" class="detail-mosaic__img" loading="lazy"
+          onclick="openLightboxImg('${img}')" />`
+  ).join('') : '';
+
+  const videoSection = lab.video ? `
+    <div class="detail-video-wrap">
+      <video controls autoplay muted loop playsinline class="detail-video">
+        <source src="${lab.video}" type="video/mp4">
+      </video>
+    </div>` : '';
+
+  const featuresHTML = d.features ? d.features.map(f => `
+    <div class="detail-feature">
+      <span class="detail-feature__icon">${f.icon}</span>
+      <div>
+        <strong class="detail-feature__title">${f.title}</strong>
+        <p class="detail-feature__desc">${f.desc}</p>
       </div>
-    </article>
-  `).join("");
+    </div>`).join('') : '';
+
+  const stackHTML = d.stack ? d.stack.map(s =>
+    `<span class="detail-stack-tag">${s}</span>`
+  ).join('') : '';
+
+  const html = `
+    <div class="lab-detail__header">
+      <div>
+        <h2 class="lab-detail__title">${lab.title}</h2>
+        <p class="lab-detail__intro">${d.intro}</p>
+        <div class="lab-detail__stack">${stackHTML}</div>
+      </div>
+      <button class="lab-detail__close" onclick="closeLabDetail()">✕</button>
+    </div>
+    ${(lab.images && lab.images.length > 0) ? `
+    <div class="detail-mosaic">${mosaicImages}</div>` : ''}
+    ${videoSection}
+    ${featuresHTML ? `
+    <div class="detail-features">
+      <h3 class="detail-features__title">¿Qué hace?</h3>
+      <div class="detail-features__grid">${featuresHTML}</div>
+    </div>` : ''}
+    <div class="lab-detail__footer">
+      ${lab.links.repo
+        ? `<a href="${lab.links.repo}" target="_blank" rel="noopener"
+              class="btn btn--primary">Ver en GitHub →</a>`
+        : ''}
+    </div>`;
+
+  const overlay = document.getElementById('labDetailOverlay');
+  const box     = document.getElementById('labDetailBox');
+  box.innerHTML = html;
+  overlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLabDetail() {
+  document.getElementById('labDetailOverlay').classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+function openLightboxImg(src) {
+  const lb = document.getElementById('imgLightbox');
+  document.getElementById('imgLightboxSrc').src = src;
+  lb.classList.add('is-open');
+}
+
+function closeImgLightbox() {
+  document.getElementById('imgLightbox').classList.remove('is-open');
 }
 
 // =========================
@@ -438,10 +568,10 @@ function initVisitCounter() {
   let   hideTimer = null;
 
   // Suma visita silenciosamente al cargar
-  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
     .then(res => res.json())
     .then(data => {
-      window._visitCount = data.count;
+      window._visitCount = data.value;
     })
     .catch(() => {});
 
