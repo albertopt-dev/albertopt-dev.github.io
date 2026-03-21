@@ -73,7 +73,7 @@ Puntos clave del proyecto:
 | 🔍 **Modal de detalle** | Muestra título, descripción, highlights, stack y links. Cierra con Escape o clic en backdrop |
 | ↔️ **Skills scroller** | Carrusel horizontal con flechas y scroll suave; oculta/muestra flechas según el scroll |
 | 📬 **Formulario de contacto** | EmailJS — envío directo al email sin backend. Feedback visual de éxito/error |
-| 📱 **Responsive** | Un único breakpoint en 960 px. Mobile-first friendly |
+| 📱 **Responsive** | Breakpoint en 768 px, menú hamburguesa en móvil, juego optimizado para táctil |
 | ♿ **Accesibilidad** | `aria-label`, `aria-hidden`, `role="dialog"`, `aria-modal`, `aria-live="polite"` |
 | ⚡ **Sin build step** | Abrir `index.html` en el navegador (o servir con cualquier servidor estático) |
 | 📄 **CV descargable** | Enlace en la navbar que descarga el PDF directamente |
@@ -170,7 +170,13 @@ Archivo central que contiene:
 - Proyectos personales y experimentos sin cliente ni fecha límite.
 - Cards con iconos de tecnologías, descripción y enlace al repositorio.
 
-### 6. `#contacto` — Contacto
+### 6. `#juego` — Mini juego: Flappy Dev
+- Minijuego tipo Flappy Bird integrado en el portfolio.
+- Personaje pixel art (desarrollador), obstáculos `{ }` neón y fondo de ciudad cyberpunk generados con Canvas.
+- Controles: **Espacio**, clic o toque en pantalla para saltar. HUD con puntuación y récord de sesión.
+- > 🤖 Esta sección fue desarrollada con ayuda de IA (GitHub Copilot).
+
+### 7. `#contacto` — Contacto
 - Links directos a email, LinkedIn y GitHub.
 - Formulario con campos Nombre, Email y Mensaje — integrado con EmailJS.
 - Feedback accesible con `aria-live="polite"`.
@@ -253,14 +259,30 @@ El fondo adapta su opacidad y color al modo claro/oscuro automáticamente.
 
 ## 📱 Responsive design
 
-El portfolio es **responsive con un único breakpoint** en `960px`:
+El portfolio está **completamente optimizado para móvil** con un breakpoint principal en `768px`:
 
 | Viewport | Comportamiento |
 |---|---|
-| `> 960px` (escritorio) | Hero en fila (`flex-row`), About en 2 columnas, Navbar con links visibles |
-| `≤ 960px` (móvil/tablet) | Hero en columna (`flex-column`), About en 1 columna, links de navbar ocultos, formulario de contacto en 1 columna |
+| `> 768px` (escritorio) | Hero en fila, About en 2 columnas, navbar con links visibles |
+| `≤ 768px` (móvil/tablet) | Hero en columna, foto centrada, all-sections en 1 columna, formulario en 1 columna |
 
-El tamaño del texto usa `clamp()` en los títulos principales para escalar suavemente entre tamaños de pantalla sin necesidad de media queries adicionales.
+### Menú hamburguesa
+
+En móvil los links de navegación se ocultan y aparece un **botón hamburguesa** (☰) a la izquierda del logo:
+
+- Las tres líneas animadas se transforman en una ✕ al abrirse.
+- El menú desplegable muestra todas las secciones con fondo degradado azul que combina con la navbar.
+- Se cierra automáticamente al pulsar un enlace o al tocar fuera.
+
+### Optimizaciones móvil del mini juego
+
+- Canvas con **altura fija de 280 px** para que sea jugable con el pulgar.
+- **Gap entre obstáculos ampliado** a 190 px (vs 160 px en escritorio).
+- Los obstáculos aparecen con **mayor frecuencia reducida** (140 frames vs 120) para dar más tiempo de reacción.
+- La instrucción de teclado (`Space`) se oculta automáticamente, ya que no aplica en táctil.
+- `touch-action: none` en el canvas para evitar scroll accidental al jugar.
+
+Los títulos principales usan `clamp()` para escalar suavemente entre tamaños de pantalla sin media queries adicionales.
 
 ---
 

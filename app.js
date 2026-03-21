@@ -73,7 +73,7 @@ const labs = [
   },
   {
     title: "Chatbot IA — Asistente técnico",
-    description: "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales. En construcción.",
+    description: "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales. Por el momento, es una idea pero tengo previsión de realizarlo próximamente.",
     iconClasses: [
       "devicon-java-plain colored",
       "devicon-javascript-plain colored"
@@ -402,7 +402,30 @@ function initNav() {
         e.preventDefault();
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+      // Cierra el menú móvil al navegar
+      hamburger.classList.remove('is-open');
+      mobileMenu.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  const hamburger  = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobileMenu');
+  if (!hamburger || !mobileMenu) return;
+
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('is-open');
+    hamburger.classList.toggle('is-open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Cierra al hacer clic fuera
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      hamburger.classList.remove('is-open');
+      mobileMenu.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
   });
 }
 
@@ -415,10 +438,10 @@ function initVisitCounter() {
   let   hideTimer = null;
 
   // Suma visita silenciosamente al cargar
-  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
     .then(res => res.json())
     .then(data => {
-      window._visitCount = data.value;
+      window._visitCount = data.count;
     })
     .catch(() => {});
 
@@ -450,6 +473,329 @@ function initVisitCounter() {
 }
 
 // =========================
+// FLAPPY DEV GAME
+// =========================
+function initFlappyDev() {
+  const canvas   = document.getElementById('flCanvas');
+  if (!canvas) return;
+  const ctx      = canvas.getContext('2d');
+  const overlay  = document.getElementById('flOverlay');
+  const startBtn = document.getElementById('flStart');
+  const scoreEl  = document.getElementById('flScore');
+  const bestEl   = document.getElementById('flBest');
+  const statusEl = document.getElementById('flStatus');
+  const titleEl  = document.getElementById('flOverTitle');
+  const msgEl    = document.getElementById('flOverMsg');
+
+  // Canvas responsive — ocupa todo el ancho del contenedor
+  function resizeCanvas() {
+    const W = canvas.parentElement.clientWidth;
+    const H = Math.round(W * 0.42);
+    canvas.width  = W;
+    canvas.height = H;
+    return { W, H };
+  }
+  let { W, H } = resizeCanvas();
+  window.addEventListener('resize', () => {
+    const dims = resizeCanvas();
+    W = dims.W; H = dims.H;
+    if (!running) { drawBg(); drawDev(dev.x, dev.y, 0); }
+  });
+
+  const GRAVITY = 0.42, JUMP = -8, PIPE_W = 64;
+  const PIPE_GAP = 160, PIPE_SPEED = 2.4, PIPE_FREQ = 120;
+
+  const isMobile = window.innerWidth <= 768;
+  const GAP      = isMobile ? 190 : PIPE_GAP;
+  const FREQ     = isMobile ? 140 : PIPE_FREQ;
+
+  let dev, pipes, score, best, frame, running, animId, countdownVal;
+  best = 0;
+
+  const PIXEL = 3;
+  const DEV_PIXELS = [
+    [0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0],
+    [0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0],
+    [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0],
+    [0,0,1,1,2,2,2,2,2,2,1,1,0,0,0,0],
+    [0,0,1,2,2,2,2,2,2,2,2,1,0,0,0,0],
+    [0,0,1,2,3,2,2,2,2,3,2,1,0,0,0,0],
+    [0,0,1,2,2,2,2,2,2,2,2,1,0,0,0,0],
+    [0,0,1,2,2,4,4,4,4,2,2,1,0,0,0,0],
+    [0,0,0,5,5,5,5,5,5,5,5,0,0,0,0,0],
+    [0,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0],
+    [0,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0],
+    [0,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0],
+    [0,0,6,6,6,6,0,0,6,6,6,6,0,0,0,0],
+    [0,0,6,6,6,6,0,0,6,6,6,6,0,0,0,0],
+    [0,0,7,7,7,7,0,0,7,7,7,7,0,0,0,0],
+    [0,0,7,7,7,7,0,0,7,7,7,7,0,0,0,0],
+  ];
+  const COLORS = [
+    'transparent','#1a0a2e','#FDBCB4',
+    '#0a0a1a','#cc4444','#1F5C99','#0d1b3e','#0a0a14',
+  ];
+
+  const buildings = Array.from({ length: 14 }, () => ({
+    x:       Math.random() * 800,
+    w:       40 + Math.random() * 25,
+    h:       60 + Math.random() * 130,
+    windows: Array.from({ length: 8 }, () => Math.random() > 0.4),
+  }));
+  const stars = Array.from({ length: 70 }, () => ({
+    x: Math.random() * 800,
+    y: Math.random() * 200,
+    r: Math.random() * 1.5,
+    a: 0.3 + Math.random() * 0.7,
+  }));
+
+  function drawBg() {
+    const sky = ctx.createLinearGradient(0, 0, 0, H);
+    sky.addColorStop(0,   '#020510');
+    sky.addColorStop(0.6, '#050c1f');
+    sky.addColorStop(1,   '#0a1230');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, W, H);
+
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc((s.x % W), (s.y % (H * 0.55)), s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,210,255,${s.a})`;
+      ctx.fill();
+    });
+
+    const glow = ctx.createRadialGradient(W/2, H, 10, W/2, H, H * 0.8);
+    glow.addColorStop(0,   'rgba(31,92,153,0.2)');
+    glow.addColorStop(0.5, 'rgba(79,142,247,0.06)');
+    glow.addColorStop(1,   'transparent');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    buildings.forEach(b => {
+      const bx = ((b.x - frame * 0.3) % (W + 80) + W + 80) % (W + 80) - 80;
+      ctx.fillStyle = '#06091a';
+      ctx.fillRect(bx, H - b.h, b.w, b.h);
+      b.windows.forEach((on, wi) => {
+        if (!on) return;
+        const wx = bx + 5 + (wi % 3) * 11;
+        const wy = H - b.h + 8 + Math.floor(wi / 3) * 16;
+        ctx.fillStyle = 'rgba(125,211,252,0.12)';
+        ctx.fillRect(wx, wy, 6, 8);
+      });
+      ctx.shadowColor = '#4f8ef7';
+      ctx.shadowBlur  = 5;
+      ctx.fillStyle   = 'rgba(79,142,247,0.5)';
+      ctx.fillRect(bx, H - b.h, b.w, 1);
+      ctx.shadowBlur  = 0;
+    });
+
+    ctx.fillStyle = '#080d20';
+    ctx.fillRect(0, H - 16, W, 16);
+    ctx.shadowColor = '#4f8ef7';
+    ctx.shadowBlur  = 8;
+    ctx.fillStyle   = 'rgba(79,142,247,0.4)';
+    ctx.fillRect(0, H - 16, W, 1);
+    ctx.shadowBlur  = 0;
+
+    ctx.font = '10px monospace';
+    const signs = ['{ code }','</dev>','npm run','git push','sudo ☕'];
+    signs.forEach((s, i) => {
+      const sx = ((frame * 0.8 + i * 140) % (W + 200)) - 80;
+      ctx.fillStyle = 'rgba(125,211,252,0.1)';
+      ctx.fillText(s, W - sx, H - 3);
+    });
+  }
+
+  function drawDev(x, y, bob) {
+    DEV_PIXELS.forEach((row, ri) => {
+      row.forEach((col, ci) => {
+        if (col === 0) return;
+        ctx.fillStyle = COLORS[col];
+        ctx.fillRect(x + ci * PIXEL, y + ri * PIXEL + bob, PIXEL, PIXEL);
+      });
+    });
+    ctx.shadowColor = '#4f8ef7';
+    ctx.shadowBlur  = 6;
+    ctx.strokeStyle = 'rgba(79,142,247,0.12)';
+    ctx.lineWidth   = 1;
+    ctx.strokeRect(x, y + bob, 16 * PIXEL, 16 * PIXEL);
+    ctx.shadowBlur  = 0;
+  }
+
+  function drawPipe(p) {
+    ctx.fillStyle = '#060f28';
+    ctx.fillRect(p.x, 0, PIPE_W, p.topH - 12);
+    ctx.fillStyle = '#0a1a3a';
+    ctx.fillRect(p.x - 5, p.topH - 30, PIPE_W + 10, 30);
+
+    ctx.shadowColor = '#7dd3fc';
+    ctx.shadowBlur  = 14;
+    ctx.fillStyle   = '#7dd3fc';
+    ctx.font        = 'bold 28px monospace';
+    ctx.textAlign   = 'center';
+    ctx.fillText('{', p.x + PIPE_W / 2, p.topH - 5);
+
+    ctx.strokeStyle = 'rgba(125,211,252,0.25)';
+    ctx.lineWidth   = 1;
+    ctx.strokeRect(p.x, 0, PIPE_W, p.topH - 12);
+    ctx.shadowBlur  = 0;
+
+    const botY = p.topH + GAP;
+    ctx.fillStyle = '#060f28';
+    ctx.fillRect(p.x, botY + 12, PIPE_W, H - botY - 12);
+    ctx.fillStyle = '#0a1a3a';
+    ctx.fillRect(p.x - 5, botY, PIPE_W + 10, 30);
+
+    ctx.shadowColor = '#7dd3fc';
+    ctx.shadowBlur  = 14;
+    ctx.fillStyle   = '#7dd3fc';
+    ctx.fillText('}', p.x + PIPE_W / 2, botY + 24);
+
+    ctx.strokeStyle = 'rgba(125,211,252,0.25)';
+    ctx.strokeRect(p.x, botY + 12, PIPE_W, H - botY - 12);
+    ctx.shadowBlur  = 0;
+  }
+
+  function hitTest(p) {
+    const pad = 5;
+    if (dev.x + dev.w - pad > p.x + pad &&
+        dev.x + pad < p.x + PIPE_W - pad) {
+      if (dev.y + pad < p.topH - 12)                   return true;
+      if (dev.y + dev.h - pad > p.topH + GAP + 12) return true;
+    }
+    if (dev.y + dev.h > H - 16) return true;
+    if (dev.y < 0)               return true;
+    return false;
+  }
+
+  function spawnPipe() {
+    const minY = 60, maxY = H - GAP - 60;
+    pipes.push({
+      x: W + 10,
+      topH: Math.random() * (maxY - minY) + minY,
+      scored: false
+    });
+  }
+
+  function reset() {
+    dev   = { x: 100, y: H / 2, vy: 0, w: 16*PIXEL, h: 16*PIXEL };
+    pipes = []; score = 0; frame = 0; running = false;
+  }
+  reset();
+
+  // ── CUENTA ATRÁS antes de empezar ──
+  function startCountdown(cb) {
+    let count = 3;
+    overlay.style.display = 'none';
+    statusEl.textContent  = 'Prepárate...';
+
+    function tick() {
+      drawBg();
+      drawDev(dev.x, dev.y, 0);
+
+      // Número grande centrado
+      ctx.save();
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font         = `bold ${Math.round(H * 0.35)}px monospace`;
+      ctx.shadowColor  = '#7dd3fc';
+      ctx.shadowBlur   = 30;
+      ctx.fillStyle    = 'rgba(125,211,252,0.9)';
+      ctx.fillText(count, W / 2, H / 2);
+      ctx.shadowBlur   = 0;
+      ctx.restore();
+
+      count--;
+      if (count < 0) { cb(); return; }
+      setTimeout(tick, 900);
+    }
+    tick();
+  }
+
+  function gameLoop() {
+    frame++;
+    drawBg();
+
+    dev.vy += GRAVITY;
+    dev.y  += dev.vy;
+
+    if (frame % FREQ === 0) spawnPipe();
+
+    let dead = false;
+    pipes.forEach(p => {
+      p.x -= PIPE_SPEED;
+      drawPipe(p);
+      if (!p.scored && p.x + PIPE_W < dev.x) {
+        p.scored = true; score++;
+        scoreEl.textContent = score;
+        if (score > best) { best = score; bestEl.textContent = best; }
+      }
+      if (hitTest(p)) dead = true;
+    });
+    pipes = pipes.filter(p => p.x + PIPE_W > 0);
+
+    if (dead || dev.y + dev.h > H - 16 || dev.y < 0) {
+      endGame(); return;
+    }
+
+    const bob = Math.sin(frame * 0.25) * 1.5;
+    drawDev(dev.x, dev.y, bob);
+
+    ctx.shadowColor = '#7dd3fc';
+    ctx.shadowBlur  = 16;
+    ctx.fillStyle   = 'rgba(125,211,252,0.25)';
+    ctx.font        = 'bold 28px monospace';
+    ctx.textAlign   = 'center';
+    ctx.fillText(score, W / 2, 36);
+    ctx.shadowBlur  = 0;
+
+    if (running) animId = requestAnimationFrame(gameLoop);
+  }
+
+  function startGame() {
+    reset();
+    cancelAnimationFrame(animId);
+    startCountdown(() => {
+      running = true;
+      statusEl.textContent = 'En juego...';
+      gameLoop();
+    });
+  }
+
+  function endGame() {
+    running = false;
+    cancelAnimationFrame(animId);
+    if (score > best) best = score;
+    bestEl.textContent   = best;
+    statusEl.textContent = 'Game over';
+
+    const msg = score >= 15 ? '🏆 ¡Leyenda del código!' :
+                score >= 8  ? '🚀 ¡Gran desarrollador!' :
+                score >= 3  ? '💪 ¡Sigue intentándolo!' :
+                              '☕ Necesitas más café...';
+    titleEl.textContent  = msg;
+    msgEl.textContent    = `Puntuación: ${score} · Récord: ${best}`;
+    startBtn.textContent = '🔄 Jugar de nuevo';
+    overlay.style.display = 'flex';
+    drawBg(); drawDev(dev.x, dev.y, 0);
+  }
+
+  function jump() { if (!running) return; dev.vy = JUMP; }
+
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); jump(); }
+  });
+  canvas.addEventListener('click',      jump);
+  canvas.addEventListener('mousedown',  jump);
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault(); jump();
+  }, { passive: false });
+  startBtn.addEventListener('click', startGame);
+
+  drawBg(); drawDev(dev.x, dev.y, 0);
+}
+
+// =========================
 // INIT
 // =========================
 renderProjects();
@@ -461,3 +807,4 @@ initContactEmailJS();
 initTheme();
 initNav();
 initVisitCounter();
+initFlappyDev();

@@ -27,15 +27,30 @@
        NAV
   ═══════════════════════════════════════ -->
   <header class="navbar">
+    <button class="navbar__hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
     <a href="#hero" class="navbar__logo">Alberto<span> PT</span></a>
 
-    <nav class="navbar__links" aria-label="Navegación principal">
+    <nav class="navbar__links" id="navLinks" aria-label="Navegación principal">
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
+      <a href="#juego">Juego</a>
       <a href="#contacto">Contacto</a>
     </nav>
+
+    <!-- Menú móvil -->
+    <div class="navbar__mobile-menu" id="navMobileMenu" aria-label="Menú móvil">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#taller">Taller</a>
+      <a href="#juego">Juego</a>
+      <a href="#contacto">Contacto</a>
+    </div>
 
     <div class="navbar__actions">
       <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" class="btn btn--outline" download>Descargar CV</a>
@@ -94,9 +109,12 @@
     <div class="hero__avatar">
       <!-- Pon tu foto como assets/foto.png -->
       <div class="hero__avatar-frame">
-        <img src="assets/foto.png" alt="Alberto Pérez Talaván"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-        <div class="hero__avatar-fallback" aria-hidden="true">APT</div>
+        <img src="assets/foto.png"
+            alt="Alberto Pérez Talaván"
+            class="avatar-img avatar-img--default" />
+        <img src="assets/foto_saludo.png"
+            alt="Alberto Pérez Talaván saludando"
+            class="avatar-img avatar-img--hover" />
       </div>
       <div class="hero__avatar-tag">📍 Alcoy · <strong>Abierto a remoto</strong></div>
     </div>
@@ -204,6 +222,55 @@
     </p>
 
     <div id="labsGrid" class="labs__grid"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       JUEGO
+  ═══════════════════════════════════════ -->
+  <section id="juego" class="game-section section">
+    <div class="game-section__intro">
+      <div>
+        <p class="section__label">Mini juego</p>
+        <h2 class="section__title">¿Puedes esquivar el código?</h2>
+        <p class="game-section__desc">
+          Que no sea todo leer — aquí tienes tu espacio para
+          divertirte y relajarte un poco. 🎮
+        </p>
+        <div class="game-instructions">
+          <div class="game-instruction">
+            <span class="game-instruction__icon">Space</span>
+            <span>Saltar</span>
+          </div>
+          <div class="game-instruction">
+            <span class="game-instruction__icon">🖱</span>
+            <span>Clic izquierdo</span>
+          </div>
+          <div class="game-instruction">
+            <span class="game-instruction__icon">👆</span>
+            <span>Toque en móvil</span>
+          </div>
+          <div class="game-instruction">
+            <span class="game-instruction__icon">{ }</span>
+            <span>Esquiva las llaves</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-wrapper game-wrapper--full">
+      <div class="game-hud">
+        <span class="hud-item">⭐ <strong id="flScore">0</strong></span>
+        <span class="hud-item">🏆 <strong id="flBest">0</strong></span>
+        <span id="flStatus" class="hud-status">Pulsa para empezar</span>
+      </div>
+      <canvas id="flCanvas" class="fl-canvas"></canvas>
+      <div id="flOverlay" class="fl-overlay">
+        <p id="flOverTitle" class="fl-over__title">👨‍💻 Flappy Dev</p>
+        <p id="flOverMsg"   class="fl-over__msg">Esquiva las llaves { } y sobrevive</p>
+        <button id="flStart" class="btn btn--primary">▶ Jugar</button>
+      </div>
+    </div>
   </section>
 
 
