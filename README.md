@@ -25,19 +25,18 @@
 5. [Estructura del proyecto](#-estructura-del-proyecto)
 6. [Secciones de la web](#-secciones-de-la-web)
 7. [Instalación y uso local](#-instalación-y-uso-local)
-8. [Configuración de EmailJS](#-configuración-de-emailjs)
-9. [Guía de personalización](#-guía-de-personalización)
+8. [Guía de personalización](#-guía-de-personalización)
    - [Añadir un proyecto](#añadir-un-proyecto)
    - [Añadir un Lab / experimento](#añadir-un-lab--experimento)
    - [Añadir una habilidad al stack](#añadir-una-habilidad-al-stack)
    - [Cambiar la foto de perfil](#cambiar-la-foto-de-perfil)
-10. [Diseño y sistema de tokens CSS](#-diseño-y-sistema-de-tokens-css)
-11. [Modo oscuro / claro](#-modo-oscuro--claro)
-12. [Animación de fondo — Matrix Rain](#-animación-de-fondo--matrix-rain)
-13. [Responsive design](#-responsive-design)
-14. [Accesibilidad](#-accesibilidad)
-15. [Soporte de navegadores](#-soporte-de-navegadores)
-16. [Licencia](#-licencia)
+9. [Diseño y sistema de tokens CSS](#-diseño-y-sistema-de-tokens-css)
+10. [Modo oscuro / claro](#-modo-oscuro--claro)
+11. [Animación de fondo — Matrix Rain](#-animación-de-fondo--matrix-rain)
+12. [Responsive design](#-responsive-design)
+13. [Accesibilidad](#-accesibilidad)
+14. [Soporte de navegadores](#-soporte-de-navegadores)
+15. [Licencia](#-licencia)
 
 ---
 
@@ -60,7 +59,7 @@ Puntos clave del proyecto:
 
 | Modo claro | Modo oscuro |
 |:---:|:---:|
-| *(añade un screenshot aquí)* | *(añade un screenshot aquí)* |
+| ![alt text](image.png) | ![alt text](image-1.png) |
 
 ---
 
@@ -180,54 +179,7 @@ Archivo central que contiene:
 
 ## 🚀 Instalación y uso local
 
-Este proyecto **no requiere ningún proceso de instalación**. Al no tener dependencias npm ni build step:
-
-```bash
-# 1. Clona el repositorio
-git clone https://github.com/albertopt-dev/portfolio-web.git
-cd portfolio-web
-
-# 2. Opción A — Abrir directamente en el navegador
-#    (doble clic en index.html o arrastrarlo a Chrome/Firefox)
-
-# 3. Opción B — Servidor local con Python (recomendado para evitar restricciones CORS)
-python -m http.server 8080
-# Visita http://localhost:8080
-
-# 4. Opción C — Con Node.js (si tienes npx disponible)
-npx serve .
-# Visita http://localhost:3000
-```
-
-> **Nota:** Para que el formulario de contacto funcione, necesitas configurar tus propias credenciales de EmailJS (ver apartado siguiente).
-
----
-
-## 📧 Configuración de EmailJS
-
-El formulario de contacto usa [EmailJS](https://www.emailjs.com/) para enviar emails sin backend. Para configurar el tuyo propio:
-
-1. **Crea una cuenta** en [emailjs.com](https://www.emailjs.com/) (tier gratuito: 200 emails/mes).
-
-2. **Crea un servicio de email** (Gmail, Outlook, etc.) y anota el `Service ID`.
-
-3. **Crea una plantilla** con las variables `{{name}}`, `{{email}}`, `{{message}}` y anota el `Template ID`.
-
-4. **Obtén tu Public Key** desde *Account → API Keys*.
-
-5. **Actualiza `index.html`** — reemplaza la Public Key en:
-   ```html
-   <script>emailjs.init("TU_PUBLIC_KEY_AQUI");</script>
-   ```
-
-6. **Actualiza `app.js`** — reemplaza Service ID y Template ID en `initContactEmailJS()`:
-   ```js
-   emailjs.sendForm(
-     'TU_SERVICE_ID',    // ← reemplaza
-     'TU_TEMPLATE_ID',   // ← reemplaza
-     form
-   )
-   ```
+Este proyecto **no requiere ningún proceso de instalación**. Al no tener dependencias npm ni build step, basta con clonar el repositorio y abrir `index.html` directamente en el navegador, o servirlo con cualquier servidor estático local como el servidor integrado de Python o `npx serve`.
 
 ---
 
@@ -237,28 +189,7 @@ Toda la información del portfolio está centralizada en el array al inicio de `
 
 ### Añadir un proyecto
 
-En `app.js`, añade un objeto al array `projects`:
-
-```js
-{
-  id: "p3",                          // ID único (usado por el modal)
-  title: "Nombre del Proyecto",
-  description: "Descripción breve que aparece en la tarjeta y en el modal.",
-  tags: ["Android", "Firebase"],     // Etiquetas de categoría (gris en la tarjeta)
-  stacks: ["Kotlin", "Room"],        // Stack técnico (azul en la tarjeta)
-  status: "terminado",               // "terminado" | "en-proceso" | "coming"
-  image: "assets/proyectos/mi-proyecto.png", // "" para usar iniciales como placeholder
-  featured: false,                   // true añade badge ⭐ Destacado
-  highlights: [                      // Puntos clave en el modal (puede ser [])
-    "Feature 1",
-    "Feature 2"
-  ],
-  links: {
-    repo: "https://github.com/tu-usuario/repo",  // "" si es privado
-    demo: "https://tu-demo.com"                  // "" si no hay demo
-  }
-}
-```
+En `app.js`, añade un nuevo objeto al array `projects` con los campos: `id` (único), `title`, `description`, `tags` (categorías), `stacks` (tecnologías), `status`, `image` (ruta o cadena vacía para usar las iniciales), `featured`, `highlights` (lista de puntos clave para el modal) y `links` con `repo` y `demo`.
 
 **Estados disponibles:**
 
@@ -270,31 +201,11 @@ En `app.js`, añade un objeto al array `projects`:
 
 ### Añadir un Lab / experimento
 
-En `app.js`, añade un objeto al array `labs`:
-
-```js
-{
-  title: "Nombre del experimento",
-  description: "Qué explora este proyecto y por qué lo hiciste.",
-  iconClasses: [
-    "devicon-kotlin-plain colored",    // Busca el nombre en devicon.dev
-    "devicon-firebase-plain colored"
-  ],
-  links: {
-    repo: "https://github.com/tu-usuario/repo"  // "" si no hay repo público
-  }
-}
-```
+En `app.js`, añade un nuevo objeto al array `labs` con los campos: `title`, `description`, las clases de los iconos de [devicon.dev](https://devicon.dev/) en el array `iconClasses`, y la URL del repositorio en `links.repo` (cadena vacía si no hay repo público).
 
 ### Añadir una habilidad al stack
 
-En `app.js`, añade un objeto al array `skills`:
-
-```js
-{ name: "Flutter", iconClass: "devicon-flutter-plain colored" }
-```
-
-Los nombres de clase de los iconos están en [devicon.dev](https://devicon.dev/). Busca la tecnología, haz clic en el icono y copia la clase.
+En `app.js`, añade un nuevo objeto al array `skills` con el nombre de la tecnología y su clase de icono de [devicon.dev](https://devicon.dev/). Busca la tecnología en esa web, haz clic en el icono y copia la clase.
 
 ### Cambiar la foto de perfil
 
@@ -306,38 +217,7 @@ Si la imagen no carga (o mientras no exista), el fallback muestra automáticamen
 
 ## 🎨 Diseño y sistema de tokens CSS
 
-Todos los valores de diseño están definidos como **CSS custom properties** en `:root` (en `styles.css`). Para cambiar el aspecto visual basta con editar estos tokens:
-
-```css
-:root {
-  /* Paleta */
-  --accent:      #1F5C99;  /* ← Color principal de acento */
-  --accent-lt:   #3b82f6;  /* Acento claro */
-  --accent-bg:   rgba(31,92,153,0.08);
-
-  /* Texto */
-  --text:        #0f1525;  /* Texto primario */
-  --text2:       #4a5568;  /* Texto secundario */
-  --text3:       #94a3b8;  /* Texto terciario / placeholders */
-
-  /* Fondos */
-  --bg:          #ffffff;
-  --bg2:         #f7f8fc;
-  --bg3:         #eef0f6;
-
-  /* Tipografía */
-  --font-display: 'Outfit', sans-serif;   /* Títulos y logos */
-  --font-body:    'DM Sans', sans-serif;  /* Cuerpo de texto */
-
-  /* Otros */
-  --radius:      12px;
-  --radius-lg:   20px;
-  --nav-h:       68px;       /* Altura de la barra de navegación */
-  --transition:  0.25s ease;
-}
-```
-
-El modo oscuro sobreescribe únicamente los tokens de color en la clase `.dark`.
+Todos los valores de diseño están definidos como **CSS custom properties** en `:root` dentro de `styles.css`: paleta de colores (`--accent`, `--bg`, `--text` y sus variantes), tipografías, radios de borde, sombras y duración de transiciones. Para cambiar el color de acento o cualquier otro valor visual del portfolio basta con editar el token correspondiente en `:root`. El modo oscuro sobreescribe únicamente los tokens de color bajo la clase `.dark`.
 
 ---
 
@@ -355,13 +235,9 @@ La clase `.dark` se añade/elimina en `<html>` y los tokens CSS del modo oscuro 
 
 ## 🌧️ Animación de fondo — Matrix Rain
 
-El hero incluye un `<canvas id="bgCanvas">` con una animación generativa inspirada en el Matrix rain, personalizada con el vocabulario de un desarrollador:
+El hero incluye un canvas con una animación generativa inspirada en el Matrix rain, personalizada con el vocabulario de un desarrollador: dígitos binarios, runas japonesas y palabras clave de Java/Kotlin. La paleta de color cicla en tono HSL de forma continua y se adapta automáticamente al modo claro y oscuro.
 
-```
-chars = '01アイウエオJavaKotlin{}[]=>&&||null true API git//'
-```
-
-**Parámetros ajustables** (al final de `index.html`, dentro del `<script>` inline):
+**Parámetros ajustables** (al final de `index.html`, dentro del script inline):
 
 | Variable | Valor por defecto | Efecto |
 |---|---|---|
@@ -417,23 +293,7 @@ Medidas de accesibilidad implementadas:
 
 ## 📄 Licencia
 
-```
-MIT License
-
-Copyright (c) 2026 Alberto Pérez Talaván
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
-```
+Este proyecto está publicado bajo la licencia **MIT**. Puedes usarlo, modificarlo y distribuirlo libremente siempre que incluyas el aviso de copyright original.
 
 ---
 
