@@ -39,7 +39,11 @@
 
     <div class="navbar__actions">
       <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" class="btn btn--outline" download>Descargar CV</a>
-      <button id="themeBtn" class="navbar__theme-btn" aria-label="Cambiar tema">🌙</button>
+      <label class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+        <input type="checkbox" id="themeToggle" />
+        <span class="theme-toggle__track"></span>
+        <span class="theme-toggle__thumb" id="themeIcon">☀️</span>
+      </label>
     </div>
   </header>
 

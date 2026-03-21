@@ -10,7 +10,7 @@
 
 **Portfolio personal · Desarrollador Java Junior · Android nativo · Java & Kotlin**
 
-[🌐 Ver en vivo](https://albertopt-dev.github.io) · [📬 Contactar](mailto:alberto.pt.dev@gmail.com) · [💼 LinkedIn](https://linkedin.com/in/alberto-perez-talavan) · [🐙 GitHub](https://github.com/albertopt-dev)
+[🌐 Ver en vivo](https://albertopt-dev.github.io) · [📬 Contactar](mailto:alberto.pt.dev@gmail.com) · [💼 LinkedIn](https://linkedin.com/in/alberto-perez-talavan) · [<img src="https://cdn.simpleicons.org/github/181717" width="16" height="16" valign="middle" alt="GitHub"> GitHub](https://github.com/albertopt-dev)
 
 </div>
 
@@ -299,8 +299,8 @@ Este proyecto está publicado bajo la licencia **MIT**. Puedes usarlo, modificar
 
 <div align="center">
 
-Hecho con 🧠 y mucho café por **Alberto Pérez Talaván**
+Hecho con paciencia y mucho café por **Alberto Pérez Talaván**
 
-[📬 alberto.pt.dev@gmail.com](mailto:alberto.pt.dev@gmail.com) · [💼 LinkedIn](https://linkedin.com/in/alberto-perez-talavan) · [🐙 GitHub](https://github.com/albertopt-dev)
+[📬 alberto.pt.dev@gmail.com](https://mail.google.com/mail/?view=cm&to=alberto.pt.dev@gmail.com) · [💼 LinkedIn](https://linkedin.com/in/alberto-perez-talavan) · [<img src="https://cdn.simpleicons.org/github/181717" width="16" height="16" valign="middle" alt="GitHub"> GitHub](https://github.com/albertopt-dev)
 
 </div>
