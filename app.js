@@ -936,22 +936,24 @@ function initFlappyDev() {
 // =========================
 const credentials = [
   {
-    id:    "rec-tich",
-    title: "Carta de Recomendación",
-    org:   "TICH Consulting",
-    year:  "2025",
-    desc:  "Emitida al finalizar las prácticas profesionales. Reconoce iniciativa, nivel técnico y capacidad de integración en equipo.",
-    icon:  "⭐",
-    color: "linear-gradient(135deg, #1F5C99 0%, #0f2d4f 100%)",
-    file:  "assets/Carta recomendación Tich Consulting.pdf",
-    type:  "rec"
+    id:        "rec-tich",
+    title:     "Carta de Recomendación",
+    org:       "TICH Consulting",
+    year:      "2025",
+    desc:      "Emitida al finalizar las prácticas profesionales. Reconoce iniciativa, nivel técnico y capacidad de integración en equipo.",
+    icon:      "⭐",
+    thumbnail: "assets/carta-rec-tich.png",
+    color:     "linear-gradient(135deg, #1F5C99 0%, #0f2d4f 100%)",
+    file:      "assets/Carta recomendación Tich Consulting.pdf",
+    type:      "rec",
+    featured:  true
   },
   {
     id:    "udemy-java",
     title: "Master Java Completo",
     org:   "Udemy",
     year:  "En curso",
-    desc:  "De cero a experto en Java. +134 horas de programación orientada a objetos, estructuras de datos y patrones de diseño.",
+    desc:  "De cero a experto en Java. +163 horas de programación orientada a objetos, estructuras de datos y patrones de diseño.",
     icon:  "☕",
     color: "linear-gradient(135deg, #b31217 0%, #e52d27 100%)",
     file:  "",
@@ -961,8 +963,8 @@ const credentials = [
     id:    "udemy-net",
     title: "Master ASP.NET MVC",
     org:   "Udemy",
-    year:  "2025",
-    desc:  "Entity Framework con .NET 9. +24 horas de arquitectura MVC, API REST y despliegue en producción.",
+    year:  "En curso",
+    desc:  "Entity Framework con .NET 9. +15 horas de arquitectura MVC, API REST y despliegue en producción.",
     icon:  "🔷",
     color: "linear-gradient(135deg, #512bd4 0%, #813bd4 100%)",
     file:  "",
@@ -983,8 +985,8 @@ const credentials = [
     id:    "anthropic-dev",
     title: "Claude AI Developer",
     org:   "Anthropic Academy",
-    year:  "En curso",
-    desc:  "Desarrollo de aplicaciones con la API de Claude. Prompting avanzado, tool use y arquitecturas de producción.",
+    year:  "Sin comenzar",
+    desc:  "",
     icon:  "🤖",
     color: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
     file:  "",
@@ -994,8 +996,8 @@ const credentials = [
     id:    "anthropic-api",
     title: "Building with Claude API",
     org:   "Anthropic Academy",
-    year:  "En curso",
-    desc:  "Más de 8 horas. System prompts, context windows, patrones de arquitectura y estrategias para productos con IA.",
+    year:  "Sin comenzar",
+    desc:  "",
     icon:  "🧠",
     color: "linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #2a475e 100%)",
     file:  "",
@@ -1007,23 +1009,40 @@ function renderCredentials() {
   const grid = document.getElementById('credentialsGrid');
   if (!grid) return;
 
-  grid.innerHTML = credentials.map(c => {
-    const badgeText = c.type === 'rec' ? '🎅 Reconocimiento' : '🎓 Certificado';
+  const featured = credentials.filter(c => c.featured);
+  const rest      = credentials.filter(c => !c.featured);
+
+  const renderCard = (c) => {
+    const badgeText = c.type === 'rec' ? '🏅 Reconocimiento' : '🎓 Certificado';
     const yearBadge = c.year === 'En curso'
       ? `<span class="cred-year cred-year--ongoing">⏳ En curso</span>`
-      : `<span class="cred-year">${c.year}</span>`;
+      : c.year === 'Sin comenzar'
+        ? `<span class="cred-year cred-year--pending">Sin comenzar</span>`
+        : `<span class="cred-year">${c.year}</span>`;
+
+    const thumb = c.thumbnail
+      ? c.featured
+        ? `<img src="${c.thumbnail}" class="cred-card__thumb-img" alt="${c.title}" />`
+        : `<iframe src="${c.thumbnail}#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+                 class="cred-card__thumb-pdf"
+                 title="${c.title}" tabindex="-1"></iframe>`
+      : `<div class="cred-card__thumb-placeholder" style="background:${c.color}">
+           <span class="cred-card__icon">${c.icon}</span>
+         </div>`;
 
     const actions = c.file
       ? `<button class="cred-btn cred-btn--view"
                  onclick="openDocModal('${c.id}')">&#128065; Ver</button>
          <a href="${c.file}" download
             class="cred-btn cred-btn--download">⬇ Descargar</a>`
-      : `<span class="cred-btn cred-btn--soon">📅 Próximamente</span>`;
+      : c.year === 'Sin comenzar' || c.status === 'pendiente'
+        ? `<span class="cred-btn cred-btn--soon">🔜 Sin comenzar</span>`
+        : `<span class="cred-btn cred-btn--soon">📚 En curso</span>`;
 
     return `
-      <div class="cred-card">
-        <div class="cred-card__thumb" style="background:${c.color}">
-          <span class="cred-card__icon">${c.icon}</span>
+      <div class="cred-card${c.featured ? ' cred-card--featured' : ''}">
+        <div class="cred-card__thumb"${!c.thumbnail ? ` style="background:${c.color}"` : ''}>
+          ${thumb}
           <span class="cred-card__badge">${badgeText}</span>
         </div>
         <div class="cred-card__body">
@@ -1036,16 +1055,41 @@ function renderCredentials() {
           <div class="cred-card__actions">${actions}</div>
         </div>
       </div>`;
-  }).join('');
+  };
+
+  grid.innerHTML = `
+    ${featured.map(renderCard).join('')}
+    <div class="cred-grid__rest">
+      ${rest.map(renderCard).join('')}
+    </div>`;
 }
 
 function openDocModal(id) {
   const c = credentials.find(x => x.id === id);
   if (!c || !c.file) return;
+
   document.getElementById('docModalTitle').textContent = c.title;
   document.getElementById('docModalSub').textContent   = c.org + ' · ' + c.year;
-  document.getElementById('docModalFrame').src         = c.file;
   document.getElementById('docModalDownload').href     = c.file;
+
+  const frame   = document.getElementById('docModalFrame');
+  const preview = document.getElementById('docModalPreview');
+  const previewWrap = document.getElementById('docModalPreviewWrap');
+
+  const thumbIsImage = c.thumbnail && !c.thumbnail.toLowerCase().endsWith('.pdf');
+
+  if (thumbIsImage) {
+    frame.style.display       = 'none';
+    frame.src                 = '';
+    previewWrap.style.display = 'block';
+    preview.src               = c.thumbnail;
+  } else {
+    previewWrap.style.display = 'none';
+    preview.src               = '';
+    frame.style.display       = 'block';
+    frame.src                 = c.file;
+  }
+
   const modal = document.getElementById('docModal');
   modal.classList.add('is-open');
   modal.setAttribute('aria-hidden', 'false');
@@ -1056,6 +1100,8 @@ function closeDocModal() {
   document.getElementById('docModal').classList.remove('is-open');
   document.getElementById('docModal').setAttribute('aria-hidden', 'true');
   document.getElementById('docModalFrame').src = '';
+  document.getElementById('docModalPreview').src = '';
+  document.getElementById('docModalPreviewWrap').style.display = 'none';
   document.body.style.overflow = '';
 }
 

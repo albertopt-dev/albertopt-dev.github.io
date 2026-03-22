@@ -153,14 +153,15 @@
       <p class="about__body">
         Me especializo en <strong>Android nativo (Java/Kotlin)</strong> y estoy ampliando con Spring Boot y Flutter. Lo que me diferencia no es solo el stack — es que cuando me comprometo con algo, lo termino.
       </p>
-
       <a href="assets/Carta recomendación Tich Consulting.pdf"
-         class="about__cred" target="_blank" rel="noopener">
-        <span class="about__cred-icon">📄</span>
-        <div>
-          <strong>Carta de recomendación — TICH Consulting</strong>
-          <span>Emitida al finalizar las prácticas. Iniciativa, compromiso y nivel técnico.</span>
-        </div>
+        target="_blank" rel="noopener"
+        class="hero__rec-badge">
+        <span class="hero__rec-icon">⭐</span>
+        <span class="hero__rec-text">
+          <strong>Carta de recomendación</strong>
+          TICH Consulting · Prácticas 2025
+        </span>
+        <span class="hero__rec-arrow">→</span>
       </a>
     </div>
 
@@ -228,6 +229,10 @@
           </a>
           <button id="docModalClose" class="doc-modal__close">✕</button>
         </div>
+      </div>
+      <div id="docModalPreviewWrap" class="doc-modal__preview-wrap" style="display:none;">
+        <img id="docModalPreview" class="doc-modal__preview"
+             src="" alt="Preview documento" />
       </div>
       <iframe id="docModalFrame" class="doc-modal__frame" src=""></iframe>
     </div>
@@ -355,6 +360,17 @@
           <i class="devicon-github-original colored"></i> GitHub
         </a>
       </div>
+
+      <a href="assets/Carta de presentacion.pdf"
+         target="_blank" rel="noopener"
+         class="contact__carta">
+        <span class="contact__carta-emoji">📄</span>
+        <div class="contact__carta-info">
+          <strong>Carta de presentación</strong>
+          <span>Descárgala antes de contactarme</span>
+        </div>
+        <span class="contact__carta-arrow">⬇</span>
+      </a>
 
       <form id="contactForm" class="contact-form" onsubmit="return false;">
         <div class="contact-form__row">

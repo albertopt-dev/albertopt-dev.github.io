@@ -89,3 +89,47 @@
 
 .hero__avatar-frame:hover .avatar-img--default { opacity: 0; }
 .hero__avatar-frame:hover .avatar-img--hover   { opacity: 1; }
+
+/* Carta de recomendación en hero */
+.hero__rec-badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 12px 20px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  max-width: fit-content;
+}
+.hero__rec-badge:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(31,92,153,0.3);
+}
+.hero__rec-badge:hover .hero__rec-text strong,
+.hero__rec-badge:hover .hero__rec-text span,
+.hero__rec-badge:hover .hero__rec-arrow { color: #ffffff; }
+
+.hero__rec-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+.hero__rec-text {
+  display: flex; flex-direction: column; gap: 1px;
+}
+.hero__rec-text strong {
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--accent);
+  transition: color 0.2s;
+}
+.hero__rec-text span {
+  font-size: 0.75rem; color: var(--text2);
+  transition: color 0.2s;
+}
+
+.hero__rec-arrow {
+  font-size: 1rem; color: var(--accent);
+  margin-left: 4px; flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+.hero__rec-badge:hover .hero__rec-arrow {
+  transform: translateX(3px);
+}

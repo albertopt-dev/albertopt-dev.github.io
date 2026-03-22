@@ -175,3 +175,16 @@
 }
 .doc-modal__close:hover { background: rgba(255,255,255,0.25); }
 .doc-modal__frame { flex: 1; width: 100%; border: none; background: var(--bg2); }
+.doc-modal__preview {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--bg2);
+  padding: 24px;
+  box-sizing: border-box;
+}
+.doc-modal__preview-wrap {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg2);
+}
