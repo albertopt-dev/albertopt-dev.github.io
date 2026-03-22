@@ -1,0 +1,40 @@
+/* ═══════════════════════════════════════
+   SOBRE MÍ
+═══════════════════════════════════════ */
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; background: var(--bg2); }
+
+.about__body { color: var(--text2); font-size: 0.97rem; line-height: 1.8; font-weight: 300; margin-top: 20px; }
+.about__body strong { color: var(--text); font-weight: 500; }
+
+/* Carta de recomendación */
+.about__cred {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-top: 28px; padding: 16px 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-bg);
+  box-shadow: 0 3px 0 rgba(31,92,153,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.about__cred:hover {
+  background: var(--accent);
+  box-shadow: 0 4px 0 rgba(31,92,153,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+.about__cred:hover strong,
+.about__cred:hover span { color: #ffffff; }
+.about__cred:active {
+  box-shadow: 0 1px 0 rgba(31,92,153,0.2), inset 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(1px);
+}
+.about__cred-icon { font-size: 2.6rem; flex-shrink: 0; margin-top: 2px; }
+.about__cred strong { display: block; color: var(--accent); font-size: 0.9rem; margin-bottom: 4px; transition: color var(--transition); }
+.about__cred span   { font-size: 0.82rem; color: var(--text2); transition: color var(--transition); }
+
+.about__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-top: 52px; }
+.about__skill-card { padding: 16px 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); transition: border-color var(--transition), transform var(--transition); }
+.about__skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.about__skill-name { display: block; font-weight: 500; font-size: 0.92rem; color: var(--text); }
+.about__skill-tag  { font-size: 0.76rem; color: var(--text3); margin-top: 2px; display: block; }
+.about__skill-tag--learning { color: var(--accent-lt) !important; }

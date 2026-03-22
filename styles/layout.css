@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════
+   UTILS
+═══════════════════════════════════════ */
+.section { padding: 100px 6%; }
+
+.section__label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+
+.section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 52px;
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 12px 28px; border-radius: 8px;
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  cursor: pointer; border: none;
+  transition: transform var(--transition), box-shadow var(--transition),
+              background var(--transition), color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn--primary { background: var(--accent); color: #fff; box-shadow: 0 4px 20px rgba(31,92,153,0.25); }
+.btn--primary:hover { box-shadow: 0 8px 28px rgba(31,92,153,0.4); }
+
+.btn--ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+/* btn--outline: navbar (fondo oscuro) */
+.btn--outline {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 9px 20px; font-size: 0.85rem;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: all 0.15s ease;
+}
+.btn--outline:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+.btn--outline:active {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25), inset 0 2px 4px rgba(0,0,0,0.2);
+  transform: translateY(2px);
+}
+
+/* btn--outline en secciones claras */
+.projects .btn--outline,
+.labs .btn--outline {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+.projects .btn--outline:hover,
+.labs .btn--outline:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(31,92,153,0.25);
+  transform: translateY(-2px);
+}

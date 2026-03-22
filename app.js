@@ -932,9 +932,146 @@ function initFlappyDev() {
 }
 
 // =========================
+// DATA: Credenciales
+// =========================
+const credentials = [
+  {
+    id:    "rec-tich",
+    title: "Carta de Recomendación",
+    org:   "TICH Consulting",
+    year:  "2025",
+    desc:  "Emitida al finalizar las prácticas profesionales. Reconoce iniciativa, nivel técnico y capacidad de integración en equipo.",
+    icon:  "⭐",
+    color: "linear-gradient(135deg, #1F5C99 0%, #0f2d4f 100%)",
+    file:  "assets/Carta recomendación Tich Consulting.pdf",
+    type:  "rec"
+  },
+  {
+    id:    "udemy-java",
+    title: "Master Java Completo",
+    org:   "Udemy",
+    year:  "En curso",
+    desc:  "De cero a experto en Java. +134 horas de programación orientada a objetos, estructuras de datos y patrones de diseño.",
+    icon:  "☕",
+    color: "linear-gradient(135deg, #b31217 0%, #e52d27 100%)",
+    file:  "",
+    type:  "cert"
+  },
+  {
+    id:    "udemy-net",
+    title: "Master ASP.NET MVC",
+    org:   "Udemy",
+    year:  "2025",
+    desc:  "Entity Framework con .NET 9. +24 horas de arquitectura MVC, API REST y despliegue en producción.",
+    icon:  "🔷",
+    color: "linear-gradient(135deg, #512bd4 0%, #813bd4 100%)",
+    file:  "",
+    type:  "cert"
+  },
+  {
+    id:    "udemy-bd",
+    title: "Bases de Datos Relacionales",
+    org:   "Udemy",
+    year:  "En curso",
+    desc:  "Fundamentos de diseño relacional, normalización, relaciones y consultas SQL avanzadas. 4 horas.",
+    icon:  "🗄️",
+    color: "linear-gradient(135deg, #00897b 0%, #00695c 100%)",
+    file:  "",
+    type:  "cert"
+  },
+  {
+    id:    "anthropic-dev",
+    title: "Claude AI Developer",
+    org:   "Anthropic Academy",
+    year:  "En curso",
+    desc:  "Desarrollo de aplicaciones con la API de Claude. Prompting avanzado, tool use y arquitecturas de producción.",
+    icon:  "🤖",
+    color: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+    file:  "",
+    type:  "cert"
+  },
+  {
+    id:    "anthropic-api",
+    title: "Building with Claude API",
+    org:   "Anthropic Academy",
+    year:  "En curso",
+    desc:  "Más de 8 horas. System prompts, context windows, patrones de arquitectura y estrategias para productos con IA.",
+    icon:  "🧠",
+    color: "linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #2a475e 100%)",
+    file:  "",
+    type:  "cert"
+  }
+];
+
+function renderCredentials() {
+  const grid = document.getElementById('credentialsGrid');
+  if (!grid) return;
+
+  grid.innerHTML = credentials.map(c => {
+    const badgeText = c.type === 'rec' ? '🎅 Reconocimiento' : '🎓 Certificado';
+    const yearBadge = c.year === 'En curso'
+      ? `<span class="cred-year cred-year--ongoing">⏳ En curso</span>`
+      : `<span class="cred-year">${c.year}</span>`;
+
+    const actions = c.file
+      ? `<button class="cred-btn cred-btn--view"
+                 onclick="openDocModal('${c.id}')">&#128065; Ver</button>
+         <a href="${c.file}" download
+            class="cred-btn cred-btn--download">⬇ Descargar</a>`
+      : `<span class="cred-btn cred-btn--soon">📅 Próximamente</span>`;
+
+    return `
+      <div class="cred-card">
+        <div class="cred-card__thumb" style="background:${c.color}">
+          <span class="cred-card__icon">${c.icon}</span>
+          <span class="cred-card__badge">${badgeText}</span>
+        </div>
+        <div class="cred-card__body">
+          <div class="cred-card__meta">
+            <span class="cred-card__org">${c.org}</span>
+            ${yearBadge}
+          </div>
+          <h3 class="cred-card__title">${c.title}</h3>
+          <p  class="cred-card__desc">${c.desc}</p>
+          <div class="cred-card__actions">${actions}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function openDocModal(id) {
+  const c = credentials.find(x => x.id === id);
+  if (!c || !c.file) return;
+  document.getElementById('docModalTitle').textContent = c.title;
+  document.getElementById('docModalSub').textContent   = c.org + ' · ' + c.year;
+  document.getElementById('docModalFrame').src         = c.file;
+  document.getElementById('docModalDownload').href     = c.file;
+  const modal = document.getElementById('docModal');
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDocModal() {
+  document.getElementById('docModal').classList.remove('is-open');
+  document.getElementById('docModal').setAttribute('aria-hidden', 'true');
+  document.getElementById('docModalFrame').src = '';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('docBackdrop')
+  ?.addEventListener('click', closeDocModal);
+document.getElementById('docModalClose')
+  ?.addEventListener('click', closeDocModal);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDocModal();
+});
+
+// =========================
 // INIT
 // =========================
 renderProjects();
+renderCredentials();
 renderSkills();
 initSkillsScroller();
 renderLabs();

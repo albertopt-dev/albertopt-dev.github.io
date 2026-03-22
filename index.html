@@ -16,7 +16,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/hero.css" />
+  <link rel="stylesheet" href="styles/about.css" />
+  <link rel="stylesheet" href="styles/credentials.css" />
+  <link rel="stylesheet" href="styles/projects.css" />
+  <link rel="stylesheet" href="styles/skills.css" />
+  <link rel="stylesheet" href="styles/labs.css" />
+  <link rel="stylesheet" href="styles/game.css" />
+  <link rel="stylesheet" href="styles/contact.css" />
+  <link rel="stylesheet" href="styles/modals.css" />
+  <link rel="stylesheet" href="styles/footer.css" />
+  <link rel="stylesheet" href="styles/responsive.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>emailjs.init("qmb3XbliOU9TNqLAN");</script>
@@ -35,6 +48,7 @@
 
     <nav class="navbar__links" id="navLinks" aria-label="Navegación principal">
       <a href="#sobre-mi">Sobre mí</a>
+      <a href="#credenciales">Formación</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
@@ -45,6 +59,7 @@
     <!-- Menú móvil -->
     <div class="navbar__mobile-menu" id="navMobileMenu" aria-label="Menú móvil">
       <a href="#sobre-mi">Sobre mí</a>
+      <a href="#credenciales">Formación</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
@@ -181,6 +196,42 @@
       </div>
     </div>
   </section>
+
+
+  <!-- ═══════════════════════════════════════
+       FORMACIÓN Y RECONOCIMIENTOS
+  ═══════════════════════════════════════ -->
+  <section id="credenciales" class="credentials section">
+    <p class="section__label">Formación y Reconocimientos</p>
+    <h2 class="section__title">Lo que me respalda</h2>
+    <p class="credentials__sub">
+      Evidencia real de formación, desempeño y compromiso profesional.
+      Los certificados en curso se irán añadiendo al completarlos.
+    </p>
+    <div class="credentials__grid" id="credentialsGrid"></div>
+  </section>
+
+  <!-- Modal visor PDF -->
+  <div id="docModal" class="doc-modal" aria-hidden="true">
+    <div class="doc-modal__backdrop" id="docBackdrop"></div>
+    <div class="doc-modal__box">
+      <div class="doc-modal__header">
+        <div>
+          <h3 id="docModalTitle" class="doc-modal__title"></h3>
+          <p  id="docModalSub"   class="doc-modal__sub"></p>
+        </div>
+        <div class="doc-modal__actions">
+          <a id="docModalDownload" href="#" download
+             class="btn btn--primary"
+             style="font-size:0.82rem;padding:8px 18px;">
+            ⬇ Descargar
+          </a>
+          <button id="docModalClose" class="doc-modal__close">✕</button>
+        </div>
+      </div>
+      <iframe id="docModalFrame" class="doc-modal__frame" src=""></iframe>
+    </div>
+  </div>
 
 
   <!-- ═══════════════════════════════════════
