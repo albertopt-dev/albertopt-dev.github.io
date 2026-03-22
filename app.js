@@ -620,7 +620,8 @@ function initFlappyDev() {
   // Canvas responsive — ocupa todo el ancho del contenedor
   function resizeCanvas() {
     const W = canvas.parentElement.clientWidth;
-    const H = Math.round(W * 0.42);
+    const ratio = window.innerWidth <= 768 ? 0.75 : 0.42;
+    const H = Math.round(W * ratio);
     canvas.width  = W;
     canvas.height = H;
     return { W, H };
@@ -632,12 +633,14 @@ function initFlappyDev() {
     if (!running) { drawBg(); drawDev(dev.x, dev.y, 0); }
   });
 
-  const GRAVITY = 0.30, JUMP = -5, PIPE_W = 64;
-  const PIPE_GAP = 160, PIPE_SPEED = 2.4, PIPE_FREQ = 120;
-
   const isMobile = window.innerWidth <= 768;
-  const GAP      = isMobile ? 190 : PIPE_GAP;
-  const FREQ     = isMobile ? 140 : PIPE_FREQ;
+  const GRAVITY    = isMobile ? 0.18 : 0.30;
+  const JUMP       = isMobile ? -4.0 : -5;
+  const PIPE_W     = 64;
+  const PIPE_GAP   = 160, PIPE_SPEED_BASE = 2.4, PIPE_FREQ = 120;
+  const PIPE_SPEED = isMobile ? 1.8 : PIPE_SPEED_BASE;
+  const GAP        = isMobile ? 200 : PIPE_GAP;
+  const FREQ       = isMobile ? 150 : PIPE_FREQ;
 
   let dev, pipes, score, best, frame, running, animId, countdownVal;
   best = 0;
@@ -794,7 +797,9 @@ function initFlappyDev() {
   }
 
   function spawnPipe() {
-    const minY = 60, maxY = H - GAP - 60;
+    const margin = Math.round(H * 0.12);          // 12 % del canvas, nunca fijo
+    const minY   = margin;
+    const maxY   = Math.max(minY + 40, H - GAP - margin);
     const pairs = [
       ['{', '}'],
       ['<', '>'],

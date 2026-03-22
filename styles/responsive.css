@@ -116,9 +116,8 @@
   .hud-item { font-size: 0.76rem; }
   .hud-status { font-size: 0.7rem; }
 
-  /* Canvas más alto en móvil para que sea jugable */
+  /* Canvas dimensionado por JS según el ancho — sólo bloqueamos el scroll táctil */
   .fl-canvas {
-    height: 280px !important;
     touch-action: none;
   }
 
