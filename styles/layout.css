@@ -117,3 +117,7 @@
     min-height: calc(100vh - var(--nav-h));
   }
 }
+
+#contacto-end{
+  scroll-margin-top: var(--nav-h);
+}

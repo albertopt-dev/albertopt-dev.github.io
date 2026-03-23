@@ -20,6 +20,7 @@
   --font-body:    'DM Sans', sans-serif;
   --nav-h:        68px;
   --transition:   0.25s ease;
+  --footer-h: 72px; /* ajusta luego si tu footer es más alto */
 }
 
 .dark {

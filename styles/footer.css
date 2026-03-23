@@ -9,6 +9,7 @@
   background: linear-gradient(90deg, #0f2d4f 0%, #1F5C99 50%, #1a4f87 100%);
   box-shadow: 0 -2px 20px rgba(15,45,79,0.4);
   position: relative; z-index: 1;
+  min-height: var(--footer-h);
 }
 .dark .footer {
   background: linear-gradient(90deg, #060d1a 0%, #0f2040 50%, #091830 100%);
