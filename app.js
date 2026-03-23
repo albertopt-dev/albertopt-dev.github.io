@@ -33,6 +33,27 @@ const projects = [
 // =========================
 const labs = [
   {
+    title: "Reloj Digital",
+    description: "Proyecto super simple para practicar conceptos de Java.",
+    detail: {
+      intro: "Un proyecto muy sencillo realizado para practicar los conceptos básicos de Java y la lógica de actualización de interfaces en tiempo real. Ideal para principiantes o como primer contacto con la programación de relojes digitales.",
+      features: [
+        { icon: "⏰", title: "Reloj en tiempo real", desc: "Muestra la hora actualizada cada segundo usando Java puro." },
+        { icon: "🖥️", title: "Interfaz simple", desc: "Diseño minimalista para centrarse en la lógica y no en el aspecto visual." },
+        { icon: "💡", title: "Práctica de conceptos", desc: "Ideal para practicar bucles, hilos y actualización de UI en Java." }
+      ],
+      stack: ["Java"]
+    },
+    iconClasses: [
+      "devicon-java-plain colored"
+    ],
+    images: [
+      "assets/proyectos/RelojDigital/Captura de pantalla 2026-03-23 154602.png"
+    ],
+    video: "",
+    links: { repo: "https://github.com/albertopt-dev/Reloj_Digital" }
+  },
+  {
     title: "NutriPlan",
     description: "Primera app profesional desarrollada como proyecto final de FP. Herramienta completa para la planificación de menús y control nutricional, con enfoque en usabilidad y buenas prácticas de desarrollo Android.",
     detail: {
@@ -63,7 +84,7 @@ const labs = [
       "assets/proyectos/NutriPlan/Nutriplan-10.png"
     ],
     video: "assets/proyectos/NutriPlan/Nutriplan-Video.mp4",
-    links: { repo: "" }
+    links: { repo: "https://github.com/albertopt-dev/Nutriplan" }
   },
   {
     title: "DespedidaApp",
@@ -225,12 +246,11 @@ function renderProjects() {
         <div class="project-card__body">
           <h3 class="project-card__title">${p.title}</h3>
           <p class="project-card__desc">${p.description}</p>
-
+          <div style="flex:1"></div>
           <div class="project-card__tags">
             ${p.tags.map(t => `<span class="project-card__tag">${t}</span>`).join("")}
             ${p.stacks.map(s => `<span class="project-card__tag project-card__tag--stack">${s}</span>`).join("")}
           </div>
-
           <div class="project-card__actions">
             <button class="lab-card__btn" type="button" data-id="${p.id}">Ver detalles</button>
             ${p.links.repo ? `<a class="btn btn--primary" href="${p.links.repo}" target="_blank" rel="noopener">Repo</a>` : `<span></span>`}
@@ -343,6 +363,7 @@ function renderLabs() {
         <div class="lab-card__body">
           <h3 class="lab-card__title">${lab.title}</h3>
           <p class="lab-card__desc">${lab.description}</p>
+          <div style="flex:1"></div>
           <div class="lab-card__icons">
             ${lab.iconClasses.map(cls =>
               `<i class="${cls} lab-card__icon" aria-hidden="true"></i>`
