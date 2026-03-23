@@ -3,74 +3,46 @@
 // =========================
 const projects = [
   {
-    id: "p2",
-    title: "Web Readaptación Funcional",
-    description: "Web para un profesional de readaptación funcional. Muestra servicios, catálogo de libros, formulario de contacto, quien es y como trabaja. Proyecto real para cliente real — actualmente en desarrollo activo.",
-    tags: ["Web", "Cliente real", "En desarrollo"],
-    stacks: ["HTML", "CSS", "JavaScript"],
-    status: "en-proceso",
+    id: "p1",
+    title: "DespedidaApp",
+    description: "App multiplataforma para organizar despedidas de soltero como un juego por bases. Roles diferenciados (amigos/novio), mapa interactivo de España con pruebas geolocalizadas, galería compartida, chat en tiempo real y notificaciones especiales al novio.",
+    tags: ["Android", "iOS", "Web", "Tiempo real"],
+    stacks: ["Flutter", "Firebase", "FCM"],
     image: "",
+    video: "assets/proyectos/DespedidaApp/Despedida-video.mp4",
+    images: [
+      "assets/proyectos/DespedidaApp/Despedida-01.png",
+      "assets/proyectos/DespedidaApp/Despedida-02.png",
+      "assets/proyectos/DespedidaApp/Despedida-03.png",
+      "assets/proyectos/DespedidaApp/Despedida-04.png",
+      "assets/proyectos/DespedidaApp/Despedida-05.png",
+      "assets/proyectos/DespedidaApp/Despedida-06.png",
+      "assets/proyectos/DespedidaApp/Despedida-07.png",
+      "assets/proyectos/DespedidaApp/Despedida-08.png",
+      "assets/proyectos/DespedidaApp/Despedida-09.png"
+    ],
     featured: false,
-    highlights: [],
+    highlights: [
+      "Roles diferenciados: amigos configuran pruebas, novio las recibe",
+      "Mapa interactivo con circuito de bases geolocalizadas",
+      "Chat interno en tiempo real (el novio no participa)",
+      "Galería compartida con fotos y vídeos del evento",
+      "Notificaciones sonoras especiales al iniciar cada prueba"
+    ],
+    status: "terminado",
     links: {
-      repo: "https://github.com/albertopt-dev/Web-cliente",
+      repo: "https://github.com/albertopt-dev/DespedidaApp",
       demo: ""
     }
   },
-
   {
-    id: "coming2",
-    title: "Próximamente",
-    description: "Explorando nuevas ideas. En construcción.",
-    tags: [], stacks: [], image: "", featured: false, highlights: [],
-    status: "coming",
-    links: { repo: "", demo: "" }
-  }
-];
-
-// =========================
-// DATA: Labs / Taller
-// =========================
-const labs = [
-  {
-    title: "Reloj Digital",
-    description: "Proyecto super simple para practicar conceptos de Java.",
-    detail: {
-      intro: "Un proyecto muy sencillo realizado para practicar los conceptos básicos de Java y la lógica de actualización de interfaces en tiempo real. Ideal para principiantes o como primer contacto con la programación de relojes digitales.",
-      features: [
-        { icon: "⏰", title: "Reloj en tiempo real", desc: "Muestra la hora actualizada cada segundo usando Java puro." },
-        { icon: "🖥️", title: "Interfaz simple", desc: "Diseño minimalista para centrarse en la lógica y no en el aspecto visual." },
-        { icon: "💡", title: "Práctica de conceptos", desc: "Ideal para practicar bucles, hilos y actualización de UI en Java." }
-      ],
-      stack: ["Java"]
-    },
-    iconClasses: [
-      "devicon-java-plain colored"
-    ],
-    images: [
-      "assets/proyectos/RelojDigital/Captura de pantalla 2026-03-23 154602.png"
-    ],
-    video: "",
-    links: { repo: "https://github.com/albertopt-dev/Reloj_Digital" }
-  },
-  {
-    title: "NutriPlan",
-    description: "Primera app profesional desarrollada como proyecto final de FP. Herramienta completa para la planificación de menús y control nutricional, con enfoque en usabilidad y buenas prácticas de desarrollo Android.",
-    detail: {
-      intro: "NutriPlan fue mi primer gran reto profesional: una app Android desarrollada como trabajo de final de ciclo de FP. El objetivo era crear una herramienta útil y real para la planificación de menús semanales, registro de alimentos y control nutricional, aplicando todo lo aprendido y siguiendo buenas prácticas de desarrollo. El proyecto me permitió afianzar conocimientos en arquitectura Android, persistencia de datos y experiencia de usuario.",
-      features: [
-        { icon: "📅", title: "Planificación semanal", desc: "Permite crear y gestionar menús semanales personalizados, adaptados a las necesidades del usuario." },
-        { icon: "🍎", title: "Registro de alimentos", desc: "Base de datos editable de alimentos y recetas, con información nutricional detallada." },
-        { icon: "📊", title: "Control nutricional", desc: "Cálculo automático de calorías, macronutrientes y seguimiento de objetivos diarios." },
-        { icon: "🔔", title: "Notificaciones inteligentes", desc: "Recordatorios para comidas y avisos personalizados para mantener la adherencia al plan." },
-        { icon: "🛠️", title: "Desarrollo profesional", desc: "Proyecto realizado aplicando patrones de arquitectura, persistencia local y diseño enfocado en la experiencia de usuario." }
-      ],
-      stack: ["Kotlin", "Android", "Room", "Material Design"]
-    },
-    iconClasses: [
-      "devicon-kotlin-plain colored",
-      "devicon-android-plain colored"
-    ],
+    id: "p2",
+    title: "Nutriplan",
+    description: "App Android de planificación nutricional semanal desarrollada como Proyecto Fin de FP. Organiza 5 comidas diarias con una API externa de recetas, permite crear comidas propias, incluye lista de la compra automática, biblioteca de artículos e ideas, calendario mensual y perfil de usuario.",
+    tags: ["Android", "Nutrición", "Proyecto FP"],
+    stacks: ["Kotlin", "API REST", "Room DB"],
+    image: "assets/proyectos/NutriPlan/Nutriplan-01.png",
+    video: "assets/proyectos/NutriPlan/Nutriplan-Video.mp4",
     images: [
       "assets/proyectos/NutriPlan/Nutriplan-01.png",
       "assets/proyectos/NutriPlan/Nutriplan-02.png",
@@ -83,53 +55,90 @@ const labs = [
       "assets/proyectos/NutriPlan/Nutriplan-09.png",
       "assets/proyectos/NutriPlan/Nutriplan-10.png"
     ],
-    video: "assets/proyectos/NutriPlan/Nutriplan-Video.mp4",
-    links: { repo: "https://github.com/albertopt-dev/Nutriplan" }
+    featured: false,
+    highlights: [
+      "Planificación semanal con 5 comidas diarias (desayuno, almuerzo, comida, merienda, cena)",
+      "Integración con API externa de recetas con buscador",
+      "Creación de recetas propias con ingredientes, preparación e imagen",
+      "Lista de la compra automática generada del menú semanal",
+      "Calendario mensual para navegar entre días planificados",
+      "Biblioteca de artículos e ideas nutricionales"
+    ],
+    status: "terminado",
+    links: {
+      repo: "https://github.com/albertopt-dev/Nutriplan",
+      demo: ""
+    }
   },
   {
-    title: "DespedidaApp",
-    description: "App Android para la despedida de la novia de una amiga. Un proyecto largo donde combiné mis conocimientos con ayuda de la IA para construirla y, de paso, aprender cosas nuevas.",
-    detail: {
-      intro: "Una app construida para la despedida de la novia de una amiga — y también una oportunidad para crecer. Fue un proyecto largo donde combiné lo que ya sabía con ayuda de la IA para poder ir más lejos técnicamente. El resultado fue una app Android completa con roles diferenciados, mapa interactivo con pruebas geolocalizadas, cámara integrada y chat en tiempo real.",
-      features: [
-        { icon: "👥", title: "Roles diferenciados", desc: "Amigas y novia acceden con roles distintos, cada uno con sus propias funcionalidades y pantallas adaptadas." },
-        { icon: "🗺️", title: "Mapa interactivo", desc: "Mapa de España con pruebas geolocalizadas que se desbloquean según la ubicación del grupo. La aventura lleva a los participantes por distintos puntos." },
-        { icon: "📸", title: "Cámara integrada", desc: "Captura fotos directamente desde la app y las guarda automáticamente en la galería del dispositivo." },
-        { icon: "💬", title: "Chat en tiempo real", desc: "Chat interno sincronizado con Firebase Realtime Database para que todo el grupo esté coordinado en todo momento." },
-        { icon: "🤖", title: "Aprendizaje real con IA", desc: "Proyecto donde me apoyé en la IA para superar desafíos técnicos nuevos y ampliar mis conocimientos mientras construía algo real." }
-      ],
-      stack: ["Kotlin", "Firebase", "Google Maps"]
-    },
-    iconClasses: [
-      "devicon-kotlin-plain colored",
-      "devicon-firebase-plain colored"
-    ],
+    id: "p3",
+    title: "Web Rehabilitación Funcional",
+    description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
+    tags: ["Web", "Cliente real", "En desarrollo"],
+    stacks: ["HTML", "CSS", "JavaScript"],
+    image: "assets/proyectos/WebRehabilitacion/Web-01.png",
+    video: null,
     images: [
-      "assets/proyectos/DespedidaApp/Despedida-01.png",
-      "assets/proyectos/DespedidaApp/Despedida-02.png",
-      "assets/proyectos/DespedidaApp/Despedida-03.png",
-      "assets/proyectos/DespedidaApp/Despedida-04.png",
-      "assets/proyectos/DespedidaApp/Despedida-05.png",
-      "assets/proyectos/DespedidaApp/Despedida-06.png",
-      "assets/proyectos/DespedidaApp/Despedida-07.png",
-      "assets/proyectos/DespedidaApp/Despedida-08.png",
-      "assets/proyectos/DespedidaApp/Despedida-09.png"
+      "assets/proyectos/WebRehabilitacion/Web-01.png"
     ],
-    video: "assets/proyectos/DespedidaApp/Despedida-video.mp4",
-    links: { repo: "https://github.com/albertopt-dev/DespedidaApp" }
+    featured: false,
+    highlights: [
+
+    ],
+    status: "en-proceso",
+    links: {
+      repo: "https://github.com/albertopt-dev/Web-cliente",
+      demo: ""
+    }
   },
+  {
+    id: "p4",
+    title: "MyAmazingPlaces",
+    description: "App Android desarrollada como proyecto académico formal de la asignatura de Kotlin. Permite guardar lugares favoritos con foto, categoría, dirección, teléfono, web y valoración con estrellas. Incluye mapa integrado con Google Maps y gestión completa de la lista.",
+    tags: ["Android", "Académico", "Google Maps"],
+    stacks: ["Kotlin", "Google Maps API", "SQLite"],
+    image: "assets/proyectos/MyAmazingPlaces/Places-01.png",
+    video: "assets/proyectos/MyAmazingPlaces/Places-video.mp4",
+    images: [
+      "assets/proyectos/MyAmazingPlaces/Places-01.png",
+      "assets/proyectos/MyAmazingPlaces/Places-02.png",
+      "assets/proyectos/MyAmazingPlaces/Places-03.png",
+      "assets/proyectos/MyAmazingPlaces/Places-04.png",
+      "assets/proyectos/MyAmazingPlaces/Places-05.png",
+      "assets/proyectos/MyAmazingPlaces/Places-06.png"
+    ],
+    featured: false,
+    highlights: [
+      "Mapa integrado con Google Maps para visualizar cada lugar",
+      "Valoración con estrellas de 1 a 5",
+      "Categorías: restaurante, monumento, museo, país y más",
+      "Añade, edita, elimina y ordena lugares fácilmente",
+      "Foto representativa por lugar"
+    ],
+    status: "terminado",
+    links: {
+      repo: "https://github.com/albertopt-dev/MyAmazingPlaces",
+      demo: ""
+    }
+  }
+];
+
+// =========================
+// DATA: Labs / Taller
+// =========================
+const labs = [
   {
     title: "ObjetivosApp",
-    description: "App personal para gestionar objetivos diarios, semanales y anuales con autenticación propia.",
+    description: "App personal para gestionar objetivos diarios, semanales y anuales. Subobjetivos, código de colores, calendario y autenticación propia — cada usuario solo ve sus datos.",
     detail: {
       intro: "Una app construida para uso real y diario. Diseñada con React Native y Firebase, cada usuario tiene su propio espacio privado donde ningún dato es compartido.",
       features: [
-        { icon: "📅", title: "Calendario inteligente", desc: "Vista mensual con marcadores visuales en los días con objetivos programados. Navega por meses y semanas de un vistazo." },
-        { icon: "🎯", title: "Objetivos por período", desc: "Crea objetivos diarios, semanales, mensuales o anuales. Los semanales y mensuales admiten subobjetivos para desglosar el progreso." },
-        { icon: "🎨", title: "Código de colores", desc: "Asigna un color a cada objetivo para identificarlos visualmente. Vista previa en tiempo real al crear o editar." },
-        { icon: "📊", title: "Estadísticas detalladas", desc: "Panel con tasa de éxito, racha actual, mejor racha, objetivos por prioridad y tendencias de los últimos 7 y 30 días." },
-        { icon: "🔔", title: "Prioridad y notificaciones", desc: "Marca cada objetivo como Baja, Media o Alta prioridad. Sistema de notificaciones integrado para no olvidar ninguno." },
-        { icon: "🔐", title: "Autenticación propia", desc: "Cada usuario se registra e inicia sesión con su cuenta. Los datos son completamente privados — nadie más puede verlos." }
+        { icon: "📅", title: "Calendario inteligente", desc: "Vista mensual con marcadores visuales en los días con objetivos programados." },
+        { icon: "🎯", title: "Objetivos por período", desc: "Diarios, semanales, mensuales o anuales. Los semanales y mensuales admiten subobjetivos." },
+        { icon: "🎨", title: "Código de colores", desc: "Asigna un color a cada objetivo. Vista previa en tiempo real al crear o editar." },
+        { icon: "📊", title: "Estadísticas", desc: "Tasa de éxito, racha actual, mejor racha y tendencias de los últimos 30 días." },
+        { icon: "🔔", title: "Prioridades", desc: "Marca cada objetivo como Baja, Media o Alta prioridad." },
+        { icon: "🔐", title: "Autenticación propia", desc: "Cada usuario se registra con su cuenta. Los datos son completamente privados." }
       ],
       stack: ["React Native", "Firebase Auth", "Firestore", "Expo"]
     },
@@ -151,7 +160,7 @@ const labs = [
   },
   {
     title: "Presupuesto Mensual",
-    description: "App personal para control de finanzas: ingresos, ahorro, desglose de gastos por categoría y estadísticas visuales. Hecha por necesidad propia, no por encargo.",
+    description: "App personal para control de finanzas: ingresos, ahorro mensual, desglose de gastos por categoría y estadísticas visuales. Hecha por necesidad propia, no por encargo.",
     detail: {
       intro: "Una app web creada para llevar el control real del dinero mes a mes. Diseñada desde cero con React y Next.js, cubre desde el registro de ingresos hasta el análisis visual de en qué se va el presupuesto. Por el momento es una app personal, pero con potencial para crecer y ser útil a más gente.",
       features: [
@@ -160,11 +169,11 @@ const labs = [
         { icon: "📊", title: "Estadísticas visuales", desc: "Gráficos claros con el desglose de gastos, porcentaje de ahorro y evolución mensual." },
         { icon: "🎯", title: "Control de ahorro", desc: "Calcula automáticamente cuánto has ahorrado al final de cada mes respecto a tu presupuesto inicial." }
       ],
-      stack: ["React", "Next.js", "TypeScript", "Chart.js"]
+      stack: ["React Native", "Firebase Auth", "Firestore", "Expo"]
     },
     iconClasses: [
       "devicon-react-original colored",
-      "devicon-nextjs-plain colored"
+      "devicon-android-plain colored"
     ],
     images: [
       "assets/proyectos/PresupuestoMensual/Presupuesto-01.png",
@@ -177,13 +186,31 @@ const labs = [
     links: { repo: "https://github.com/albertopt-dev/Presupuesto-mensual" }
   },
   {
+    title: "Reloj Digital",
+    description: "Proyecto de práctica en Java para afianzar conceptos de programación orientada a objetos, hilos y actualización de UI en tiempo real.",
+    detail: null,
+    iconClasses: [
+      "devicon-java-plain colored",
+      "devicon-android-plain colored"
+    ],
+    images: [
+      "assets/proyectos/RelojDigital/Captura de pantalla 2026-03-23 154602.png",
+      "assets/proyectos/RelojDigital/Captura de pantalla 2026-03-23 154614.png"
+    ],
+    video: null,
+    links: { repo: "https://github.com/albertopt-dev/Reloj_Digital" }
+  },
+  {
     title: "Chatbot IA — Asistente técnico",
-    description: "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales. Por el momento, es una idea pero tengo previsión de realizarlo próximamente.",
+    description: "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales. En construcción.",
+    detail: null,
     iconClasses: [
       "devicon-java-plain colored",
       "devicon-javascript-plain colored"
     ],
-    links: { repo: ""}
+    images: [],
+    video: null,
+    links: { repo: "https://github.com/albertopt-dev" }
   }
 ];
 
@@ -212,7 +239,7 @@ const skills = [
 // RENDER: Projects
 // =========================
 function renderProjects() {
-  const grid = document.getElementById("projectsGrid");
+  const grid = document.getElementById("projectsTrack");
 
   grid.innerHTML = projects.map((p) => {
     if (p.status === "coming") {
@@ -233,13 +260,23 @@ function renderProjects() {
       ? `<span class="project-card__status status--done">✓ Terminado</span>`
       : "";
 
+    const mediaContent = p.video
+      ? `<video class="lab-thumb__video" autoplay muted loop playsinline>
+           <source src="${p.video}" type="video/mp4">
+         </video>`
+      : p.image
+        ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
+        : `<div class="project-card__placeholder">${initials}</div>`;
+
+    const stackTag = p.stacks[0]
+      ? `<div class="lab-card__thumb-overlay"><span class="lab-thumb__tag">${p.stacks[0]}</span></div>`
+      : '';
+
     return `
       <article class="project-card${p.featured ? ' project-card--featured' : ''}">
         <div class="project-card__media">
-          ${p.image
-            ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" />`
-            : `<div class="project-card__placeholder">${initials}</div>`
-          }
+          ${mediaContent}
+          ${stackTag}
           ${featuredBadge}${wipBadge}${statusBadge}
         </div>
 
@@ -263,6 +300,32 @@ function renderProjects() {
   grid.querySelectorAll(".lab-card__btn").forEach(btn => {
     btn.addEventListener("click", () => openProjectModal(btn.dataset.id));
   });
+}
+
+function initProjectsCarousel() {
+  const track = document.getElementById('projectsTrack');
+  const prev  = document.getElementById('projectsPrev');
+  const next  = document.getElementById('projectsNext');
+  if (!track || !prev || !next) return;
+
+  const visible = 3;
+  const total   = projects.length;
+  const max     = Math.max(0, total - visible);
+  let current   = 0;
+
+  function move() {
+    const card   = track.children[0];
+    const gap    = 22;
+    const offset = current * (card.offsetWidth + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+    prev.classList.toggle('is-disabled', current === 0);
+    next.classList.toggle('is-disabled', current >= max);
+  }
+
+  prev.addEventListener('click', () => { if (current > 0)   { current--; move(); } });
+  next.addEventListener('click', () => { if (current < max) { current++; move(); } });
+  window.addEventListener('resize', move);
+  move();
 }
 
 // =========================
@@ -334,7 +397,7 @@ function onEscClose(e) {
 // RENDER: Labs
 // =========================
 function renderLabs() {
-  const grid = document.getElementById("labsGrid");
+  const grid = document.getElementById("labsTrack");
 
   grid.innerHTML = labs.map((lab, labIdx) => {
     const hasImages = lab.images && lab.images.length > 0;
@@ -384,6 +447,32 @@ function renderLabs() {
         </div>
       </article>`;
   }).join("");
+}
+
+function initLabsCarousel() {
+  const track = document.getElementById('labsTrack');
+  const prev  = document.getElementById('labsPrev');
+  const next  = document.getElementById('labsNext');
+  if (!track || !prev || !next) return;
+
+  const visible = 3;
+  const total   = labs.length;
+  const max     = total - visible;
+  let current   = 0;
+
+  function move() {
+    const card    = track.children[0];
+    const gap     = 22;
+    const offset  = current * (card.offsetWidth + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+    prev.classList.toggle('is-disabled', current === 0);
+    next.classList.toggle('is-disabled', current >= max);
+  }
+
+  prev.addEventListener('click', () => { if (current > 0)    { current--; move(); } });
+  next.addEventListener('click', () => { if (current < max)  { current++; move(); } });
+  window.addEventListener('resize', move);
+  move();
 }
 
 function openLabDetail(idx) {
@@ -1148,11 +1237,11 @@ function renderCredentials() {
   grid.innerHTML = `
     ${featured.map(renderCard).join('')}
     <div class="cred-carousel">
-      <button class="cred-carousel__btn cred-carousel__btn--prev" id="credPrev" aria-label="Anterior">&#8592;</button>
+      <button class="labs__arrow is-disabled" id="credPrev" aria-label="Anterior">❮</button>
       <div class="cred-grid__rest" id="credTrack">
         ${rest.map(renderCard).join('')}
       </div>
-      <button class="cred-carousel__btn cred-carousel__btn--next" id="credNext" aria-label="Siguiente">&#8594;</button>
+      <button class="labs__arrow" id="credNext" aria-label="Siguiente">❯</button>
     </div>`;
 
   // Carousel nav
@@ -1164,8 +1253,8 @@ function renderCredentials() {
     btnPrev.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
     btnNext.addEventListener('click', () => track.scrollBy({ left:  scrollAmount(), behavior: 'smooth' }));
     const updateBtns = () => {
-      btnPrev.disabled = track.scrollLeft <= 0;
-      btnNext.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      btnPrev.classList.toggle('is-disabled', track.scrollLeft <= 0);
+      btnNext.classList.toggle('is-disabled', track.scrollLeft + track.clientWidth >= track.scrollWidth - 2);
     };
     track.addEventListener('scroll', updateBtns, { passive: true });
     updateBtns();
@@ -1225,10 +1314,12 @@ document.addEventListener('keydown', e => {
 // INIT
 // =========================
 renderProjects();
+initProjectsCarousel();
 renderCredentials();
 renderSkills();
 initSkillsScroller();
 renderLabs();
+initLabsCarousel();
 initProjectModal();
 initContactEmailJS();
 initTheme();

@@ -1,7 +1,11 @@
 /* ═══════════════════════════════════════
    PROYECTOS
 ═══════════════════════════════════════ */
-.projects__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(440px, 1fr)); gap: 22px; }
+/* ── CAROUSEL ── */
+.projects__carousel { display: flex; align-items: center; gap: 16px; }
+.projects__track-wrap { flex: 1; overflow: hidden; }
+.projects__track { display: flex; gap: 22px; transition: transform 0.45s cubic-bezier(.4,0,.2,1); will-change: transform; }
+.project-card { flex: 0 0 calc((100% - 44px) / 3); min-width: 0; }
 
 .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); }
 .project-card:hover { border-color: rgba(31,92,153,0.4); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
