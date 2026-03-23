@@ -2,16 +2,50 @@
    SKILLS
 ═══════════════════════════════════════ */
 .skills__scroller { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 44px; }
-.skills__row { flex: none; width: calc(10 * 116px + 9 * 14px); display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; padding-top: 6px; -ms-overflow-style: none; scrollbar-width: none; }
+.skills__row{
+  flex: 1;
+  width: 100%;
+  max-width: 980px; /* ajusta si quieres */
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .skills__row::-webkit-scrollbar { display: none; }
 
-.skill-card { flex-shrink: 0; scroll-snap-align: start; width: 126px; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color var(--transition), transform var(--transition); }
+.skill-card { 
+   flex-shrink: 0; 
+   scroll-snap-align: start; 
+   width: 150px; 
+   display: flex; 
+   flex-direction: column; 
+   align-items: center; 
+   gap: 12px; 
+   padding: 56px 46px; 
+   background: var(--bg2); 
+   border: 1px solid var(--border); 
+   border-radius: var(--radius); 
+   transition: border-color var(--transition), transform var(--transition); 
+}
+
 .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-.skill-card__icon { font-size: 2.6rem; }
-.skill-card__name { font-size: 0.78rem; color: var(--text2); text-align: center; }
+.skill-card__icon { font-size: 2.4rem; }
+.skill-card__name { font-size: 0.88rem; font-weight: 700; color: var(--text2); text-align: center; }
 
 .skills__desc { color: var(--text2); font-size: 0.9rem; font-weight: 300; line-height: 1.7; margin-top: 10px; margin-bottom: 0; max-width: 580px; }
 
 .skills__arrow { flex-shrink: 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem; color: var(--text2); transition: background var(--transition), color var(--transition), border-color var(--transition); }
 .skills__arrow:hover { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
 .skills__arrow.is-disabled { opacity: 0.3; pointer-events: none; }
+
+/* Cuando skills tiene snap, la hacemos más “fullpage” */
+#habilidades.snap{
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: calc(80px + var(--nav-h));
+}

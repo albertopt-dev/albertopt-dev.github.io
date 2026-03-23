@@ -20,7 +20,7 @@
 .status--done { background: rgba(31,92,153,0.12); color: var(--accent); border: 1px solid var(--border); }
 .status--wip  { background: rgba(251,191,36,0.12); color: #d97706; border: 1px solid rgba(251,191,36,0.3); }
 
-.project-card__body { padding: 26px; flex: 1; display: flex; flex-direction: column; }
+.project-card__body { padding: 36px; flex: 1; display: flex; flex-direction: column; }
 .project-card__title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 8px; }
 .project-card__desc  { font-size: 0.88rem; color: var(--text2); line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
 .project-card__tags  { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
@@ -39,3 +39,4 @@
 .coming-icon { font-size: 2.5rem; }
 .project-card--coming .project-card__title { color: var(--text3); }
 .project-card--coming .project-card__desc  { color: var(--text3); font-size: 0.85rem; }
+

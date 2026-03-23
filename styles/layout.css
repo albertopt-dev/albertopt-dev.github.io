@@ -88,3 +88,32 @@
   box-shadow: 0 4px 20px rgba(31,92,153,0.25);
   transform: translateY(-2px);
 }
+
+/* =========================================================
+   FULLPAGE SNAP (solo escritorio)
+   - En móvil NO hacemos snap para no estropear UX
+========================================================= */
+
+@media (min-width: 900px){
+  html{
+    scroll-behavior: smooth;
+  }
+
+  /* Activar snap en escritorio */
+  body{
+    scroll-snap-type: y proximity; /* proximity = menos agresivo que mandatory */
+    scroll-padding-top: var(--nav-h);
+  }
+
+  /* Snap solo para secciones "snap" (no todas) */
+  section.snap{
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    min-height: calc(100vh - var(--nav-h));
+  }
+
+  /* Asegura que HERO también encaja */
+  #hero.snap{
+    min-height: calc(100vh - var(--nav-h));
+  }
+}

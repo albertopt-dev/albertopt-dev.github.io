@@ -94,3 +94,50 @@
   0%   { transform: scale(1.4); opacity: 0.5; }
   100% { transform: scale(1);   opacity: 1; }
 }
+
+/* =========================================================
+   Layout en escritorio (2 columnas)
+   - En móvil NO cambia nada
+========================================================= */
+@media (min-width: 1000px){
+  /* Subimos un poco el bloque de intro (menos aire) */
+  .game-section__intro{
+    margin-bottom: 18px; /* antes 36px */
+  }
+
+  /* El bloque de texto no debe ser gigante */
+  .game-section__desc{
+    margin-bottom: 14px; /* antes 20px */
+    max-width: 520px;    /* lo mantienes */
+  }
+}
+
+@media (min-width: 1000px){
+  /* Convertimos la sección en grid de 2 columnas */
+  #juego.section{
+    display: grid;
+    grid-template-columns: 1fr 1.25fr; /* texto / juego */
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* El wrapper del juego no necesita centrarse ni margen auto */
+  .game-wrapper--full{
+    max-width: none;
+    margin: 0;
+  }
+}
+
+/* Evita que se vea la siguiente sección:
+   el juego ocupa al menos una pantalla */
+#juego{
+  min-height: calc(100vh - var(--nav-h));
+}
+
+@media (min-width: 1000px){
+  /* más alto el área jugable en escritorio */
+  .fl-canvas{
+    height: 520px;     /* prueba 480–560 */
+    max-height: 72vh;  /* límite para pantallas bajas */
+  }
+}
