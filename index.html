@@ -48,7 +48,7 @@
 
     <nav class="navbar__links" id="navLinks" aria-label="Navegación principal">
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#credenciales">Formación</a>
+      <a href="#credenciales">Reconocimientos</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
@@ -59,7 +59,7 @@
     <!-- Menú móvil -->
     <div class="navbar__mobile-menu" id="navMobileMenu" aria-label="Menú móvil">
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#credenciales">Formación</a>
+      <a href="#credenciales">Reconocimientos</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
@@ -96,7 +96,7 @@
 
       <p class="hero__subtitle">
         <strong>Desarrollador Java Junior</strong> — Java &amp; Kotlin.<br>
-        FP DAM · Prácticas reales en empresa tech · Producto en producción.<br>
+        FP DAM · Prácticas reales en empresa tech · En busca de una oportunidad laboral.<br>
         Aprendiendo Spring Boot y Flutter de forma autodidacta.
       </p>
 
@@ -107,12 +107,8 @@
 
       <div class="hero__stats">
         <div class="hero__stat">
-          <span class="hero__stat-num">3</span>
+          <span class="hero__stat-num">4</span>
           <span class="hero__stat-label">Apps Android propias</span>
-        </div>
-        <div class="hero__stat">
-          <span class="hero__stat-num">1</span>
-          <span class="hero__stat-label">Producto en producción</span>
         </div>
         <div class="hero__stat">
           <span class="hero__stat-num">150h+</span>
@@ -142,17 +138,22 @@
   <section id="sobre-mi" class="about section">
     <div class="about__text">
       <p class="section__label">Sobre mí</p>
-      <h2 class="section__title">Código, apps<br>y constancia</h2>
+      <h2 class="section__title">Código, apps y constancia</h2>
 
       <p class="about__body">
-        Vengo de entornos técnicos exigentes — 4 años en un centro de I+D — donde aprendí que la disciplina y el trabajo bajo presión no se estudian, se viven. En paralelo, me formé más de <strong>150 horas de forma autodidacta</strong> en Java, Spring Boot y .NET.
+        Vengo de entornos técnicos exigentes — 4 años en un centro de I+D — donde aprendí que la disciplina y el trabajo bajo presión no se estudian, se viven. 
       </p>
       <p class="about__body">
-        Hoy tengo el título de <strong>FPGS en Desarrollo de Aplicaciones Multiplataforma</strong> y prácticas reales en empresa tech donde entregué un portal completo en producción en 3 meses. Al finalizar, me dieron una carta de recomendación formal.
+        Hoy tengo el título de <strong>FPGS en Desarrollo de Aplicaciones Multiplataforma</strong> y prácticas reales en empresa tech donde entregué un portal completo en producción en 3 meses. Al finalizar, me dieron una carta de recomendación formal. <br>
+        En paralelo, me he formado más de <strong>150 horas de forma autodidacta</strong> en Java, Spring Boot y .NET.
       </p>
       <p class="about__body">
         Me especializo en <strong>Android nativo (Java/Kotlin)</strong> y estoy ampliando con Spring Boot y Flutter. Lo que me diferencia no es solo el stack — es que cuando me comprometo con algo, lo termino.
       </p>
+      <p class="about__body">
+        A continuación puedes ver el reconocimiento real que recibí por mi desempeño en la empresa.
+      </p>
+      <br>
       <a href="assets/Carta recomendación Tich Consulting.pdf"
         target="_blank" rel="noopener"
         class="hero__rec-badge">
@@ -205,10 +206,7 @@
   <section id="credenciales" class="credentials section">
     <p class="section__label">Formación y Reconocimientos</p>
     <h2 class="section__title">Lo que me respalda</h2>
-    <p class="credentials__sub">
-      Evidencia real de formación, desempeño y compromiso profesional.
-      Los certificados en curso se irán añadiendo al completarlos.
-    </p>
+    <p class="credentials__sub">Evidencia real de formación, desempeño y compromiso profesional. Los certificados en curso se irán añadiendo al completarlos.</p>
     <div class="credentials__grid" id="credentialsGrid"></div>
   </section>
 
@@ -242,7 +240,7 @@
   <!-- ═══════════════════════════════════════
        PROYECTOS
   ═══════════════════════════════════════ -->
-  <section id="proyectos" class="projects section">
+  <section id="proyectos" class="projects section section--alt">
     <div class="section__header">
       <div>
         <p class="section__label">Proyectos</p>
@@ -263,6 +261,7 @@
   <section id="habilidades" class="skills section">
     <p class="section__label">Habilidades</p>
     <h2 class="section__title">Mi stack</h2>
+    <p class="skills__desc">Estas son las tecnologías con las que he trabajado de forma práctica — desde apps Android hasta sistemas web con bases de datos, APIs y más.</p>
 
     <div class="skills__scroller">
       <button id="skillsPrev" class="skills__arrow is-disabled" aria-label="Anterior">❮</button>
@@ -295,9 +294,13 @@
         <p class="section__label">Mini juego</p>
         <h2 class="section__title">¿Puedes esquivar el código?</h2>
         <p class="game-section__desc">
-          Esquiva las llaves <strong>{ }</strong> y sobrevive el mayor tiempo posible. 🎮
+          Esquiva los obstáculos y sobrevive el mayor tiempo posible. 🎮
         </p>
         <p class="game-instructions-label">Instrucciones</p>
+          <p>
+            Es simple: el personaje se mueve automáticamente, tú solo tienes que saltar para esquivar los obstáculos. Cuanto más tiempo sobrevivas, más puntos ganas.
+          </p>
+          <br>
         <div class="game-instructions">
           <div class="game-instruction">
             <span class="game-instruction__icon">Space</span>
@@ -312,8 +315,8 @@
             <span>Toque en móvil</span>
           </div>
           <div class="game-instruction">
-            <span class="game-instruction__icon">{ }</span>
-            <span>Esquiva las llaves</span>
+            <span class="game-instruction__icon">{} // [] ()</span>
+            <span>Esquiva los obstáculos</span>
           </div>
         </div>
       </div>
@@ -328,7 +331,7 @@
       <canvas id="flCanvas" class="fl-canvas"></canvas>
       <div id="flOverlay" class="fl-overlay">
         <p id="flOverTitle" class="fl-over__title">👨‍💻 Flappy Dev</p>
-        <p id="flOverMsg"   class="fl-over__msg">Esquiva las llaves { } y sobrevive</p>
+        <p id="flOverMsg"   class="fl-over__msg">Esquiva los obstáculos y sobrevive</p>
         <button id="flStart" class="btn btn--primary">▶ Jugar</button>
       </div>
     </div>
@@ -367,9 +370,8 @@
         <span class="contact__carta-emoji">📄</span>
         <div class="contact__carta-info">
           <strong>Carta de presentación</strong>
-          <span>Descárgala antes de contactarme</span>
+          <span>Si quieres, puedes descargarla antes de contactarme</span>
         </div>
-        <span class="contact__carta-arrow">⬇</span>
       </a>
 
       <form id="contactForm" class="contact-form" onsubmit="return false;">
@@ -407,7 +409,6 @@
     <span class="footer__copy">© 2026 Alberto Pérez Talaván · Todos los derechos reservados</span>
     <div class="footer__right">
       <div class="footer__links">
-        <a href="assets/Carta de presentacion.pdf" target="_blank" rel="noopener">Carta de presentación</a>
         <a href="assets/Alberto_Pérez_Talaván_CV_2025.pdf" download>Descargar CV</a>
       </div>
       <div class="footer__counter">
@@ -464,7 +465,7 @@ const drops     = Array.from({ length: COLS }, () =>
   Math.floor(Math.random() * -50)
 );
 
-const chars = '01アイウエオJavaKotlin{}[]=>&&||null true API git//';
+const chars = '01<>アイウエALBERTOオJava/\Kotlin{}[]=>&&||null true API git//';
 
 let hue = 120; // empieza en verde (0=rojo, 120=verde, 240=azul)
 

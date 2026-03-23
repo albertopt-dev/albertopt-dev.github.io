@@ -2,11 +2,12 @@
    UTILS
 ═══════════════════════════════════════ */
 .section { padding: 100px 6%; }
+.section--alt { background: var(--bg2); }
 
 .section__label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 3px;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0px;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 12px;
@@ -14,10 +15,10 @@
 
 .section__title {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.1;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
   margin-bottom: 0;
 }
 

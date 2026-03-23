@@ -3,30 +3,9 @@
 // =========================
 const projects = [
   {
-    id: "p1",
-    title: "DespedidaApp",
-    description: "App Android para la despedida de soltero de un amigo. Roles diferenciados (amigos/novio), mapa de España con pruebas geolocalizadas, cámara integrada con guardado en galería y chat interno en tiempo real.",
-    tags: ["Android", "Firebase", "Roles"],
-    stacks: ["Kotlin", "Firebase", "Maps"],
-    status: "terminado",
-    image: "",
-    featured: false,
-    highlights: [
-      "Autenticación con roles diferenciados",
-      "Mapa interactivo con pruebas geolocalizadas",
-      "Chat interno en tiempo real (Firebase)",
-      "Cámara + guardado en galería del dispositivo"
-    ],
-    links: {
-      repo: "https://github.com/albertopt-dev/DespedidaApp",
-      demo: ""
-    }
-  },
-
-  {
     id: "p2",
-    title: "Web Rehabilitación Funcional",
-    description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
+    title: "Web Readaptación Funcional",
+    description: "Web para un profesional de readaptación funcional. Muestra servicios, catálogo de libros, formulario de contacto, quien es y como trabaja. Proyecto real para cliente real — actualmente en desarrollo activo.",
     tags: ["Web", "Cliente real", "En desarrollo"],
     stacks: ["HTML", "CSS", "JavaScript"],
     status: "en-proceso",
@@ -53,6 +32,71 @@ const projects = [
 // DATA: Labs / Taller
 // =========================
 const labs = [
+  {
+    title: "NutriPlan",
+    description: "Primera app profesional desarrollada como proyecto final de FP. Herramienta completa para la planificación de menús y control nutricional, con enfoque en usabilidad y buenas prácticas de desarrollo Android.",
+    detail: {
+      intro: "NutriPlan fue mi primer gran reto profesional: una app Android desarrollada como trabajo de final de ciclo de FP. El objetivo era crear una herramienta útil y real para la planificación de menús semanales, registro de alimentos y control nutricional, aplicando todo lo aprendido y siguiendo buenas prácticas de desarrollo. El proyecto me permitió afianzar conocimientos en arquitectura Android, persistencia de datos y experiencia de usuario.",
+      features: [
+        { icon: "📅", title: "Planificación semanal", desc: "Permite crear y gestionar menús semanales personalizados, adaptados a las necesidades del usuario." },
+        { icon: "🍎", title: "Registro de alimentos", desc: "Base de datos editable de alimentos y recetas, con información nutricional detallada." },
+        { icon: "📊", title: "Control nutricional", desc: "Cálculo automático de calorías, macronutrientes y seguimiento de objetivos diarios." },
+        { icon: "🔔", title: "Notificaciones inteligentes", desc: "Recordatorios para comidas y avisos personalizados para mantener la adherencia al plan." },
+        { icon: "🛠️", title: "Desarrollo profesional", desc: "Proyecto realizado aplicando patrones de arquitectura, persistencia local y diseño enfocado en la experiencia de usuario." }
+      ],
+      stack: ["Kotlin", "Android", "Room", "Material Design"]
+    },
+    iconClasses: [
+      "devicon-kotlin-plain colored",
+      "devicon-android-plain colored"
+    ],
+    images: [
+      "assets/proyectos/NutriPlan/Nutriplan-01.png",
+      "assets/proyectos/NutriPlan/Nutriplan-02.png",
+      "assets/proyectos/NutriPlan/Nutriplan-03.png",
+      "assets/proyectos/NutriPlan/Nutriplan-04.png",
+      "assets/proyectos/NutriPlan/Nutriplan-05.png",
+      "assets/proyectos/NutriPlan/Nutriplan-06.png",
+      "assets/proyectos/NutriPlan/Nutriplan-07.png",
+      "assets/proyectos/NutriPlan/Nutriplan-08.png",
+      "assets/proyectos/NutriPlan/Nutriplan-09.png",
+      "assets/proyectos/NutriPlan/Nutriplan-10.png"
+    ],
+    video: "assets/proyectos/NutriPlan/Nutriplan-Video.mp4",
+    links: { repo: "" }
+  },
+  {
+    title: "DespedidaApp",
+    description: "App Android para la despedida de la novia de una amiga. Un proyecto largo donde combiné mis conocimientos con ayuda de la IA para construirla y, de paso, aprender cosas nuevas.",
+    detail: {
+      intro: "Una app construida para la despedida de la novia de una amiga — y también una oportunidad para crecer. Fue un proyecto largo donde combiné lo que ya sabía con ayuda de la IA para poder ir más lejos técnicamente. El resultado fue una app Android completa con roles diferenciados, mapa interactivo con pruebas geolocalizadas, cámara integrada y chat en tiempo real.",
+      features: [
+        { icon: "👥", title: "Roles diferenciados", desc: "Amigas y novia acceden con roles distintos, cada uno con sus propias funcionalidades y pantallas adaptadas." },
+        { icon: "🗺️", title: "Mapa interactivo", desc: "Mapa de España con pruebas geolocalizadas que se desbloquean según la ubicación del grupo. La aventura lleva a los participantes por distintos puntos." },
+        { icon: "📸", title: "Cámara integrada", desc: "Captura fotos directamente desde la app y las guarda automáticamente en la galería del dispositivo." },
+        { icon: "💬", title: "Chat en tiempo real", desc: "Chat interno sincronizado con Firebase Realtime Database para que todo el grupo esté coordinado en todo momento." },
+        { icon: "🤖", title: "Aprendizaje real con IA", desc: "Proyecto donde me apoyé en la IA para superar desafíos técnicos nuevos y ampliar mis conocimientos mientras construía algo real." }
+      ],
+      stack: ["Kotlin", "Firebase", "Google Maps"]
+    },
+    iconClasses: [
+      "devicon-kotlin-plain colored",
+      "devicon-firebase-plain colored"
+    ],
+    images: [
+      "assets/proyectos/DespedidaApp/Despedida-01.png",
+      "assets/proyectos/DespedidaApp/Despedida-02.png",
+      "assets/proyectos/DespedidaApp/Despedida-03.png",
+      "assets/proyectos/DespedidaApp/Despedida-04.png",
+      "assets/proyectos/DespedidaApp/Despedida-05.png",
+      "assets/proyectos/DespedidaApp/Despedida-06.png",
+      "assets/proyectos/DespedidaApp/Despedida-07.png",
+      "assets/proyectos/DespedidaApp/Despedida-08.png",
+      "assets/proyectos/DespedidaApp/Despedida-09.png"
+    ],
+    video: "assets/proyectos/DespedidaApp/Despedida-video.mp4",
+    links: { repo: "https://github.com/albertopt-dev/DespedidaApp" }
+  },
   {
     title: "ObjetivosApp",
     description: "App personal para gestionar objetivos diarios, semanales y anuales con autenticación propia.",
@@ -87,10 +131,28 @@ const labs = [
   {
     title: "Presupuesto Mensual",
     description: "App personal para control de finanzas: ingresos, ahorro, desglose de gastos por categoría y estadísticas visuales. Hecha por necesidad propia, no por encargo.",
+    detail: {
+      intro: "Una app web creada para llevar el control real del dinero mes a mes. Diseñada desde cero con React y Next.js, cubre desde el registro de ingresos hasta el análisis visual de en qué se va el presupuesto. Por el momento es una app personal, pero con potencial para crecer y ser útil a más gente.",
+      features: [
+        { icon: "💰", title: "Registro de ingresos", desc: "Añade tus ingresos mensuales y lleva un histórico claro de cuánto entra cada mes." },
+        { icon: "📂", title: "Gastos por categoría", desc: "Clasifica cada gasto en categorías personalizables para saber exactamente dónde va tu dinero." },
+        { icon: "📊", title: "Estadísticas visuales", desc: "Gráficos claros con el desglose de gastos, porcentaje de ahorro y evolución mensual." },
+        { icon: "🎯", title: "Control de ahorro", desc: "Calcula automáticamente cuánto has ahorrado al final de cada mes respecto a tu presupuesto inicial." }
+      ],
+      stack: ["React", "Next.js", "TypeScript", "Chart.js"]
+    },
     iconClasses: [
-      "devicon-kotlin-plain colored",
-      "devicon-android-plain colored"
+      "devicon-react-original colored",
+      "devicon-nextjs-plain colored"
     ],
+    images: [
+      "assets/proyectos/PresupuestoMensual/Presupuesto-01.png",
+      "assets/proyectos/PresupuestoMensual/Presupuesto-02.png",
+      "assets/proyectos/PresupuestoMensual/Presupuesto-03.png",
+      "assets/proyectos/PresupuestoMensual/Presupuesto-04.png",
+      "assets/proyectos/PresupuestoMensual/Presupuesto-05.png"
+    ],
+    video: "assets/proyectos/PresupuestoMensual/Presupuesto-video.mp4",
     links: { repo: "https://github.com/albertopt-dev/Presupuesto-mensual" }
   },
   {
@@ -100,7 +162,7 @@ const labs = [
       "devicon-java-plain colored",
       "devicon-javascript-plain colored"
     ],
-    links: { repo: "https://github.com/albertopt-dev" }
+    links: { repo: ""}
   }
 ];
 
@@ -568,10 +630,10 @@ function initVisitCounter() {
   let   hideTimer = null;
 
   // Suma visita silenciosamente al cargar
-  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
     .then(res => res.json())
     .then(data => {
-      window._visitCount = data.value;
+      window._visitCount = data.count ?? data.value;
     })
     .catch(() => {});
 
@@ -1064,9 +1126,29 @@ function renderCredentials() {
 
   grid.innerHTML = `
     ${featured.map(renderCard).join('')}
-    <div class="cred-grid__rest">
-      ${rest.map(renderCard).join('')}
+    <div class="cred-carousel">
+      <button class="cred-carousel__btn cred-carousel__btn--prev" id="credPrev" aria-label="Anterior">&#8592;</button>
+      <div class="cred-grid__rest" id="credTrack">
+        ${rest.map(renderCard).join('')}
+      </div>
+      <button class="cred-carousel__btn cred-carousel__btn--next" id="credNext" aria-label="Siguiente">&#8594;</button>
     </div>`;
+
+  // Carousel nav
+  const track = document.getElementById('credTrack');
+  const btnPrev = document.getElementById('credPrev');
+  const btnNext = document.getElementById('credNext');
+  if (track && btnPrev && btnNext) {
+    const scrollAmount = () => track.querySelector('.cred-card')?.offsetWidth + 22 || 300;
+    btnPrev.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+    btnNext.addEventListener('click', () => track.scrollBy({ left:  scrollAmount(), behavior: 'smooth' }));
+    const updateBtns = () => {
+      btnPrev.disabled = track.scrollLeft <= 0;
+      btnNext.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    track.addEventListener('scroll', updateBtns, { passive: true });
+    updateBtns();
+  }
 }
 
 function openDocModal(id) {
