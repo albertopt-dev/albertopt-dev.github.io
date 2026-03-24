@@ -40,3 +40,42 @@
 .project-card--coming .project-card__title { color: var(--text3); }
 .project-card--coming .project-card__desc  { color: var(--text3); font-size: 0.85rem; }
 
+/* ── RESPONSIVE MÓVIL ── */
+@media (max-width: 768px) {
+  /* Reducir tamaño de flechas para no robar espacio al carousel */
+  .projects__carousel .labs__arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  /* El contenedor de pista pasa a ser el scroll container */
+  .projects__track-wrap {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .projects__track-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Espaciado interior con padding para que las cards no peguen al borde */
+  .projects__track {
+    gap: 14px;
+    padding: 4px 5% 12px;
+  }
+
+  /* Cada card ocupa ~85% del viewport y se ancla al scroll-snap */
+  .project-card {
+    flex: 0 0 65.5vw;
+    scroll-snap-align: start;
+  }
+
+  /* Reducir padding interior para no desperdiciar espacio */
+  .project-card__body {
+    padding: 20px;
+  }
+}
+

@@ -1,8 +1,17 @@
 /* ═══════════════════════════════════════
    TALLER / LABS
 ═══════════════════════════════════════ */
-.labs { background: var(--bg2); }
+.labs { background: transparent; }
 .labs__subtitle { color: var(--text2); font-size: 0.97rem; font-weight: 300; margin-top: 14px; margin-bottom: 52px; max-width: 500px; }
+
+/* Encabezado legible sobre la lluvia */
+.labs .section__label,
+.labs .section__title,
+.labs .labs__subtitle {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 8px var(--bg), 0 0 20px var(--bg);
+}
 
 /* ── CAROUSEL ── */
 .labs__carousel { display: flex; align-items: center; gap: 16px; }
@@ -98,3 +107,51 @@
   margin-right: 8px;
 }
 .lab-card__btn--detail:hover { opacity: 0.85; }
+
+/* ── RESPONSIVE MÓVIL ── */
+@media (max-width: 768px) {
+  /* Asegurar que el contenido del taller quede siempre sobre el canvas matrix */
+  .labs__carousel {
+    position: relative;
+    z-index: 1;
+    gap: 0;
+  }
+
+  /* Reducir tamaño de flechas para no robar espacio al carousel */
+  .labs__arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  /* El contenedor de pista pasa a ser el scroll container */
+  .labs__track-wrap {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .labs__track-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Espaciado interior para que las cards no peguen al borde */
+  .labs__track {
+    gap: 14px;
+    padding: 4px 5% 12px;
+  }
+
+  /* Cada card ocupa ~85% del viewport y se ancla al scroll-snap */
+  .lab-card {
+    flex: 0 0 73.5vw;
+    scroll-snap-align: start;
+    /* Evitar que el texto quede ilegible por fondo transparente */
+    background: var(--bg);
+  }
+
+  /* Reducir padding interior en cards estándar */
+  .lab-card:not(.lab-card--has-media):not(.lab-card--has-thumb) {
+    padding: 22px;
+  }
+}

@@ -62,6 +62,8 @@ body {
   line-height: 1.6;
   transition: background var(--transition), color var(--transition);
   overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--nav-h);
 }
 
 img { max-width: 100%; display: block; }

@@ -1,51 +1,164 @@
 /* ═══════════════════════════════════════
-   SKILLS
+   SKILLS — Layout + Carousel 3D
 ═══════════════════════════════════════ */
-.skills__scroller { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 44px; }
-.skills__row{
-  flex: 1;
-  width: 100%;
-  max-width: 980px; /* ajusta si quieres */
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 6px 0;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.skills__row::-webkit-scrollbar { display: none; }
 
-.skill-card { 
-   flex-shrink: 0; 
-   scroll-snap-align: start; 
-   width: 150px; 
-   display: flex; 
-   flex-direction: column; 
-   align-items: center; 
-   gap: 12px; 
-   padding: 56px 46px; 
-   background: var(--bg2); 
-   border: 1px solid var(--border); 
-   border-radius: var(--radius); 
-   transition: border-color var(--transition), transform var(--transition); 
+/* Base (sirve en todas las resoluciones) */
+.skills__desc{
+  color: var(--text2);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-top: 12px;
 }
 
-.skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-.skill-card__icon { font-size: 2.4rem; }
-.skill-card__name { font-size: 0.88rem; font-weight: 700; color: var(--text2); text-align: center; }
+/* ── Rueda 3D ── */
+.skills__wheel{
+  width: 190px;
+  height: 190px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: wheelSpin 36s linear infinite;
+}
 
-.skills__desc { color: var(--text2); font-size: 0.9rem; font-weight: 300; line-height: 1.7; margin-top: 10px; margin-bottom: 0; max-width: 580px; }
+.skills__stage:hover .skills__wheel{
+  animation-play-state: paused;
+}
 
-.skills__arrow { flex-shrink: 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem; color: var(--text2); transition: background var(--transition), color var(--transition), border-color var(--transition); }
-.skills__arrow:hover { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
-.skills__arrow.is-disabled { opacity: 0.3; pointer-events: none; }
+@keyframes wheelSpin{
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(-150deg); }
+}
 
-/* Cuando skills tiene snap, la hacemos más “fullpage” */
-#habilidades.snap{
-  min-height: calc(100vh - var(--nav-h));
+.skill-card{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 190px;
+  height: 190px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: calc(80px + var(--nav-h));
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.skill-card:hover{
+  border-color: var(--accent);
+  box-shadow: 0 0 24px rgba(31,92,153,0.2);
+}
+
+.skill-card__icon{
+  font-size: 3.1rem;
+  line-height: 1;
+}
+
+.skill-card__name{
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text2);
+  text-align: center;
+}
+
+/* =========================================================
+   ESCRITORIO (>= 901px)
+   - Texto fijo a la izquierda
+   - Rueda grande sin desbordar
+========================================================= */
+@media (min-width: 901px){
+  /* La sección ocupa pantalla (modo snap) */
+  #habilidades.snap{
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 70px;
+  }
+
+  /* Layout full-width con margen razonable */
+  .skills__layout{
+    display: grid;
+    grid-template-columns: 520px 1fr; /* texto fijo + derecha flexible */
+    column-gap: 60px;
+    align-items: center;
+
+    width: 100%;
+    margin: 0;
+    padding: 0 24px; /* margen a los bordes */
+  }
+
+  /* Texto fijo (no se mueve) */
+  .skills__text{
+    width: 520px;
+    max-width: 520px;
+    justify-self: start;
+    align-self: flex-start;
+  }
+
+  /* Escenario de la rueda: grande y recorta desbordes */
+  .skills__stage{
+    justify-self: end;
+    width: 860px;      /* rellena el blanco sin salirse */
+    height: 400px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 40px;
+    box-sizing: border-box;
+
+    perspective: 1100px;
+    perspective-origin: 50% 50%;
+  }
+}
+
+/* =========================================================
+   MÓVIL / TABLET (<= 900px)
+   - Se mantiene como lo tenías: columna + rueda pequeña
+========================================================= */
+@media (max-width: 900px){
+  #habilidades.snap{
+    min-height: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    align-items: flex-start;
+  }
+
+  .skills__layout{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 48px;
+  }
+
+  .skills__text{
+    max-width: 100%;
+  }
+
+  .skills__stage{
+    align-self: center;
+    width: 200px;
+    height: 200px;
+    perspective: 900px;
+  }
+
+  .skills__wheel{
+    width: 120px;
+    height: 120px;
+  }
+
+  .skill-card{
+    width: 120px;
+    height: 120px;
+    gap: 10px;
+  }
+
+  .skill-card__icon{ font-size: 2rem; }
+  .skill-card__name{ font-size: 0.78rem; }
 }

@@ -190,36 +190,60 @@
   /* base (móvil/tablet): centrado normal */
   min-height: calc(100vh - var(--nav-h));
   display: flex;
-  align-items: center;
+  align-items: flex-start;  /* antes: center */
+  padding-top: 60px;
 }
 
 /* Escritorio: más compacto, baja un poco y deja sitio footer */
 @media (min-width: 900px){
   #contacto.snap{
-    min-height: calc(100vh - var(--nav-h) - var(--footer-h));
-    align-items: flex-start;  /* para que no quede “en medio” */
-    padding-top: 40px;        /* baja el panel */
-    padding-bottom: 16px;     /* aire sin empujar demasiado */
+    min-height: unset;
+    height: calc(100vh - var(--nav-h) - var(--footer-h));
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .contact__inner{
-    max-width: 560px;   /* antes 620 */
-    padding: 8px 36px;  /* antes 10px 48px */
+    max-width: 540px;
+    padding: 24px 36px;
   }
 
   .contact__sub{
-    margin-bottom: 26px; /* antes 36 */
+    font-size: 0.88rem;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    line-height: 1.5;
   }
 
   .contact__links{
-    margin-bottom: 28px; /* antes 40 */
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .contact__link{
+    padding: 8px 16px;
+    font-size: 0.8rem;
   }
 
   .contact__carta{
-    margin-bottom: 20px; /* antes 28 */
+    padding: 10px 16px;
+    margin-bottom: 14px;
+  }
+
+  .contact-form__row{
+    margin-bottom: 10px;
+  }
+
+  .contact-form__group{
+    margin-bottom: 10px;
   }
 
   .contact-form__group textarea{
-    min-height: 120px;   /* reduce altura del textarea */
+    min-height: 80px;
+    rows: 3;
   }
 }
+
+

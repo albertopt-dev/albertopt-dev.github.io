@@ -48,10 +48,10 @@
 
     <nav class="navbar__links" id="navLinks" aria-label="Navegación principal">
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#credenciales">Reconocimientos</a>
+      <a href="#credenciales">Formación</a>
       <a href="#proyectos">Proyectos</a>
-      <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
+      <a href="#habilidades">Habilidades</a>
       <a href="#juego">Juego</a>
       <a href="#contacto-end">Contacto</a>
     </nav>
@@ -59,10 +59,10 @@
     <!-- Menú móvil -->
     <div class="navbar__mobile-menu" id="navMobileMenu" aria-label="Menú móvil">
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#credenciales">Reconocimientos</a>
+      <a href="#credenciales">Formación</a>
       <a href="#proyectos">Proyectos</a>
-      <a href="#habilidades">Habilidades</a>
       <a href="#taller">Taller</a>
+      <a href="#habilidades">Habilidades</a>
       <a href="#juego">Juego</a>
       <a href="#contacto-end">Contacto</a>
     </div>
@@ -150,20 +150,26 @@
       <p class="about__body">
         Me especializo en <strong>Android nativo (Java/Kotlin)</strong> y estoy ampliando con Spring Boot y Flutter. Lo que me diferencia no es solo el stack — es que cuando me comprometo con algo, lo termino.
       </p>
-      <p class="about__body">
-        A continuación puedes ver el reconocimiento real que recibí por mi desempeño en la empresa.
-      </p>
-      <br>
-      <a href="assets/Carta recomendación Tich Consulting.pdf"
-        target="_blank" rel="noopener"
-        class="hero__rec-badge">
-        <span class="hero__rec-icon">⭐</span>
-        <span class="hero__rec-text">
-          <strong>Carta de recomendación</strong>
-          TICH Consulting · Prácticas 2025
-        </span>
-        <span class="hero__rec-arrow">→</span>
-      </a>
+      <div class="cred-card cred-card--featured about__rec-card">
+        <div class="cred-card__thumb">
+          <img src="assets/carta-rec-tich.png" class="cred-card__thumb-img" alt="Carta de Recomendación" />
+          <span class="cred-card__badge">🏅 Reconocimiento</span>
+        </div>
+        <div class="cred-card__body">
+          <div class="cred-card__meta">
+            <span class="cred-card__org">TICH Consulting</span>
+            <span class="cred-year">2025</span>
+          </div>
+          <h3 class="cred-card__title">Carta de Recomendación</h3>
+          <p class="cred-card__desc">Emitida al finalizar las prácticas profesionales. Reconoce iniciativa, nivel técnico y capacidad de integración en equipo.</p>
+          <div class="cred-card__actions">
+            <button class="cred-btn cred-btn--view"
+                    onclick="openDocModal('rec-tich')">👁 Ver</button>
+            <a href="assets/Carta recomendación Tich Consulting.pdf" download
+              class="cred-btn cred-btn--download">⬇ Descargar</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="about__cards">
@@ -201,10 +207,10 @@
 
 
   <!-- ═══════════════════════════════════════
-       FORMACIÓN Y RECONOCIMIENTOS
+       FORMACIÓN 
   ═══════════════════════════════════════ -->
   <section id="credenciales" class="credentials section">
-    <p class="section__label">Formación y Reconocimientos</p>
+    <p class="section__label">Formación</p>
     <h2 class="section__title">Lo que me respalda</h2>
     <p class="credentials__sub">Evidencia real de formación, desempeño y compromiso profesional. Los certificados en curso se irán añadiendo al completarlos.</p>
     <div class="credentials__grid" id="credentialsGrid"></div>
@@ -262,22 +268,6 @@
 
 
   <!-- ═══════════════════════════════════════
-       HABILIDADES
-  ═══════════════════════════════════════ -->
-  <section id="habilidades" class="skills section snap">
-    <p class="section__label">Habilidades</p>
-    <h2 class="section__title">Mi stack</h2>
-    <p class="skills__desc">Estas son las tecnologías con las que he trabajado de forma práctica — desde apps Android hasta sistemas web con bases de datos, APIs y más.</p>
-
-    <div class="skills__scroller">
-      <button id="skillsPrev" class="skills__arrow is-disabled" aria-label="Anterior">❮</button>
-      <div id="skillsRow" class="skills__row"></div>
-      <button id="skillsNext" class="skills__arrow" aria-label="Siguiente">❯</button>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
        TALLER
   ═══════════════════════════════════════ -->
   <section id="taller" class="labs section">
@@ -296,6 +286,32 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════
+       HABILIDADES
+  ═══════════════════════════════════════ -->
+  <section id="habilidades" class="skills section section--alt snap">
+    <div class="skills__layout">
+
+      <div class="skills__text">
+        <p class="section__label">Habilidades</p>
+        <h2 class="section__title">Mi stack</h2>
+        <p class="skills__desc">
+          Estas son las tecnologías con las que he trabajado de forma práctica — desde apps Android hasta sistemas web con bases de datos, APIs y más.
+        </p>
+        <p class="skills__desc" style="margin-top: 16px;">
+          Mi base es <strong>Android nativo con Java y Kotlin</strong>, pero he trabajado en proyectos fullstack con Spring Boot, PHP/Laravel y bases de datos relacionales. En el frontend manejo HTML, CSS y JavaScript vanilla, y últimamente estoy ampliando con <strong>React Native</strong> para móvil multiplataforma.
+        </p>
+        <p class="skills__desc" style="margin-top: 16px;">
+          Uso <strong>Git</strong> a diario, integro APIs REST con Postman y despliego con Firebase.
+        </p>
+      </div>
+
+      <div class="skills__stage">
+        <div id="skillsRow"></div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════
        JUEGO

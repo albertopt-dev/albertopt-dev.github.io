@@ -308,23 +308,34 @@ function initProjectsCarousel() {
   const next  = document.getElementById('projectsNext');
   if (!track || !prev || !next) return;
 
-  const visible = 3;
+  const wrap    = track.parentElement; // .projects__track-wrap
   const total   = projects.length;
-  const max     = Math.max(0, total - visible);
   let current   = 0;
 
+  function isMobile() { return window.innerWidth <= 768; }
+  function maxIndex()  { return isMobile() ? total - 1 : Math.max(0, total - 3); }
+
   function move() {
-    const card   = track.children[0];
-    const gap    = 22;
-    const offset = current * (card.offsetWidth + gap);
-    track.style.transform = `translateX(-${offset}px)`;
+    const card = track.children[0];
+    if (!card) return;
+    if (isMobile()) {
+      // En móvil: scroll nativo sobre el wrap (compatible con scroll-snap)
+      const gap = 14;
+      track.style.transform = '';
+      wrap.scrollTo({ left: current * (card.offsetWidth + gap), behavior: 'smooth' });
+    } else {
+      // En escritorio: transform sobre el track
+      const gap    = 22;
+      const offset = current * (card.offsetWidth + gap);
+      track.style.transform = `translateX(-${offset}px)`;
+    }
     prev.classList.toggle('is-disabled', current === 0);
-    next.classList.toggle('is-disabled', current >= max);
+    next.classList.toggle('is-disabled', current >= maxIndex());
   }
 
-  prev.addEventListener('click', () => { if (current > 0)   { current--; move(); } });
-  next.addEventListener('click', () => { if (current < max) { current++; move(); } });
-  window.addEventListener('resize', move);
+  prev.addEventListener('click', () => { if (current > 0)           { current--; move(); } });
+  next.addEventListener('click', () => { if (current < maxIndex())  { current++; move(); } });
+  window.addEventListener('resize', () => { current = 0; move(); });
   move();
 }
 
@@ -455,23 +466,34 @@ function initLabsCarousel() {
   const next  = document.getElementById('labsNext');
   if (!track || !prev || !next) return;
 
-  const visible = 3;
-  const total   = labs.length;
-  const max     = total - visible;
-  let current   = 0;
+  const wrap  = track.parentElement; // .labs__track-wrap
+  const total = labs.length;
+  let current = 0;
+
+  function isMobile() { return window.innerWidth <= 768; }
+  function maxIndex()  { return isMobile() ? total - 1 : Math.max(0, total - 3); }
 
   function move() {
-    const card    = track.children[0];
-    const gap     = 22;
-    const offset  = current * (card.offsetWidth + gap);
-    track.style.transform = `translateX(-${offset}px)`;
+    const card = track.children[0];
+    if (!card) return;
+    if (isMobile()) {
+      // En móvil: scroll nativo sobre el wrap (compatible con scroll-snap)
+      const gap = 14;
+      track.style.transform = '';
+      wrap.scrollTo({ left: current * (card.offsetWidth + gap), behavior: 'smooth' });
+    } else {
+      // En escritorio: transform sobre el track
+      const gap    = 22;
+      const offset = current * (card.offsetWidth + gap);
+      track.style.transform = `translateX(-${offset}px)`;
+    }
     prev.classList.toggle('is-disabled', current === 0);
-    next.classList.toggle('is-disabled', current >= max);
+    next.classList.toggle('is-disabled', current >= maxIndex());
   }
 
-  prev.addEventListener('click', () => { if (current > 0)    { current--; move(); } });
-  next.addEventListener('click', () => { if (current < max)  { current++; move(); } });
-  window.addEventListener('resize', move);
+  prev.addEventListener('click', () => { if (current > 0)          { current--; move(); } });
+  next.addEventListener('click', () => { if (current < maxIndex()) { current++; move(); } });
+  window.addEventListener('resize', () => { current = 0; move(); });
   move();
 }
 
@@ -552,17 +574,28 @@ function closeImgLightbox() {
 }
 
 // =========================
-// RENDER: Skills
+// RENDER: Skills 3D Wheel
 // =========================
 function renderSkills() {
-  const row = document.getElementById("skillsRow");
+  const wheel = document.getElementById("skillsRow");
+  if (!wheel) return;
 
-  row.innerHTML = skills.map(s => `
-    <div class="skill-card">
-      <i class="${s.iconClass} skill-card__icon"></i>
-      <div class="skill-card__name">${s.name}</div>
-    </div>
-  `).join("");
+  const total = skills.length;
+
+  const CARD = 190; // <- mismo número que en CSS (skill-card width/height)
+  const radius = Math.round((CARD / 2) / Math.tan(Math.PI / total)) + 15;
+
+  wheel.innerHTML = skills.map((s, i) => {
+    const angle = (360 / total) * i;
+    return `
+      <div class="skill-card"
+           style="transform: rotateY(${angle}deg) translateZ(${radius}px)">
+        <i class="${s.iconClass} skill-card__icon"></i>
+        <div class="skill-card__name">${s.name}</div>
+      </div>`;
+  }).join("");
+
+  wheel.classList.add("skills__wheel");
 }
 
 // =========================
@@ -1235,7 +1268,6 @@ function renderCredentials() {
   };
 
   grid.innerHTML = `
-    ${featured.map(renderCard).join('')}
     <div class="cred-carousel">
       <button class="labs__arrow is-disabled" id="credPrev" aria-label="Anterior">❮</button>
       <div class="cred-grid__rest" id="credTrack">
