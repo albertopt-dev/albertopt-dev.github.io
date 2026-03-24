@@ -240,6 +240,7 @@ const skills = [
 // =========================
 function renderProjects() {
   const grid = document.getElementById("projectsTrack");
+  if (!grid) return;
 
   grid.innerHTML = projects.map((p) => {
     if (p.status === "coming") {
@@ -253,7 +254,7 @@ function renderProjects() {
         </article>`;
     }
 
-    const initials = p.title.split(" ").slice(0,2).map(w => w[0]).join("").toUpperCase();
+    const initials = p.title.split(" ").slice(0, 2).map(w => w[0]).join("").toUpperCase();
     const featuredBadge = p.featured ? `<span class="project-card__featured-badge">⭐ Destacado</span>` : "";
     const wipBadge = p.status === "en-proceso" ? `<span class="project-card__wip-badge">🔧 En desarrollo</span>` : "";
     const statusBadge = p.status === "terminado"
@@ -261,7 +262,19 @@ function renderProjects() {
       : "";
 
     const mediaContent = p.video
-      ? `<video class="lab-thumb__video" src="${p.video}" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>`
+      ? `
+        <video
+          class="lab-thumb__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="metadata"
+        >
+          <source src="${p.video}" type="video/mp4">
+        </video>
+      `
       : p.image
         ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
         : `<div class="project-card__placeholder">${initials}</div>`;
@@ -304,11 +317,26 @@ function renderProjects() {
   projectVideos.forEach(video => {
     video.muted = true;
     video.defaultMuted = true;
+    video.loop = true;
     video.playsInline = true;
+    video.autoplay = true;
 
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {});
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("autoplay", "");
+
+    const tryPlay = () => {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    };
+
+    if (video.readyState >= 1) {
+      tryPlay();
+    } else {
+      video.addEventListener("loadedmetadata", tryPlay, { once: true });
     }
   });
 }
@@ -1179,6 +1207,19 @@ const credentials = [
     type:      "rec",
     featured:  true
   },
+
+  {
+    id:    "udemy-bd",
+    title: "Bases de Datos Relacionales",
+    org:   "Udemy",
+    year:  "2026",
+    desc:  "Fundamentos de diseño relacional, normalización, relaciones y consultas SQL avanzadas. 4 horas.",
+    icon:  "🗄️",
+    color: "linear-gradient(135deg, #00897b 0%, #00695c 100%)",
+    file:  "assets/CertificadoFundamentosBBDDrelacionales.pdf",
+    type:  "cert"
+  },
+
   {
     id:    "udemy-java",
     title: "Master Java Completo",
@@ -1198,17 +1239,6 @@ const credentials = [
     desc:  "Entity Framework con .NET 9. +15 horas de arquitectura MVC, API REST y despliegue en producción.",
     icon:  "🔷",
     color: "linear-gradient(135deg, #512bd4 0%, #813bd4 100%)",
-    file:  "",
-    type:  "cert"
-  },
-  {
-    id:    "udemy-bd",
-    title: "Bases de Datos Relacionales",
-    org:   "Udemy",
-    year:  "En curso",
-    desc:  "Fundamentos de diseño relacional, normalización, relaciones y consultas SQL avanzadas. 4 horas.",
-    icon:  "🗄️",
-    color: "linear-gradient(135deg, #00897b 0%, #00695c 100%)",
     file:  "",
     type:  "cert"
   },
