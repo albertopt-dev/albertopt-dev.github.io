@@ -261,7 +261,7 @@ function renderProjects() {
       : "";
 
     const mediaContent = p.video
-      ? `<video class="lab-thumb__video" src="${p.video}" autoplay muted loop playsinline></video>`
+      ? `<video class="lab-thumb__video" src="${p.video}" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>`
       : p.image
         ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
         : `<div class="project-card__placeholder">${initials}</div>`;
@@ -297,6 +297,19 @@ function renderProjects() {
 
   grid.querySelectorAll(".lab-card__btn").forEach(btn => {
     btn.addEventListener("click", () => openProjectModal(btn.dataset.id));
+  });
+
+  const projectVideos = grid.querySelectorAll("video");
+
+  projectVideos.forEach(video => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
   });
 }
 
