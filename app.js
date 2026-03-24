@@ -1304,7 +1304,6 @@ function renderCredentials() {
       <div class="cred-card${c.featured ? ' cred-card--featured' : ''}">
         <div class="cred-card__thumb"${!c.thumbnail ? ` style="background:${c.color}"` : ''}>
           ${thumb}
-          <span class="cred-card__badge">${badgeText}</span>
         </div>
         <div class="cred-card__body">
           <div class="cred-card__meta">
@@ -1313,7 +1312,10 @@ function renderCredentials() {
           </div>
           <h3 class="cred-card__title">${c.title}</h3>
           <p  class="cred-card__desc">${c.desc}</p>
-          <div class="cred-card__actions">${actions}</div>
+          <div class="cred-card__actions">
+            ${actions}
+            <span class="cred-card__badge cred-card__badge--inline">${badgeText}</span>
+          </div>
         </div>
       </div>`;
   };
