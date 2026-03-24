@@ -368,7 +368,9 @@
             <span class="hud-item">🏆 <strong id="flBest">0</strong></span>
             <span id="flStatus" class="hud-status">Pulsa para empezar</span>
           </div>
+
           <canvas id="flCanvas" class="fl-canvas"></canvas>
+
           <div id="flOverlay" class="fl-overlay">
             <p id="flOverTitle" class="fl-over__title">👨‍💻 Flappy Dev</p>
             <p id="flOverMsg" class="fl-over__msg">Esquiva los obstáculos y sobrevive</p>
@@ -379,44 +381,50 @@
 
     </div>
 
-    <!-- Fila inferior: Wordle -->
-    <article class="word-card">
-      <div class="word-card__layout">
-
-        <div class="word-card__board-col">
-          <div id="wordGrid" class="word-grid" aria-label="Tablero palabra del día"></div>
-          <p id="wordFeedback" class="word-feedback" aria-live="polite"></p>
-          <div class="word-card__footer">
-            <button id="wordReset" class="btn btn--primary word-reset" type="button">
-              ↺ Reiniciar
-            </button>
-          </div>
+    <!-- Intro Wordle fuera del juego -->
+    <div class="word-section">
+      <div class="word-section__intro">
+        <div class="word-section__intro-head">
+          <p class="word-card__eyebrow">Reto lógico</p>
+          <span class="word-card__status" id="wordDateLabel">Hoy</span>
         </div>
 
-        <div class="word-card__info-col">
-          <div class="word-card__header">
-            <p class="word-card__eyebrow">Reto lógico</p>
-            <span class="word-card__status" id="wordDateLabel">Hoy</span>
-          </div>
-          <h3 class="word-card__title">La palabra del día</h3>
-          <p class="word-card__sub">
-            Adivina la palabra en 5 intentos. Cada día hay una palabra nueva en castellano.
-          </p>
-          <div class="word-card__help">
-            <p class="word-card__help-title">Cómo funciona</p>
-            <ul class="word-card__help-list">
-              <li>Escribe una palabra de 5 letras y pulsa Enter.</li>
-              <li>🟦 Letra correcta en posición correcta.</li>
-              <li>🟨 La letra existe pero está en otra posición.</li>
-              <li>⬜ La letra no aparece en la palabra.</li>
-            </ul>
-          </div>
-        </div>
+        <h3 class="word-section__title">La palabra del día</h3>
 
+        <p class="word-section__desc">
+          Adivina la palabra en 5 intentos. Cada día hay una palabra nueva en castellano.
+        </p>
+
+        <div class="word-section__help">
+          <p class="word-section__help-title">Cómo funciona</p>
+          <ul class="word-section__help-list">
+            <li>Escribe una palabra de 5 letras y pulsa Enter.</li>
+            <li>🟦 Letra correcta en posición correcta.</li>
+            <li>🟨 La letra existe pero está en otra posición.</li>
+            <li>⬜ La letra no aparece en la palabra.</li>
+          </ul>
+        </div>
       </div>
-      <div id="wordKeyboard" class="word-keyboard" aria-label="Teclado en pantalla"></div>
-  </article>
-</section>
+
+      <article class="word-card">
+        <div class="word-card__layout">
+          <div class="word-card__board-col">
+            <div id="wordGrid" class="word-grid" aria-label="Tablero palabra del día"></div>
+
+            <p id="wordFeedback" class="word-feedback" aria-live="polite"></p>
+
+            <div class="word-card__footer">
+              <button id="wordReset" class="btn btn--primary word-reset" type="button">
+                ↺ Reiniciar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="wordKeyboard" class="word-keyboard" aria-label="Teclado en pantalla"></div>
+      </article>
+    </div>
+  </section>
 
 
   <!-- ═══════════════════════════════════════

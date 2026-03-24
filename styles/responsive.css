@@ -93,6 +93,68 @@
 
   /* ── JUEGO EN MÓVIL ── */
 
+  .word-section {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .word-section__intro {
+    order: 1;
+    max-width: 100%;
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+
+  .word-section__title {
+    font-size: 1.35rem;
+  }
+
+  .word-section__desc {
+    font-size: 0.92rem;
+    margin-bottom: 14px;
+    max-width: 100%;
+  }
+
+  .word-section__help {
+    padding: 12px;
+    margin-top: 0;
+    max-width: 100%;
+  }
+
+  .word-section__help-list li {
+    font-size: 0.84rem;
+  }
+
+  .word-section__intro-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .word-section__help-title {
+    font-size: 0.76rem;
+    margin-bottom: 8px;
+  }
+
+
+  .word-card {
+    order: 2;
+    max-width: 100%;
+    padding: 16px 14px 14px;
+  }
+
+  .word-card__footer {
+    margin-top: 10px;
+  }
+
+  .word-reset {
+    width: 100%;
+    max-width: 180px;
+  }
   /* Ocultar instrucción Space (sin teclado físico en móvil) */
   .game-instruction:first-child { display: none; }
 

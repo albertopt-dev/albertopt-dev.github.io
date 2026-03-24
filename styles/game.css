@@ -166,101 +166,104 @@
 /* ══════════════════════════════════════
    WORD CARD — Wordle
 ══════════════════════════════════════ */
-.word-card {
-  width: 100%;
-  background: linear-gradient(135deg, #1e2c48 0%, #192239 100%);
-  border: 1px solid rgba(79, 142, 247, 0.22);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(8, 16, 36, 0.22);
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-.word-card__layout {
+.word-section {
+  margin-top: 28px;
   display: grid;
-  grid-template-columns: 1fr;   /* móvil: columna única */
-  gap: 20px;
+  grid-template-columns: minmax(350px, 620px) minmax(320px, 1fr);
+  gap: 40px;
   align-items: start;
 }
 
-.word-card__board-col,
-.word-card__info-col {
-  min-width: 0;
+.word-section__intro {
+  order: 2;
+  display: block;
+  max-width: 660px;
+  padding-top: 38px;
+  margin-left: 50px;
 }
 
-.word-card__header {
+.word-section__intro-head {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-.word-card__eyebrow {
-  font-size: 0.76rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin: 0;
-}
-
-.word-card__status {
-  flex-shrink: 0;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(31, 92, 153, 0.12);
-  color: var(--accent);
-  border: 1px solid rgba(31, 92, 153, 0.25);
-}
-
-.word-card__title {
+.word-section__title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.9rem;
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 8px;
-  color: #ffffff;
+  line-height: 1.15;
+  color: var(--text);
+  margin: 0 0 12px;
 }
 
-.word-card__sub {
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 14px;
+.word-section__desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text);
+  max-width: 540px;
+  margin: 0 0 18px;
 }
 
-.word-card__help {
-  padding: 12px 14px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.word-section__help {
+  max-width: 540px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(79, 142, 247, 0.08);
+  border: 1px solid rgba(79, 142, 247, 0.16);
 }
 
-.word-card__help-title {
-  font-size: 0.76rem;
+.word-section__help-title {
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.word-card__help-list {
+.word-section__help-list {
   margin: 0;
-  padding-left: 16px;
+  padding-left: 18px;
 }
 
-.word-card__help-list li {
-  font-size: 0.82rem;
-  line-height: 1.55;
-  margin-bottom: 5px;
-  color: rgba(255, 255, 255, 0.72);
+.word-section__help-list li {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.word-card {
+  order: 1;
+  margin-top: 0;
+  width: 100%;
+  max-width: 820px;
+  padding: 22px 22px 18px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(8, 16, 40, 0.97), rgba(7, 13, 32, 0.99));
+  border: 1px solid rgba(79, 142, 247, 0.22);
+  box-shadow: 0 18px 50px rgba(8, 15, 35, 0.28);
+}
+
+.word-card__layout {
+  display: block;
+}
+
+.word-card__board-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .word-card__footer {
   margin-top: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .word-reset {
@@ -274,7 +277,8 @@
   grid-template-rows: repeat(5, 1fr);
   gap: 8px;
   width: 100%;
-  max-width: 280px;
+  max-width: 310px;
+  margin: 0 auto;
 }
 
 .word-row {
@@ -348,6 +352,26 @@
 .word-key--present  { background: rgba(234, 179, 8, 0.22);   border-color: rgba(234, 179, 8, 0.5); }
 .word-key--absent   { background: rgba(148, 163, 184, 0.16); border-color: rgba(148, 163, 184, 0.25); color: rgba(255,255,255,0.55); }
 
+.word-card__status {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(79, 142, 247, 0.12);
+  color: #2f6fb2;
+  border: 1px solid rgba(79, 142, 247, 0.24);
+}
+
+.word-card__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2f6fb2;
+  margin: 0;
+}
+
 /* ══════════════════════════════════════
    DESKTOP (≥ 1000px)
 ══════════════════════════════════════ */
@@ -368,7 +392,10 @@
   }
 
   .word-card__layout {
-    grid-template-columns: 270px 1fr;
-    gap: 28px;
+    display: block;
   }
+}
+
+#juego.section {
+  padding-top: 15px;
 }
