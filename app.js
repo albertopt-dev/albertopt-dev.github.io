@@ -581,9 +581,12 @@ function renderSkills() {
   if (!wheel) return;
 
   const total = skills.length;
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
 
-  const CARD = 190; // <- mismo número que en CSS (skill-card width/height)
-  const radius = Math.round((CARD / 2) / Math.tan(Math.PI / total)) + 15;
+  // Solo cambia el cálculo en móvil; escritorio queda como estaba
+  const CARD = isMobile ? 90 : 190;
+  const EXTRA_RADIUS = isMobile ? 0 : 15;
+  const radius = Math.round((CARD / 2) / Math.tan(Math.PI / total)) + EXTRA_RADIUS;
 
   wheel.innerHTML = skills.map((s, i) => {
     const angle = (360 / total) * i;
@@ -595,8 +598,19 @@ function renderSkills() {
       </div>`;
   }).join("");
 
-  wheel.classList.add("skills__wheel");
+  wheel.className = "skills__wheel";
 }
+
+let skillsBreakpoint = window.matchMedia("(max-width: 900px)").matches;
+
+window.addEventListener("resize", () => {
+  const nowMobile = window.matchMedia("(max-width: 900px)").matches;
+
+  if (nowMobile !== skillsBreakpoint) {
+    skillsBreakpoint = nowMobile;
+    renderSkills();
+  }
+});
 
 // =========================
 // SKILLS SCROLLER

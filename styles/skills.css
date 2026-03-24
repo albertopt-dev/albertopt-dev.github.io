@@ -26,7 +26,7 @@
 
 @keyframes wheelSpin{
   from { transform: rotateY(0deg); }
-  to   { transform: rotateY(-150deg); }
+  to   { transform: rotateY(-100deg); }
 }
 
 .skill-card{
@@ -134,7 +134,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 48px;
+    gap: 32px;
   }
 
   .skills__text{
@@ -143,22 +143,29 @@
 
   .skills__stage{
     align-self: center;
-    width: 200px;
-    height: 200px;
+    width: min(100%, 320px);
+    height: 240px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     perspective: 900px;
+    perspective-origin: 50% 50%;
   }
 
   .skills__wheel{
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
   }
 
   .skill-card{
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     gap: 10px;
   }
 
-  .skill-card__icon{ font-size: 2rem; }
-  .skill-card__name{ font-size: 0.78rem; }
+  .skill-card__icon{ font-size: 2.2rem; }
+  .skill-card__name{ font-size: 0.82rem; }
 }
