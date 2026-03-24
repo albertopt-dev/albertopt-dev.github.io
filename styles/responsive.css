@@ -174,4 +174,21 @@
   .credentials__grid { grid-template-columns: 1fr 1fr; }
   .doc-modal__box { height: 92vh; width: 98vw; }
   .doc-modal__header { flex-wrap: wrap; gap: 8px; padding: 12px 16px; }
+
+  /* La imagen del documento se contiene dentro del modal sin desbordar */
+  .doc-modal__preview-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    max-height: calc(92vh - 70px); /* 70px ≈ altura del header */
+    overflow-y: auto;
+  }
+  .doc-modal__preview {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(92vh - 94px); /* margen extra por padding */
+    height: auto;
+    padding: 12px;
+    object-fit: contain;
+  }
 }
