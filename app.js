@@ -873,13 +873,14 @@ function initFlappyDev() {
 
   // Canvas responsive — ocupa todo el ancho del contenedor
   function resizeCanvas() {
-    const W = canvas.parentElement.clientWidth;
-    const ratio = window.innerWidth <= 768 ? 0.75 : 0.42;
-    const H = Math.round(W * ratio);
-    canvas.width  = W;
-    canvas.height = H;
-    return { W, H };
-  }
+  const wrapper = canvas.closest('.game-wrapper');
+  const W = wrapper ? wrapper.clientWidth : canvas.parentElement.clientWidth;
+  const ratio = window.innerWidth <= 768 ? 0.75 : 0.58;
+  const H = Math.round(W * ratio);
+  canvas.width = W;
+  canvas.height = H;
+  return { W, H };
+}
   let { W, H } = resizeCanvas();
   window.addEventListener('resize', () => {
     const dims = resizeCanvas();
@@ -1190,6 +1191,284 @@ function initFlappyDev() {
   drawBg(); drawDev(dev.x, dev.y, 0);
 }
 
+// juego WORDLE DEV
+function initWordGame() {
+  const gridEl = document.getElementById('wordGrid');
+  const feedbackEl = document.getElementById('wordFeedback');
+  const keyboardEl = document.getElementById('wordKeyboard');
+  const resetBtn = document.getElementById('wordReset');
+  const dateLabel = document.getElementById('wordDateLabel');
+
+  if (!gridEl || !feedbackEl || !keyboardEl || !resetBtn) return;
+
+  const WORDS = [
+    "NEXOS", "DATOS", "CLAVE", "JUEGO", "ERROR",
+    "CODIGO", "LOGIN", "TOKEN", "VISTA", "NIVEL",
+    "TECLA", "RETOS", "IDEAL", "PANEL", "MOTOR"
+  ].filter(w => w.length === 5);
+
+  const KEY_ROWS = [
+    ["Q","W","E","R","T","Y","U","I","O","P"],
+    ["A","S","D","F","G","H","J","K","L","Ñ"],
+    ["ENTER","Z","X","C","V","B","N","M","⌫"]
+  ];
+
+  const todayKey = new Date().toISOString().slice(0, 10);
+  if (dateLabel) {
+    dateLabel.textContent = "Hoy";
+  }
+
+  let target = WORDS[hashString(todayKey) % WORDS.length];
+  let state = loadState() || createEmptyState();
+
+  function createEmptyState() {
+    return {
+      date: todayKey,
+      attempts: ["", "", "", "", ""],
+      row: 0,
+      col: 0,
+      done: false,
+      won: false,
+      keyStates: {}
+    };
+  }
+
+  function hashString(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) {
+      h = (h * 31 + str.charCodeAt(i)) >>> 0;
+    }
+    return h;
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem("portfolio-word-game");
+      if (!raw) return null;
+      const saved = JSON.parse(raw);
+      if (saved.date !== todayKey) return null;
+      return saved;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem("portfolio-word-game", JSON.stringify(state));
+  }
+
+  function renderGrid() {
+    gridEl.innerHTML = "";
+
+    for (let r = 0; r < 5; r++) {
+      const rowEl = document.createElement("div");
+      rowEl.className = "word-row";
+
+      const word = state.attempts[r] || "";
+      const evals = getEvaluation(word, r);
+
+      for (let c = 0; c < 5; c++) {
+        const cell = document.createElement("div");
+        let cls = "word-cell";
+        const char = word[c] || "";
+
+        if (char) cls += " word-cell--filled";
+        if (r === state.row && c === state.col && !state.done) cls += " word-cell--active";
+        if (r < state.row || (state.done && word.length === 5)) {
+          if (evals[c] === "correct") cls += " word-cell--correct";
+          else if (evals[c] === "present") cls += " word-cell--present";
+          else if (evals[c] === "absent") cls += " word-cell--absent";
+        }
+
+        cell.className = cls;
+        cell.textContent = char;
+        rowEl.appendChild(cell);
+      }
+
+      gridEl.appendChild(rowEl);
+    }
+  }
+
+  function renderKeyboard() {
+    keyboardEl.innerHTML = "";
+
+    KEY_ROWS.forEach(row => {
+      const rowEl = document.createElement("div");
+      rowEl.className = "word-keyboard__row";
+
+      row.forEach(key => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "word-key";
+        btn.textContent = key;
+
+        if (key === "ENTER" || key === "⌫") {
+          btn.classList.add("word-key--wide");
+        }
+
+        const keyState = state.keyStates[key];
+        if (keyState === "correct") btn.classList.add("word-key--correct");
+        else if (keyState === "present") btn.classList.add("word-key--present");
+        else if (keyState === "absent") btn.classList.add("word-key--absent");
+
+        btn.addEventListener("click", () => handleKey(key));
+        rowEl.appendChild(btn);
+      });
+
+      keyboardEl.appendChild(rowEl);
+    });
+  }
+
+  function setFeedback(msg, type = "") {
+    feedbackEl.textContent = msg;
+    feedbackEl.className = "word-feedback";
+    if (type) {
+      feedbackEl.classList.add(type);
+    }
+  }
+
+  function getEvaluation(word, rowIndex) {
+    if (!word || word.length !== 5 || rowIndex > state.row) return [];
+    const result = Array(5).fill("absent");
+    const targetArr = target.split("");
+    const wordArr = word.split("");
+
+    for (let i = 0; i < 5; i++) {
+      if (wordArr[i] === targetArr[i]) {
+        result[i] = "correct";
+        targetArr[i] = null;
+        wordArr[i] = null;
+      }
+    }
+
+    for (let i = 0; i < 5; i++) {
+      if (!wordArr[i]) continue;
+      const idx = targetArr.indexOf(wordArr[i]);
+      if (idx !== -1) {
+        result[i] = "present";
+        targetArr[idx] = null;
+      }
+    }
+
+    return result;
+  }
+
+  function mergeKeyState(letter, nextState) {
+    const current = state.keyStates[letter];
+    const rank = { absent: 1, present: 2, correct: 3 };
+    if (!current || rank[nextState] > rank[current]) {
+      state.keyStates[letter] = nextState;
+    }
+  }
+
+  function submitRow() {
+    const guess = state.attempts[state.row];
+    if (guess.length !== 5) {
+      setFeedback("La palabra debe tener 5 letras.", "word-feedback--error");
+      return;
+    }
+
+    const evals = getEvaluation(guess, state.row);
+    guess.split("").forEach((letter, i) => mergeKeyState(letter, evals[i]));
+
+    if (guess === target) {
+      state.done = true;
+      state.won = true;
+      setFeedback("¡Correcto! Has acertado la palabra del día.", "word-feedback--success");
+      saveState();
+      renderGrid();
+      renderKeyboard();
+      return;
+    }
+
+    if (state.row === 4) {
+      state.done = true;
+      state.won = false;
+      setFeedback(`Fin de la partida. La palabra era ${target}.`, "word-feedback--error");
+      saveState();
+      renderGrid();
+      renderKeyboard();
+      return;
+    }
+
+    state.row++;
+    state.col = 0;
+    setFeedback("");
+    saveState();
+    renderGrid();
+    renderKeyboard();
+  }
+
+  function handleKey(key) {
+    if (state.done) return;
+
+    if (key === "ENTER") {
+      submitRow();
+      return;
+    }
+
+    if (key === "⌫" || key === "BACKSPACE") {
+      if (state.col > 0) {
+        const current = state.attempts[state.row];
+        state.attempts[state.row] = current.slice(0, -1);
+        state.col--;
+        saveState();
+        renderGrid();
+      }
+      return;
+    }
+
+    if (!/^[A-ZÑ]$/.test(key)) return;
+    if (state.col >= 5) return;
+
+    state.attempts[state.row] += key;
+    state.col++;
+    saveState();
+    renderGrid();
+  }
+
+  function onKeyDown(e) {
+    if (!document.getElementById("juego")) return;
+
+    const key = e.key.toUpperCase();
+
+    if (key === "ENTER") {
+      handleKey("ENTER");
+      return;
+    }
+
+    if (key === "BACKSPACE") {
+      handleKey("BACKSPACE");
+      return;
+    }
+
+    if (/^[A-ZÑ]$/.test(key)) {
+      handleKey(key);
+    }
+  }
+
+  resetBtn.addEventListener("click", () => {
+    state = createEmptyState();
+    saveState();
+    setFeedback("");
+    renderGrid();
+    renderKeyboard();
+  });
+
+  document.addEventListener("keydown", onKeyDown);
+
+  if (state.done) {
+    if (state.won) {
+      setFeedback("Ya has resuelto la palabra de hoy.", "word-feedback--success");
+    } else {
+      setFeedback(`La palabra de hoy era ${target}.`, "word-feedback--error");
+    }
+  }
+
+  renderGrid();
+  renderKeyboard();
+}
+
 // =========================
 // DATA: Credenciales
 // =========================
@@ -1411,3 +1690,4 @@ initTheme();
 initNav();
 initVisitCounter();
 initFlappyDev();
+initWordGame();

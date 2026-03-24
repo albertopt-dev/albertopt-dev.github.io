@@ -92,37 +92,25 @@
   .skill-card__name { font-size: 0.68rem; }
 
   /* ── JUEGO EN MÓVIL ── */
-  #juego { display: block; }
 
-  .game-section__desc { font-size: 0.88rem; margin-bottom: 20px; }
-
-  .game-instructions {
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  .game-instruction { font-size: 0.78rem; }
-  .game-instruction__icon { padding: 2px 7px; font-size: 0.72rem; }
-
-  /* Oculta instrucciones de teclado en móvil — no tiene sentido */
+  /* Ocultar instrucción Space (sin teclado físico en móvil) */
   .game-instruction:first-child { display: none; }
 
-  .game-wrapper--full {
-    border-radius: 12px;
-  }
-  .game-hud {
-    padding: 8px 14px;
-    gap: 12px;
-  }
-  .hud-item { font-size: 0.76rem; }
-  .hud-status { font-size: 0.7rem; }
+  /* Evitar scroll de página al tocar el canvas */
+  .fl-canvas { touch-action: none; }
 
-  /* Canvas dimensionado por JS según el ancho — sólo bloqueamos el scroll táctil */
-  .fl-canvas {
-    touch-action: none;
-  }
-
+  /* Ajustes visuales menores del HUD */
+  .game-hud    { padding: 8px 14px; gap: 12px; }
+  .hud-item    { font-size: 0.76rem; }
+  .hud-status  { font-size: 0.7rem; }
   .fl-over__title { font-size: 1.3rem; }
   .fl-over__msg   { font-size: 0.82rem; }
+
+  /* Wordle: tablero ocupa todo el ancho disponible */
+  .word-grid { max-width: 100%; margin-bottom: 10px; }
+
+  /* Teclado en pantalla visible en móvil */
+  .word-keyboard { display: block; }
 
   /* ── CONTACTO ── */
   .contact__inner { padding: 28px 20px; }
