@@ -261,9 +261,7 @@ function renderProjects() {
       : "";
 
     const mediaContent = p.video
-      ? `<video class="lab-thumb__video" autoplay muted loop playsinline>
-           <source src="${p.video}" type="video/mp4">
-         </video>`
+      ? `<video class="lab-thumb__video" src="${p.video}" autoplay muted loop playsinline></video>`
       : p.image
         ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
         : `<div class="project-card__placeholder">${initials}</div>`;
@@ -416,9 +414,7 @@ function renderLabs() {
     const hasDetail = !!lab.detail;
 
     const thumbnail = hasVideo
-      ? `<video class="lab-thumb__video" autoplay muted loop playsinline>
-           <source src="${lab.video}" type="video/mp4">
-         </video>`
+      ? `<video class="lab-thumb__video" src="${lab.video}" autoplay muted loop playsinline></video>`
       : hasImages
         ? `<img src="${lab.images[0]}" alt="${lab.title}" class="lab-thumb__img" loading="lazy" />`
         : '';
@@ -509,9 +505,7 @@ function openLabDetail(idx) {
 
   const videoSection = lab.video ? `
     <div class="detail-video-wrap">
-      <video controls autoplay muted loop playsinline class="detail-video">
-        <source src="${lab.video}" type="video/mp4">
-      </video>
+      <video src="${lab.video}" controls autoplay muted loop playsinline class="detail-video"></video>
     </div>` : '';
 
   const featuresHTML = d.features ? d.features.map(f => `
