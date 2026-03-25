@@ -26,7 +26,7 @@
 
 @keyframes wheelSpin{
   from { transform: rotateY(0deg); }
-  to   { transform: rotateY(-100deg); }
+  to   { transform: rotateY(-200deg); }
 }
 
 .skill-card{

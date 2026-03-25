@@ -8,7 +8,7 @@ const projects = [
     description: "App multiplataforma para organizar despedidas de soltero como un juego por bases. Roles diferenciados (amigos/novio), mapa interactivo de España con pruebas geolocalizadas, galería compartida, chat en tiempo real y notificaciones especiales al novio.",
     tags: ["Android", "iOS", "Web", "Tiempo real"],
     stacks: ["Flutter", "Firebase", "FCM"],
-    image: "",
+    image: "assets/proyectos/DespedidaApp/Despedida-03.png",
     video: "assets/proyectos/DespedidaApp/Despedida-video.mp4",
     images: [
       "assets/proyectos/DespedidaApp/Despedida-01.png",
@@ -239,6 +239,7 @@ const skills = [
 // RENDER: Projects
 // =========================
 function renderProjects() {
+  const isMobile = window.innerWidth <= 768;
   const grid = document.getElementById("projectsTrack");
   if (!grid) return;
 
@@ -262,26 +263,20 @@ function renderProjects() {
       : "";
 
     const mediaContent = p.video
-      ? `
-        <video
-          class="lab-thumb__video"
-          autoplay
-          muted
-          loop
-          playsinline
-          webkit-playsinline
-          preload="metadata"
-        >
+    ? isMobile
+      ? `<div class="lab-thumb__no-video">
+          <span class="lab-thumb__no-video-icon">🖥️</span>
+          <span class="lab-thumb__no-video-text">Vídeo disponible en escritorio</span>
+        </div>`
+      : `<video class="lab-thumb__video" autoplay muted loop playsinline webkit-playsinline preload="metadata">
           <source src="${p.video}" type="video/mp4">
-        </video>
-      `
-      : p.image
-        ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
-        : `<div class="project-card__placeholder">${initials}</div>`;
-
-    const stackTag = p.stacks[0]
-      ? `<div class="lab-card__thumb-overlay"><span class="lab-thumb__tag">${p.stacks[0]}</span></div>`
-      : '';
+        </video>`
+    : p.image
+      ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
+      : `<div class="project-card__placeholder">${initials}</div>`;
+      const stackTag = p.stacks[0]
+        ? `<div class="lab-card__thumb-overlay"><span class="lab-thumb__tag">${p.stacks[0]}</span></div>`
+        : '';
 
     return `
       <article class="project-card${p.featured ? ' project-card--featured' : ''}">
@@ -454,8 +449,14 @@ function renderLabs() {
     const hasVideo  = !!lab.video;
     const hasDetail = !!lab.detail;
 
+    const isMobile = window.innerWidth <= 768;
     const thumbnail = hasVideo
-      ? `<video class="lab-thumb__video" src="${lab.video}" autoplay muted loop playsinline></video>`
+      ? isMobile
+        ? `<div class="lab-thumb__no-video">
+            <span class="lab-thumb__no-video-icon">🖥️</span>
+            <span class="lab-thumb__no-video-text">Vídeo disponible en escritorio</span>
+          </div>`
+        : `<video class="lab-thumb__video" src="${lab.video}" autoplay muted loop playsinline></video>`
       : hasImages
         ? `<img src="${lab.images[0]}" alt="${lab.title}" class="lab-thumb__img" loading="lazy" />`
         : '';
@@ -1389,7 +1390,7 @@ function initWordGame() {
     }
   }
 
-  async function submitRow() {
+  function submitRow() {
     // Captura la generación al inicio; si el usuario resetea antes de que
     // resuelva el fetch, la generación habrá cambiado y descartamos el resultado
     const gen = submitGeneration;
@@ -1398,26 +1399,6 @@ function initWordGame() {
     if (guess.length !== 5) {
       setFeedback("Escribe 5 letras.", "word-feedback--error");
       return;
-    }
-
-    if (!WORDS.includes(guess)) {
-      setFeedback("Palabra no válida.", "word-feedback--error");
-      return;
-    }
-
-    try {
-      const res = await fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/es/${guess.toLowerCase()}`
-      );
-      // Si el usuario reseteó mientras esperábamos la respuesta, ignorar
-      if (submitGeneration !== gen) return;
-      if (!res.ok) {
-        setFeedback("Palabra no válida.", "word-feedback--error");
-        return;
-      }
-    } catch {
-      // Si la API falla dejamos pasar para no bloquear al usuario
-      if (submitGeneration !== gen) return;
     }
 
     // Guardia final antes de mutar el estado
@@ -1454,11 +1435,11 @@ function initWordGame() {
     renderKeyboard();
   }
 
-  async function handleKey(key) {
+  function handleKey(key) {
     if (state.done) return;
 
     if (key === "ENTER") {
-      await submitRow();
+      submitRow();
       return;
     }
 
@@ -1546,6 +1527,7 @@ function initWordGame() {
         handleKey('BACKSPACE');
       }
     });
+    return;
   }
   // ─────────────────────────────────────────────────────────────────────
 

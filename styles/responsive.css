@@ -211,6 +211,30 @@
   /* ── MODAL ── */
   .modal__box  { width: 96%; max-height: 92vh; }
   .modal__body { padding: 20px; }
+
+  .lab-thumb__no-video {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bg3);
+  border-radius: var(--radius);
+}
+
+.lab-thumb__no-video-icon {
+  font-size: 2rem;
+}
+
+.lab-thumb__no-video-text {
+  font-size: 0.78rem;
+  color: var(--text2);
+  font-weight: 500;
+  text-align: center;
+  padding: 0 12px;
+}
 }
 
 @media (max-width: 768px) {
