@@ -9,10 +9,10 @@ const projects = [
     description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
     tags: ["Web", "Cliente real", "En desarrollo"],
     stacks: ["HTML", "CSS", "JavaScript"],
-    image: "assets/proyectos/WebRehabilitacion/Web-01.png",
+    image: "assets/proyectos/WebRehabilitacion/web-01.png",
     video: null,
     images: [
-      "assets/proyectos/WebRehabilitacion/Web-01.png"
+      "assets/proyectos/WebRehabilitacion/web-01.png"
     ],
     featured: false,
     highlights: [
