@@ -148,7 +148,7 @@
   }
 
   .word-card__footer {
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   .word-reset {
@@ -171,8 +171,7 @@
   /* Wordle: tablero ocupa todo el ancho disponible */
   .word-grid { max-width: 100%; margin-bottom: 10px; }
 
-  /* Teclado en pantalla visible en móvil */
-  .word-keyboard { display: block; }
+  /* Teclado en pantalla eliminado en móvil — se usa el teclado nativo */
 
   /* ── CONTACTO ── */
   .contact__inner { padding: 28px 20px; }

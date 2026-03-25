@@ -1202,9 +1202,33 @@ function initWordGame() {
   if (!gridEl || !feedbackEl || !keyboardEl || !resetBtn) return;
 
   const WORDS = [
+    // Conceptos dev
     "NEXOS", "DATOS", "CLAVE", "JUEGO", "ERROR",
-    "CODIGO", "LOGIN", "TOKEN", "VISTA", "NIVEL",
-    "TECLA", "RETOS", "IDEAL", "PANEL", "MOTOR"
+    "LOGIN", "TOKEN", "VISTA", "NIVEL", "TECLA",
+    "RETOS", "IDEAL", "PANEL", "MOTOR", "BUILD",
+    "STACK", "QUERY", "PATCH", "MERGE", "ROLES",
+    "RUTAS", "FRAME", "COLAS", "CACHE", "HOOKS",
+    "PULLS", "CLASE", "LLAVE", "BUCLE", "HILOS",
+    "CAPAS", "RAMAS", "BYTES", "TESTS", "TRAZA",
+    "AGILE", "CAMPO", "ORDEN", "CEROS", "FALSO",
+    // Lenguajes
+    "SWIFT", "SCALA", "LISP",  "BASIC",
+    "JULIA", "PEARL", "GROOV", "COBOL",
+    // IDEs y herramientas
+    "LINUX", "NGINX", "REDIS", "FIGMA",
+    "GITEA", "CMAKE", "XCODE", "SONAR",
+    "MAVEN", "NEXUS", "KAFKA",
+    // Android / móvil
+    "REALM", "RETRO", "GLIDE", "FLOWS",
+    "ROOMS", "COROS", "INTENT", "LAYOUT", "FRAGS", "WIDGET",
+    // Web
+    "REACT", "AXIOS", "FETCH", "REMIX",
+    "ASTRO", "TYPED", "VITES", "SVELT",
+    "NUXTJ", "PINIA",
+    // Bases de datos
+    "MYSQL", "MONGO", "JOINS", "INDEX",
+    "SQLIT", "TABLA", "REPOS", "BLOBS",
+    "ASSET", "PSQL"
   ].filter(w => w.length === 5);
 
   const KEY_ROWS = [
@@ -1220,6 +1244,10 @@ function initWordGame() {
 
   let target = WORDS[hashString(todayKey) % WORDS.length];
   let state = loadState() || createEmptyState();
+
+  // Contador de generación: se incrementa en cada Reset para invalidar
+  // cualquier llamada a submitRow que siga pendiente (async fetch en vuelo)
+  let submitGeneration = 0;
 
   function createEmptyState() {
     return {
@@ -1361,12 +1389,39 @@ function initWordGame() {
     }
   }
 
-  function submitRow() {
+  async function submitRow() {
+    // Captura la generación al inicio; si el usuario resetea antes de que
+    // resuelva el fetch, la generación habrá cambiado y descartamos el resultado
+    const gen = submitGeneration;
+
     const guess = state.attempts[state.row];
     if (guess.length !== 5) {
-      setFeedback("La palabra debe tener 5 letras.", "word-feedback--error");
+      setFeedback("Escribe 5 letras.", "word-feedback--error");
       return;
     }
+
+    if (!WORDS.includes(guess)) {
+      setFeedback("Palabra no válida.", "word-feedback--error");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/es/${guess.toLowerCase()}`
+      );
+      // Si el usuario reseteó mientras esperábamos la respuesta, ignorar
+      if (submitGeneration !== gen) return;
+      if (!res.ok) {
+        setFeedback("Palabra no válida.", "word-feedback--error");
+        return;
+      }
+    } catch {
+      // Si la API falla dejamos pasar para no bloquear al usuario
+      if (submitGeneration !== gen) return;
+    }
+
+    // Guardia final antes de mutar el estado
+    if (submitGeneration !== gen) return;
 
     const evals = getEvaluation(guess, state.row);
     guess.split("").forEach((letter, i) => mergeKeyState(letter, evals[i]));
@@ -1399,11 +1454,11 @@ function initWordGame() {
     renderKeyboard();
   }
 
-  function handleKey(key) {
+  async function handleKey(key) {
     if (state.done) return;
 
     if (key === "ENTER") {
-      submitRow();
+      await submitRow();
       return;
     }
 
@@ -1433,11 +1488,15 @@ function initWordGame() {
     const key = e.key.toUpperCase();
 
     if (key === "ENTER") {
+      // Evita que Enter active el botón Reiniciar (u otro botón) si tiene el foco
+      e.preventDefault();
       handleKey("ENTER");
       return;
     }
 
     if (key === "BACKSPACE") {
+      // Evita que Backspace navegue hacia atrás en el historial del navegador
+      e.preventDefault();
       handleKey("BACKSPACE");
       return;
     }
@@ -1448,12 +1507,47 @@ function initWordGame() {
   }
 
   resetBtn.addEventListener("click", () => {
+    // Quitar el foco del botón para que futuros Enter no lo reactiven
+    resetBtn.blur();
+    // Incrementar generación invalida cualquier submitRow con fetch pendiente
+    submitGeneration++;
     state = createEmptyState();
     saveState();
     setFeedback("");
     renderGrid();
     renderKeyboard();
   });
+
+  // ── Teclado nativo en móvil ──────────────────────────────────────────
+  const nativeInput = document.getElementById('wordNativeInput');
+  const isMobileDevice = window.matchMedia('(max-width: 768px)').matches
+                      || ('ontouchstart' in window);
+
+  if (isMobileDevice && nativeInput) {
+    // Al tocar cualquier celda del tablero, abrir el teclado nativo
+    gridEl.addEventListener('click', () => nativeInput.focus());
+
+    // Captura cada carácter introducido desde el teclado nativo
+    nativeInput.addEventListener('input', () => {
+      const raw = nativeInput.value;
+      nativeInput.value = ''; // vaciar para no acumular texto
+      if (!raw) return;
+      const char = raw[raw.length - 1].toUpperCase();
+      if (/^[A-ZÑ]$/.test(char)) handleKey(char);
+    });
+
+    // Captura Backspace y Enter desde el teclado nativo
+    nativeInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleKey('ENTER');
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        handleKey('BACKSPACE');
+      }
+    });
+  }
+  // ─────────────────────────────────────────────────────────────────────
 
   document.addEventListener("keydown", onKeyDown);
 

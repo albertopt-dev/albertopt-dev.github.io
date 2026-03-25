@@ -392,14 +392,17 @@
         <h3 class="word-section__title">La palabra del día</h3>
 
         <p class="word-section__desc">
-          Adivina la palabra en 5 intentos. Cada día hay una palabra nueva en castellano.
+          Adivina la palabra en 5 intentos. Cada día hay una palabra nueva relacionada con el mundo 
+          tech — puede ser un IDE, un lenguaje, un framework, una herramienta o cualquier concepto 
+          del stack de un desarrollador. Puedes usar cualquier palabra en español para tantear letras, 
+          pero solo hay una solución correcta cada día.
         </p>
 
         <div class="word-section__help">
           <p class="word-section__help-title">Cómo funciona</p>
           <ul class="word-section__help-list">
             <li>Escribe una palabra de 5 letras y pulsa Enter.</li>
-            <li>🟦 Letra correcta en posición correcta.</li>
+            <li>🟩 Letra correcta en posición correcta.</li>
             <li>🟨 La letra existe pero está en otra posición.</li>
             <li>⬜ La letra no aparece en la palabra.</li>
           </ul>
@@ -408,19 +411,23 @@
 
       <article class="word-card">
         <div class="word-card__layout">
+
           <div class="word-card__board-col">
             <div id="wordGrid" class="word-grid" aria-label="Tablero palabra del día"></div>
-
-            <p id="wordFeedback" class="word-feedback" aria-live="polite"></p>
-
-            <div class="word-card__footer">
-              <button id="wordReset" class="btn btn--primary word-reset" type="button">
-                ↺ Reiniciar
-              </button>
-            </div>
           </div>
-        </div>
 
+          <div class="word-card__side">
+            <p id="wordFeedback" class="word-feedback" aria-live="polite"></p>
+            <button id="wordReset" class="btn word-reset" type="button">
+              ↺ Reiniciar
+            </button>
+          </div>
+
+        </div>
+        <input id="wordNativeInput" type="text" inputmode="text"
+               autocomplete="off" autocorrect="off" autocapitalize="characters"
+               spellcheck="false"
+               style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;" />
         <div id="wordKeyboard" class="word-keyboard" aria-label="Teclado en pantalla"></div>
       </article>
     </div>
