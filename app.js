@@ -8,7 +8,7 @@ const projects = [
     description: "App multiplataforma para organizar despedidas de soltero como un juego por bases. Roles diferenciados (amigos/novio), mapa interactivo de España con pruebas geolocalizadas, galería compartida, chat en tiempo real y notificaciones especiales al novio.",
     tags: ["Android", "iOS", "Web", "Tiempo real"],
     stacks: ["Flutter", "Firebase", "FCM"],
-    image: "assets/proyectos/DespedidaApp/Despedida-03.png",
+    image: "assets/proyectos/DespedidaApp/Despedida-04.png",
     video: "assets/proyectos/DespedidaApp/Despedida-video.mp4",
     images: [
       "assets/proyectos/DespedidaApp/Despedida-01.png",
