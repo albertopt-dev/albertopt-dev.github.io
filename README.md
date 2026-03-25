@@ -63,6 +63,46 @@ Puntos clave del proyecto:
 
 ---
 
+## 🆕 Novedades y mejoras implementadas
+
+Estas funcionalidades ya están disponibles en la web y amplían la experiencia respecto a versiones anteriores:
+
+- **Galería multimedia en proyectos y labs:**
+    Proyectos y labs pueden mostrar varias imágenes y vídeos en una galería tipo mosaico o slideshow, accesible desde el modal de detalle.
+
+- **Modal de detalle para labs:**
+    Los labs/experimentos también tienen modal de detalle con descripción ampliada, pila tecnológica y galería multimedia, igual que los proyectos.
+
+- **Certificados y carta de recomendación:**
+    Sección de credenciales con visor de PDF integrado y descarga directa de certificados y carta de recomendación.
+
+- **Contador de visitas:**
+    Contador de visitas real en el footer, con botón para mostrar/ocultar el número de visitas.
+
+- **Wordle Dev:**
+    Minijuego tipo Wordle con palabras técnicas del mundo del desarrollo, jugable desde la sección de juego.
+
+- **Lightbox de imágenes:**
+    Al hacer clic en cualquier imagen de la galería de proyectos o labs, se abre en un lightbox para verla en grande.
+
+- **Animaciones y detalles visuales:**
+    - Animación de fondo Matrix Rain adaptada a modo claro/oscuro.
+    - Badges de estado y destacado en proyectos y labs.
+    - Efectos de hover y transiciones suaves en todos los componentes interactivos.
+
+- **Accesibilidad mejorada:**
+    - Modal accesible con roles y atributos ARIA.
+    - Feedback accesible en formularios y minijuegos.
+    - Navegación por teclado en modales y menús.
+
+- **Nuevos proyectos y labs añadidos:**
+    - Web Rehabilitación Funcional (en desarrollo)
+    - Chatbot IA — Asistente técnico (en proceso)
+    - ObjetivosApp, Presupuesto Mensual, Reloj Digital (labs personales)
+
+
+---
+
 ## ✨ Características
 
 | Característica | Detalle |

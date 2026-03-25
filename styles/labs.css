@@ -19,7 +19,7 @@
 .labs__arrow:hover { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
 .labs__arrow.is-disabled { opacity: 0.3; pointer-events: none; }
 .labs__track-wrap { flex: 1; overflow: hidden; }
-.labs__track { display: flex; gap: 22px; transition: transform 0.45s cubic-bezier(.4,0,.2,1); will-change: transform; }
+.labs__track { display: flex; gap: 22px; padding-block: 12px; transition: transform 0.45s cubic-bezier(.4,0,.2,1); will-change: transform; }
 
 .lab-card { flex: 0 0 calc((100% - 44px) / 3); min-width: 0; padding: 32px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg); display: flex; flex-direction: column; transition: border-color var(--transition), transform var(--transition); }
 .lab-card:hover { border-color: rgba(31,92,153,0.4); transform: translateY(-3px); }
