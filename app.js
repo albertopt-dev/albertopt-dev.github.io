@@ -2,6 +2,29 @@
 // DATA: Proyectos reales
 // =========================
 const projects = [
+
+  {
+    id: "p3",
+    title: "Web Rehabilitación Funcional",
+    description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
+    tags: ["Web", "Cliente real", "En desarrollo"],
+    stacks: ["HTML", "CSS", "JavaScript"],
+    image: "assets/proyectos/WebRehabilitacion/Web-01.png",
+    video: null,
+    images: [
+      "assets/proyectos/WebRehabilitacion/Web-01.png"
+    ],
+    featured: false,
+    highlights: [
+
+    ],
+    status: "en-proceso",
+    links: {
+      repo: "https://github.com/albertopt-dev/Web-cliente",
+      demo: ""
+    }
+  },
+
   {
     id: "p1",
     title: "DespedidaApp",
@@ -35,6 +58,7 @@ const projects = [
       demo: ""
     }
   },
+
   {
     id: "p2",
     title: "Nutriplan",
@@ -70,27 +94,7 @@ const projects = [
       demo: ""
     }
   },
-  {
-    id: "p3",
-    title: "Web Rehabilitación Funcional",
-    description: "Web para un profesional de rehabilitación funcional. Muestra servicios, catálogo de libros, formulario de contacto y blog. Proyecto real para cliente real — actualmente en desarrollo activo.",
-    tags: ["Web", "Cliente real", "En desarrollo"],
-    stacks: ["HTML", "CSS", "JavaScript"],
-    image: "assets/proyectos/WebRehabilitacion/Web-01.png",
-    video: null,
-    images: [
-      "assets/proyectos/WebRehabilitacion/Web-01.png"
-    ],
-    featured: false,
-    highlights: [
 
-    ],
-    status: "en-proceso",
-    links: {
-      repo: "https://github.com/albertopt-dev/Web-cliente",
-      demo: ""
-    }
-  },
   {
     id: "p4",
     title: "MyAmazingPlaces",
@@ -129,6 +133,7 @@ const projects = [
 const labs = [
   {
     title: "ObjetivosApp",
+    status: "terminado",
     description: "App personal para gestionar objetivos diarios, semanales y anuales. Subobjetivos, código de colores, calendario y autenticación propia — cada usuario solo ve sus datos.",
     detail: {
       intro: "Una app construida para uso real y diario. Diseñada con React Native y Firebase, cada usuario tiene su propio espacio privado donde ningún dato es compartido.",
@@ -158,8 +163,10 @@ const labs = [
     video: "assets/proyectos/ObjetivosApp/objetivos-video.mp4",
     links: { repo: "https://github.com/albertopt-dev/ObjetivosApp" }
   },
+
   {
     title: "Presupuesto Mensual",
+    status: "terminado",
     description: "App personal para control de finanzas: ingresos, ahorro mensual, desglose de gastos por categoría y estadísticas visuales. Hecha por necesidad propia, no por encargo.",
     detail: {
       intro: "Una app web creada para llevar el control real del dinero mes a mes. Diseñada desde cero con React y Next.js, cubre desde el registro de ingresos hasta el análisis visual de en qué se va el presupuesto. Por el momento es una app personal, pero con potencial para crecer y ser útil a más gente.",
@@ -185,8 +192,10 @@ const labs = [
     video: "assets/proyectos/PresupuestoMensual/Presupuesto-video.mp4",
     links: { repo: "https://github.com/albertopt-dev/Presupuesto-mensual" }
   },
+
   {
     title: "Reloj Digital",
+    status: "terminado",
     description: "Proyecto de práctica en Java para afianzar conceptos de programación orientada a objetos, hilos y actualización de UI en tiempo real.",
     detail: null,
     iconClasses: [
@@ -200,8 +209,10 @@ const labs = [
     video: null,
     links: { repo: "https://github.com/albertopt-dev/Reloj_Digital" }
   },
+
   {
     title: "Chatbot IA — Asistente técnico",
+    status: "en-proceso",
     description: "Experimento para crear un asistente que responda dudas de programación integrando la API de Claude. Explorando cómo conectar LLMs con aplicaciones reales. En construcción.",
     detail: null,
     iconClasses: [
@@ -380,62 +391,75 @@ function openProjectModal(projectId) {
   const p = projects.find(x => x.id === projectId);
   if (!p) return;
 
-  const modal    = document.getElementById("projectModal");
-  const title    = document.getElementById("modalTitle");
-  const desc     = document.getElementById("modalDesc");
-  const tags     = document.getElementById("modalTags");
-  const actions  = document.getElementById("modalActions");
-  const media    = document.getElementById("modalMedia");
+  const isMobile = window.innerWidth <= 768;
 
-  title.textContent = p.title;
-  desc.textContent  = p.description;
+  // Galería mosaico
+  const mosaicImages = p.images && p.images.length > 0
+    ? p.images.map(img =>
+        `<img src="${img}" alt="${p.title}" class="detail-mosaic__img" loading="lazy"
+              onclick="openLightboxImg('${img}')" />`
+      ).join('')
+    : '';
 
-  tags.innerHTML = [
-    ...p.tags.map(t  => `<span class="tag">${t}</span>`),
-    ...p.stacks.map(s => `<span class="tag">${s}</span>`)
-  ].join("");
+  // Vídeo — omitir en móvil
+  const videoSection = p.video && !isMobile
+    ? `<div class="detail-video-wrap">
+         <video src="${p.video}" controls autoplay muted loop playsinline class="detail-video"></video>
+       </div>`
+    : '';
 
-  if (p.image) {
-    media.innerHTML = `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" />`;
-  } else {
-    media.innerHTML = `<div class="project-card__placeholder" style="height:100%;">${p.title}</div>`;
-  }
+  // Highlights como features
+  const featuresHTML = p.highlights && p.highlights.length > 0
+    ? p.highlights.map(h => `
+        <div class="detail-feature">
+          <span class="detail-feature__icon">▸</span>
+          <div>
+            <p class="detail-feature__desc">${h}</p>
+          </div>
+        </div>`).join('')
+    : '';
 
-  // Highlights si existen
-  const highlightsEl = document.getElementById("modalHighlights");
-  if (highlightsEl) {
-    if (p.highlights && p.highlights.length > 0) {
-      highlightsEl.innerHTML = `
-        <ul class="modal__highlights">
-          ${p.highlights.map(h => `<li>▸ ${h}</li>`).join("")}
-        </ul>`;
-      highlightsEl.style.display = "block";
-    } else {
-      highlightsEl.style.display = "none";
-    }
-  }
+  // Stack tags
+  const stackHTML = p.stacks.map(s =>
+    `<span class="detail-stack-tag">${s}</span>`
+  ).join('');
 
-  actions.innerHTML = `
-    ${p.links.demo ? `<a class="btn btn--primary" href="${p.links.demo}" target="_blank" rel="noopener">Demo</a>` : ""}
-    ${p.links.repo ? `<a class="btn btn--ghost"    href="${p.links.repo}"  target="_blank" rel="noopener">Ver en GitHub</a>` : ""}
-  `;
+  const html = `
+    <div class="lab-detail__header">
+      <div>
+        <h2 class="lab-detail__title">${p.title}</h2>
+        <p class="lab-detail__intro">${p.description}</p>
+        <div class="lab-detail__stack">${stackHTML}</div>
+      </div>
+      <button class="lab-detail__close" onclick="closeProjectModal()">✕</button>
+    </div>
+    ${mosaicImages ? `<div class="detail-mosaic">${mosaicImages}</div>` : ''}
+    ${videoSection}
+    ${featuresHTML ? `
+    <div class="detail-features">
+      <h3 class="detail-features__title">Características</h3>
+      <div class="detail-features__grid">${featuresHTML}</div>
+    </div>` : ''}
+    <div class="lab-detail__footer">
+      ${p.links.repo ? `<a href="${p.links.repo}" target="_blank" rel="noopener" class="btn btn--primary">Ver en GitHub →</a>` : ''}
+    </div>`;
 
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-  document.addEventListener("keydown", onEscClose);
+  const overlay = document.getElementById('labDetailOverlay');
+  const box     = document.getElementById('labDetailBox');
+  box.innerHTML = html;
+  overlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', onEscClose);
 }
 
 function closeProjectModal() {
-  const modal = document.getElementById("projectModal");
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-  document.removeEventListener("keydown", onEscClose);
+  document.getElementById('labDetailOverlay').classList.remove('is-open');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', onEscClose);
 }
 
 function onEscClose(e) {
-  if (e.key === "Escape") closeProjectModal();
+  if (e.key === 'Escape') closeProjectModal();
 }
 
 // =========================
@@ -461,13 +485,20 @@ function renderLabs() {
         ? `<img src="${lab.images[0]}" alt="${lab.title}" class="lab-thumb__img" loading="lazy" />`
         : '';
 
-    const thumbSection = (hasVideo || hasImages) ? `
-      <div class="lab-card__thumb">
-        ${thumbnail}
-        <div class="lab-card__thumb-overlay">
-          <span class="lab-thumb__tag">${lab.detail ? lab.detail.stack[0] : ''}</span>
-        </div>
-      </div>` : '';
+    const statusBadge = lab.status === "terminado"
+    ? `<span class="project-card__status status--done">✓ Terminado</span>`
+    : lab.status === "en-proceso"
+      ? `<span class="project-card__wip-badge">🔧 En desarrollo</span>`
+      : "";
+
+  const thumbSection = (hasVideo || hasImages) ? `
+    <div class="lab-card__thumb">
+      ${thumbnail}
+      <div class="lab-card__thumb-overlay">
+        <span class="lab-thumb__tag">${lab.detail ? lab.detail.stack[0] : ''}</span>
+      </div>
+      ${statusBadge}
+    </div>` : '';
 
     return `
       <article class="lab-card${(hasVideo || hasImages) ? ' lab-card--has-thumb' : ''}">

@@ -173,6 +173,19 @@
 
   /* Teclado en pantalla eliminado en móvil — se usa el teclado nativo */
 
+  .cred-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .cred-card__badge--inline {
+    margin-left: 0 !important;
+    margin-right: 0;
+    display: inline-flex;
+  }
+
   /* ── CONTACTO ── */
   .contact__inner { padding: 28px 20px; }
   .contact__links {

@@ -16,9 +16,30 @@
 .project-card__placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--accent); background: var(--bg3); letter-spacing: -1px; }
 
 .project-card__status { position: absolute; top: 12px; right: 12px; font-size: 0.72rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
-.project-card__wip-badge { position: absolute; top: 12px; right: 12px; font-size: 0.72rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(251,191,36,0.15); color: #d97706; border: 1px solid rgba(251,191,36,0.35); }
-.status--done { background: rgba(31,92,153,0.12); color: var(--accent); border: 1px solid var(--border); }
-.status--wip  { background: rgba(251,191,36,0.12); color: #d97706; border: 1px solid rgba(251,191,36,0.3); }
+.project-card__wip-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: #d97706;
+  color: #ffffff;
+  border: none;
+}
+
+.status--done {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+}
+
+.status--wip {
+  background: #d97706;
+  color: #ffffff;
+  border: none;
+}
 
 .project-card__body { padding: 36px; flex: 1; display: flex; flex-direction: column; }
 .project-card__title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 8px; }
