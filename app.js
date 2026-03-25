@@ -850,7 +850,8 @@ function initNav() {
 // =========================
 function initVisitCounter() {
   const namespace = 'alberto-portfolio';
-  const key       = 'visitas-2026';
+  // Clave anterior: 'visitas-2026'
+  const key       = 'visitas-2026b'; // Cambiada para reiniciar el contador desde 0
   let   hideTimer = null;
 
   // Suma visita silenciosamente al cargar
