@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: 1fr;   /* móvil: columna única */
   gap: 24px;
-  margin-bottom: 28px;
+  margin-bottom: 8px;
   align-items: center;
 }
 
@@ -449,7 +449,7 @@
   .game-section__layout {
     grid-template-columns: minmax(320px, 700px) 1fr;
     gap: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 26px;
   }
 
   .fl-canvas {
