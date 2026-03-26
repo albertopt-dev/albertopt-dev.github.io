@@ -62,7 +62,8 @@ const projects = [
     tags: ["Android", "iOS", "Web", "Tiempo real"],
     stacks: ["Flutter", "Firebase", "FCM"],
     image: "assets/proyectos/DespedidaApp/Despedida-04.png",
-    video: "assets/proyectos/DespedidaApp/Despedida-video.mp4",
+    video: null,
+    drive: "1cgilLopt4VVpY6uCHPZ6H0PfbTfCjz2T",
     images: [
       "assets/proyectos/DespedidaApp/Despedida-01.png",
       "assets/proyectos/DespedidaApp/Despedida-02.png",
@@ -96,7 +97,8 @@ const projects = [
     tags: ["Android", "Nutrición", "Proyecto FP"],
     stacks: ["Kotlin", "API REST", "Room DB"],
     image: "assets/proyectos/NutriPlan/Nutriplan-01.png",
-    video: "assets/proyectos/NutriPlan/Nutriplan-Video.mp4",
+    video: null,
+    drive: "1A8N-PRN5aKJGL0g-95ph7_MpTgZM0gri",
     images: [
       "assets/proyectos/NutriPlan/Nutriplan-01.png",
       "assets/proyectos/NutriPlan/Nutriplan-02.png",
@@ -132,7 +134,8 @@ const projects = [
     tags: ["Android", "Académico", "Google Maps"],
     stacks: ["Kotlin", "Google Maps API", "SQLite"],
     image: "assets/proyectos/MyAmazingPlaces/Places-01.png",
-    video: "assets/proyectos/MyAmazingPlaces/Places-video.mp4",
+    video: null,
+    drive: "1TWcOAKcO7ZPZbgTHnYNzMc1qKy99N6IX",
     images: [
       "assets/proyectos/MyAmazingPlaces/Places-01.png",
       "assets/proyectos/MyAmazingPlaces/Places-02.png",
@@ -190,7 +193,8 @@ const labs = [
       "assets/proyectos/ObjetivosApp/objetivos-06.png",
       "assets/proyectos/ObjetivosApp/objetivos-07.png"
     ],
-    video: "assets/proyectos/ObjetivosApp/objetivos-video.mp4",
+    video: null,
+    drive: "1KOC21FoV4fM9q1xTaIpnFdzSke8rRrpq",
     links: { repo: "https://github.com/albertopt-dev/ObjetivosApp" }
   },
 
@@ -219,7 +223,8 @@ const labs = [
       "assets/proyectos/PresupuestoMensual/Presupuesto-04.png",
       "assets/proyectos/PresupuestoMensual/Presupuesto-05.png"
     ],
-    video: "assets/proyectos/PresupuestoMensual/Presupuesto-video.mp4",
+    video: null,
+    drive: "1XAt7aBJJohcDAsujX8xotfFqKXvENVN7",
     links: { repo: "https://github.com/albertopt-dev/Presupuesto-mensual" }
   },
 
@@ -304,18 +309,23 @@ function renderProjects() {
       ? `<span class="project-card__status status--done">✓ Terminado</span>`
       : "";
 
-    const mediaContent = p.video
-    ? isMobile
-      ? `<div class="lab-thumb__no-video">
-          <span class="lab-thumb__no-video-icon">🖥️</span>
-          <span class="lab-thumb__no-video-text">Vídeo disponible en escritorio</span>
-        </div>`
-      : `<video class="lab-thumb__video" autoplay muted loop playsinline webkit-playsinline preload="metadata">
-          <source src="${p.video}" type="video/mp4">
-        </video>`
-    : p.image
-      ? `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`
-      : `<div class="project-card__placeholder">${initials}</div>`;
+    let mediaContent = "";
+    if (p.drive && !isMobile) {
+      mediaContent = `<div class="lab-thumb__video lab-thumb__video--iframe"><iframe src="https://drive.google.com/file/d/${p.drive}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
+    } else if (p.video) {
+      mediaContent = isMobile
+        ? `<div class="lab-thumb__no-video">
+            <span class="lab-thumb__no-video-icon">🖥️</span>
+            <span class="lab-thumb__no-video-text">Vídeo disponible en escritorio</span>
+          </div>`
+        : `<video class="lab-thumb__video" autoplay muted loop playsinline webkit-playsinline preload="metadata">
+            <source src="${p.video}" type="video/mp4">
+          </video>`;
+    } else if (p.image) {
+      mediaContent = `<img src="${p.image}" alt="Preview ${p.title}" loading="lazy" class="lab-thumb__img" />`;
+    } else {
+      mediaContent = `<div class="project-card__placeholder">${initials}</div>`;
+    }
       const stackTag = p.stacks[0]
         ? `<div class="lab-card__thumb-overlay"><span class="lab-thumb__tag">${p.stacks[0]}</span></div>`
         : '';
@@ -433,11 +443,14 @@ function openProjectModal(projectId) {
     : '';
 
   // Vídeo — omitir en móvil
-  const videoSection = p.video && !isMobile
-    ? `<div class="detail-video-wrap">
+  let videoSection = '';
+  if (p.drive && !isMobile) {
+    videoSection = `<div class="detail-video-wrap"><iframe src="https://drive.google.com/file/d/${p.drive}/preview" allow="autoplay" allowfullscreen class="detail-video" style="width:100%;height:360px;"></iframe></div>`;
+  } else if (p.video && !isMobile) {
+    videoSection = `<div class="detail-video-wrap">
          <video src="${p.video}" controls autoplay muted loop playsinline class="detail-video"></video>
-       </div>`
-    : '';
+       </div>`;
+  }
 
   // Highlights como features
   const featuresHTML = p.highlights && p.highlights.length > 0
