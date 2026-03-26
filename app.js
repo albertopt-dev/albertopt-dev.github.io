@@ -1,3 +1,33 @@
+// Scrollspy con IntersectionObserver para navbar
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll('.navbar__links a');
+  const sectionIds = Array.from(navLinks).map(link => link.getAttribute('href')).filter(h => h.startsWith('#'));
+  const sections = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
+
+  // Configuración del observer
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60% 0px', // Ajusta el umbral según la altura del navbar
+    threshold: 0.2 // Un 20% visible ya cuenta como activa
+  };
+
+  let activeId = null;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        activeId = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => {
+    if (section) observer.observe(section);
+  });
+});
 // =========================
 // DATA: Proyectos reales
 // =========================
@@ -813,6 +843,7 @@ function initTheme() {
 // SMOOTH SCROLL nav links
 // =========================
 function initNav() {
+
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", e => {
       const target = document.querySelector(link.getAttribute("href"));
