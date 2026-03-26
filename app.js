@@ -519,16 +519,19 @@ function renderLabs() {
 
     // Detecta móvil real: pantalla pequeña y táctil
     const isMobile = window.innerWidth <= 768 && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
-    const thumbnail = hasVideo
-      ? isMobile
+    let thumbnail = "";
+    if (lab.drive && !isMobile) {
+      thumbnail = `<div class="lab-thumb__video lab-thumb__video--iframe"><iframe src="https://drive.google.com/file/d/${lab.drive}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
+    } else if (hasVideo) {
+      thumbnail = isMobile
         ? `<div class="lab-thumb__no-video">
             <span class="lab-thumb__no-video-icon">🖥️</span>
             <span class="lab-thumb__no-video-text">Vídeo disponible en escritorio</span>
           </div>`
-        : `<video class="lab-thumb__video" src="${lab.video}" autoplay muted loop playsinline></video>`
-      : hasImages
-        ? `<img src="${lab.images[0]}" alt="${lab.title}" class="lab-thumb__img" loading="lazy" />`
-        : '';
+        : `<video class="lab-thumb__video" src="${lab.video}" autoplay muted loop playsinline></video>`;
+    } else if (hasImages) {
+      thumbnail = `<img src="${lab.images[0]}" alt="${lab.title}" class="lab-thumb__img" loading="lazy" />`;
+    }
 
     const statusBadge = lab.status === "terminado"
     ? `<span class="project-card__status status--done">✓ Terminado</span>`
@@ -621,10 +624,14 @@ function openLabDetail(idx) {
           onclick="openLightboxImg('${img}')" />`
   ).join('') : '';
 
-  const videoSection = lab.video ? `
-    <div class="detail-video-wrap">
+  let videoSection = '';
+  if (lab.drive) {
+    videoSection = `<div class="detail-video-wrap"><iframe src="https://drive.google.com/file/d/${lab.drive}/preview" allow="autoplay" allowfullscreen class="detail-video" style="width:100%;height:360px;"></iframe></div>`;
+  } else if (lab.video) {
+    videoSection = `<div class="detail-video-wrap">
       <video src="${lab.video}" controls autoplay muted loop playsinline class="detail-video"></video>
-    </div>` : '';
+    </div>`;
+  }
 
   const featuresHTML = d.features ? d.features.map(f => `
     <div class="detail-feature">
