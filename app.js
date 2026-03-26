@@ -63,7 +63,7 @@ const projects = [
     stacks: ["Flutter", "Firebase", "FCM"],
     image: "assets/proyectos/DespedidaApp/Despedida-04.png",
     video: null,
-    drive: "1cgilLopt4VVpY6uCHPZ6H0PfbTfCjz2T",
+    drive: "1A8N-PRN5aKJGL0g-95ph7_MpTgZM0gri",
     images: [
       "assets/proyectos/DespedidaApp/Despedida-01.png",
       "assets/proyectos/DespedidaApp/Despedida-02.png",
@@ -98,7 +98,7 @@ const projects = [
     stacks: ["Kotlin", "API REST", "Room DB"],
     image: "assets/proyectos/NutriPlan/Nutriplan-01.png",
     video: null,
-    drive: "1A8N-PRN5aKJGL0g-95ph7_MpTgZM0gri",
+    drive: "1cgilLopt4VVpY6uCHPZ6H0PfbTfCjz2T",
     images: [
       "assets/proyectos/NutriPlan/Nutriplan-01.png",
       "assets/proyectos/NutriPlan/Nutriplan-02.png",
@@ -135,7 +135,7 @@ const projects = [
     stacks: ["Kotlin", "Google Maps API", "SQLite"],
     image: "assets/proyectos/MyAmazingPlaces/Places-01.png",
     video: null,
-    drive: "1TWcOAKcO7ZPZbgTHnYNzMc1qKy99N6IX",
+    drive: "1KOC21FoV4fM9q1xTaIpnFdzSke8rRrpq",
     images: [
       "assets/proyectos/MyAmazingPlaces/Places-01.png",
       "assets/proyectos/MyAmazingPlaces/Places-02.png",
@@ -194,7 +194,7 @@ const labs = [
       "assets/proyectos/ObjetivosApp/objetivos-07.png"
     ],
     video: null,
-    drive: "1KOC21FoV4fM9q1xTaIpnFdzSke8rRrpq",
+    drive: "1TWcOAKcO7ZPZbgTHnYNzMc1qKy99N6IX",
     links: { repo: "https://github.com/albertopt-dev/ObjetivosApp" }
   },
 
