@@ -250,7 +250,8 @@ const skills = [
 // RENDER: Projects
 // =========================
 function renderProjects() {
-  const isMobile = window.innerWidth <= 768;
+  // Detecta móvil real: pantalla pequeña y táctil
+  const isMobile = window.innerWidth <= 768 && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
   const grid = document.getElementById("projectsTrack");
   if (!grid) return;
 
@@ -473,7 +474,8 @@ function renderLabs() {
     const hasVideo  = !!lab.video;
     const hasDetail = !!lab.detail;
 
-    const isMobile = window.innerWidth <= 768;
+    // Detecta móvil real: pantalla pequeña y táctil
+    const isMobile = window.innerWidth <= 768 && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
     const thumbnail = hasVideo
       ? isMobile
         ? `<div class="lab-thumb__no-video">
@@ -921,7 +923,8 @@ function initFlappyDev() {
     if (!running) { drawBg(); drawDev(dev.x, dev.y, 0); }
   });
 
-  const isMobile = window.innerWidth <= 768;
+  // Detecta móvil real: pantalla pequeña y táctil
+  const isMobile = window.innerWidth <= 768 && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
   const GRAVITY    = isMobile ? 0.18 : 0.30;
   const JUMP       = isMobile ? -4.0 : -5;
   const PIPE_W     = 64;
