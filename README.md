@@ -154,7 +154,7 @@ portfolio-web/
 │
 └── assets/
     ├── foto.png                                   # Foto de perfil del hero
-    ├── Alberto_Pérez_Talaván_CV_2025.pdf           # CV descargable
+    ├── Alberto_Pérez_Talaván_CV_2026.pdf           # CV descargable
     ├── Carta recomendación Tich Consulting.pdf     # Carta de recomendación
     ├── Carta de presentacion.pdf                   # Carta de presentación
     └── proyectos/                                  # Imágenes preview de proyectos (opcional)
